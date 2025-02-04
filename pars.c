@@ -10,10 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../get_next_line/get_next_line.h"
+#include "get_next_line.h"
+#include <stdio.h>
 
 
-void	pars_map(char **map)
+void	pars_map(char ***map)
 {
 	int	fd;
 	char	*line;
@@ -24,10 +25,11 @@ void	pars_map(char **map)
 	i = 0;
 	row = 0;
 	col = 0;
+	fd = open("file.txt", O_RDONLY);
 	line = get_next_line(fd);
 	while (line)
 	{
-		while (line[i] && row == 0)
+		while (line[i])
 		{
 			col++;
 			i++;
@@ -36,4 +38,38 @@ void	pars_map(char **map)
 		free(line);
 		line = get_next_line(fd);
 	}
+	/*printf("col: %d\n", col - 1);*/
+	/*printf("row: %d\n", row);*/
+	map = (char **)malloc(sizeof(char *) * row);
+	i = 0;
+	while (i < row)
+	{
+		map[i] = (char *)malloc(sizeof(char) * col);
+		if (!map[i])
+			return ;
+		i++;
+	}
+	i = 0;
+	fd = open("file.txt", O_RDONLY);
+	line = get_next_line(fd);
+	while (line)
+	{
+		map[i] = line;
+		i++;
+		free(line);
+		line = get_next_line(fd);
+	}
+	 for (int i = 0; i < row; i++) {
+        for (int j = 0; j < col; j++) {
+            printf("%c", map[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+int main()
+{
+	char **map;
+	pars_map(map);
+	return 0;
 }
