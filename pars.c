@@ -13,38 +13,36 @@
 #include "get_next_line.h"
 #include <stdio.h>
 
-
-void	pars_map(char ***map)
+void	check_map(char **map, int *col, int *row)
 {
+	int co = *col;
+	int ro = *row;
+	 for (int i = 0; i < ro; i++) {
+        for (int j = 0; j < co; j++) {
+            printf("%c", map[i][j]);
+        }
+        	printf("\n");
+	}
+}
+
+void	fill_map(int *row, int *col)
+{
+	char **map;
 	int	fd;
 	char	*line;
+	int	co;
+	int	ro;
 	int	i;
-	int	col;
-	int	row;
 
+	ro = *row;
+	co = *col;
+	map = (char **)malloc(sizeof(char *) * ro);
+	if (!map)
+		return;
 	i = 0;
-	row = 0;
-	col = 0;
-	fd = open("file.txt", O_RDONLY);
-	line = get_next_line(fd);
-	while (line)
+	while (i < ro)
 	{
-		while (line[i])
-		{
-			col++;
-			i++;
-		}
-		row++;
-		free(line);
-		line = get_next_line(fd);
-	}
-	/*printf("col: %d\n", col - 1);*/
-	/*printf("row: %d\n", row);*/
-	map = (char **)malloc(sizeof(char *) * row);
-	i = 0;
-	while (i < row)
-	{
-		map[i] = (char *)malloc(sizeof(char) * col);
+		map[i] = (char *)malloc(sizeof(char) * co);
 		if (!map[i])
 			return ;
 		i++;
@@ -52,24 +50,51 @@ void	pars_map(char ***map)
 	i = 0;
 	fd = open("file.txt", O_RDONLY);
 	line = get_next_line(fd);
+	while (line && i < ro)
+	{
+		int j = 0;
+		while (line[j] && j < co - 1)
+		{
+			map[i][j] = line[j];
+			j++;
+		}
+		free(line);
+		line = get_next_line(fd);
+		i++;
+	}
+	close(fd);
+	check_map(map, &co, &ro);
+}
+
+
+void	pars_map(int fd)
+{
+	char	*line;
+	int	col;
+	int	row;
+
+	row = 0;
+	col = 0;
+	line = get_next_line(fd);
 	while (line)
 	{
-		map[i] = line;
-		i++;
+		while (line[col])
+		{
+			col++;
+		}
+		row++;
 		free(line);
 		line = get_next_line(fd);
 	}
-	 for (int i = 0; i < row; i++) {
-        for (int j = 0; j < col; j++) {
-            printf("%c", map[i][j]);
-        }
-        printf("\n");
-    }
+	close(fd);
+	fill_map(&row, &col);
 }
 
 int main()
 {
-	char **map;
-	pars_map(map);
+	int	fd;
+
+	fd = open("file.txt", O_RDONLY);
+	pars_map(fd);
 	return 0;
 }
