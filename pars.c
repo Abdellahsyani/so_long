@@ -28,35 +28,30 @@ void	free_map(char **map)
 
 void	check_map(char **map, int *col, int *row)
 {
-	int	co;
-	int	ro;
+	int	co = *col;
+	int	ro = *row;
 	int	i;
 	int	j;
 
-	co = *col;
-	ro = *row;
 	i = 0;
-	while (*map[i])
+	j = 0;
+	while (j < co)
 	{
-		j = 0;
-		while (map[i][j])
-		{
-			if (map[i][j] != '1')
-			{
-				perror("The map dose not exit\n");
-				exit(1);
-			}
-			else if ((map[i][0] != '1' && map[i][co - 1] != '1') || map[ro][j] != '1')
-			{
-				perror("The map dose not exit\n");
-				exit(1);
-			}
-			j++;
+		if (map[0][j] != '1' || map[ro - 1][j] != '1') {
+			perror("Map must be surrounded by walls\n");
+			exit(1);
+		}
+		j++;
+	}
+	while (i < ro)
+	{
+		if (map[i][0] != '1' || map[i][co - 1] != '1') {
+			perror("Map must be surrounded by walls\n");
+			exit(1);
 		}
 		i++;
 	}
 }
-
 
 void	fill_map(char **map, int *row, int *col)
 {
