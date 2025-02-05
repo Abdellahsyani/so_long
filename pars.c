@@ -30,18 +30,31 @@ void	check_map(char **map, int *col, int *row)
 {
 	int	co;
 	int	ro;
+	int	i;
+	int	j;
 
-	co = 0;
-	ro = 0;
-	while (map[ro][co])
+	co = *col;
+	ro = *row;
+	i = 0;
+	while (*map[i])
 	{
-		if (map[ro][co] != '1')
+		j = 0;
+		while (map[i][j])
 		{
-			perror("The map dose not exit\n");
-			exit(1);
+			if (map[i][j] != '1')
+			{
+				perror("The map dose not exit\n");
+				exit(1);
+			}
+			else if (map[i][0] != '1' && map[i][co - 1] != '1')
+			{
+				perror("The map dose not exit\n");
+				exit(1);
+			}
+			else
+			j++;
 		}
-		else
-			co++;
+		i++;
 	}
 }
 
