@@ -13,6 +13,53 @@
 #include "get_next_line.h"
 
 /**
+ * ft_putstr_fd _ function to write string in a file descriptor
+ * @s: the string that will be written
+ * fd: file descriptor to write on it
+ */
+void	ft_putstr_fd(char *s, int fd)
+{
+	int	i;
+
+	i = 0;
+	if (!s || fd == -1)
+		return ;
+	while (s[i])
+	{
+		write(fd, &s[i], 1);
+		i++;
+	}
+}
+
+/**
+ * ft_strncmp _ function to compare the two strings
+ * @s1: the first string
+ * @s2: teh second string
+ * @n: the size that will be compared
+ *
+ * return: 0 if there are same and -1 if different
+ */
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
+{
+	unsigned char	*ss1;
+	unsigned char	*ss2;
+	size_t			i;
+
+	ss1 = (unsigned char *)s1;
+	ss2 = (unsigned char *)s2;
+	i = 0;
+	while (i < n)
+	{
+		if (ss1[i] != ss2[i])
+			return (ss1[i] - ss2[i]);
+		if (ss1[i] == '\0' || ss2[i] == '\0')
+			return (ss1[i] - ss2[i]);
+		i++;
+	}
+	return (0);
+}
+
+/**
  * ft_strjoin - helper function to join two strings
  * @s1: the string that will has joined
  * @s2: the string that will join to s1
@@ -64,6 +111,11 @@ char	*extract_line(char **static_str)
 		line = malloc(((newline_pos - *static_str) + 1) * sizeof(char));
 		ft_strncpy(line, *static_str, (newline_pos - *static_str));
 		temp = ft_strdup(newline_pos);
+		if (temp && temp[0] == '\0')
+		{
+			free(temp);
+			temp = NULL;
+		}
 	}
 	free(*static_str);
 	*static_str = temp;

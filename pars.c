@@ -13,6 +13,19 @@
 #include "get_next_line.h"
 #include <stdio.h>
 
+void	free_map(char **map)
+{
+	int	i;
+
+	i = 0;
+	while (map[i])
+	{
+		free(map[i]);
+		i++;
+	}
+	free(map);
+}
+
 void	check_map(char **map, int *col, int *row)
 {
 	int co = *col;
@@ -23,32 +36,22 @@ void	check_map(char **map, int *col, int *row)
         }
         	printf("\n");
 	}
+	free_map(map);
 }
 
-void	fill_map(int *row, int *col)
+
+void	fill_map(char **map, int *row, int *col)
 {
-	char **map;
 	int	fd;
 	char	*line;
-	int	co;
-	int	ro;
+	int	co = *col;
+	int	ro = *row;
 	int	i;
 
-	ro = *row;
-	co = *col;
-	map = (char **)malloc(sizeof(char *) * ro);
-	if (!map)
-		return;
-	i = 0;
-	while (i < ro)
-	{
-		map[i] = (char *)malloc(sizeof(char) * co);
-		if (!map[i])
-			return ;
-		i++;
-	}
 	i = 0;
 	fd = open("file.txt", O_RDONLY);
+	if (!fd)
+		perror("fail to open file");
 	line = get_next_line(fd);
 	while (line && i < ro)
 	{
@@ -66,13 +69,36 @@ void	fill_map(int *row, int *col)
 	check_map(map, &co, &ro);
 }
 
+void	allocation(char **map, int *row, int *col)
+{
+	int	ro;
+	int	co;
+	int	i;
+
+	ro = *row;
+	co = *col;
+	map = (char **)malloc(sizeof(char *) * ro);
+	if (!map)
+		free_map(map);
+	i = 0;
+	while (i < ro)
+	{
+		map[i] = (char *)malloc(sizeof(char) * co - 1);
+		if (!map[i])
+			free_map(map);
+		i++;
+	}
+	fill_map(map, &ro, &co);
+}
 
 void	pars_map(int fd)
 {
 	char	*line;
 	int	col;
 	int	row;
+	char	**map;
 
+	map = NULL;
 	row = 0;
 	col = 0;
 	line = get_next_line(fd);
@@ -87,7 +113,7 @@ void	pars_map(int fd)
 		line = get_next_line(fd);
 	}
 	close(fd);
-	fill_map(&row, &col);
+	allocation(map, &row, &col);
 }
 
 int main()
