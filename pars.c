@@ -46,12 +46,11 @@ void	check_map(char **map, int *col, int *row)
 				perror("The map dose not exit\n");
 				exit(1);
 			}
-			else if (map[i][0] != '1' && map[i][co - 1] != '1')
+			else if ((map[i][0] != '1' && map[i][co - 1] != '1') || map[ro][j] != '1')
 			{
 				perror("The map dose not exit\n");
 				exit(1);
 			}
-			else
 			j++;
 		}
 		i++;
