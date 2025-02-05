@@ -28,15 +28,21 @@ void	free_map(char **map)
 
 void	check_map(char **map, int *col, int *row)
 {
-	int co = *col;
-	int ro = *row;
-	 for (int i = 0; i < ro; i++) {
-        for (int j = 0; j < co; j++) {
-            printf("%c", map[i][j]);
-        }
-        	printf("\n");
+	int	co;
+	int	ro;
+
+	co = 0;
+	ro = 0;
+	while (map[ro][co])
+	{
+		if (map[ro][co] != '1')
+		{
+			perror("The map dose not exit\n");
+			exit(1);
+		}
+		else
+			co++;
 	}
-	free_map(map);
 }
 
 
@@ -69,7 +75,7 @@ void	fill_map(char **map, int *row, int *col)
 	check_map(map, &co, &ro);
 }
 
-void	allocation(char **map, int *row, int *col)
+char	**allocation(char **map, int *row, int *col)
 {
 	int	ro;
 	int	co;
@@ -77,7 +83,7 @@ void	allocation(char **map, int *row, int *col)
 
 	ro = *row;
 	co = *col;
-	map = (char **)malloc(sizeof(char *) * ro);
+	map = (char **)malloc(sizeof(char *) * (ro + 1));
 	if (!map)
 		free_map(map);
 	i = 0;
@@ -88,7 +94,8 @@ void	allocation(char **map, int *row, int *col)
 			free_map(map);
 		i++;
 	}
-	fill_map(map, &ro, &co);
+	map[ro] = NULL;
+	return (map);
 }
 
 void	pars_map(int fd)
@@ -102,7 +109,7 @@ void	pars_map(int fd)
 	row = 0;
 	col = 0;
 	line = get_next_line(fd);
-	while (line)
+	while (line != NULL)
 	{
 		while (line[col])
 		{
@@ -113,7 +120,8 @@ void	pars_map(int fd)
 		line = get_next_line(fd);
 	}
 	close(fd);
-	allocation(map, &row, &col);
+	map = allocation(map, &row, &col);
+	fill_map(map, &row, &col);
 }
 
 int main()
