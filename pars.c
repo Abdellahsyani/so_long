@@ -12,6 +12,7 @@
 
 #include "get_next_line.h"
 #include <stdio.h>
+#include <errno.h>
 
 void	free_map(char **map)
 {
@@ -29,8 +30,24 @@ void	free_map(char **map)
 void	ft_error(char **map)
 {
 	free_map(map);
-	perror("Map must be surrounded by walls\n");
+	errno = EINVAL;
+	perror("Map must be surrounded by walls");
 	exit(1);
+}
+
+void	check_inside(char **map, int *col, int *row)
+{
+	int	ro;
+	int	co;
+	int	i;
+	int	j;
+
+	ro = *row;
+	co = *col;
+	i = 0;
+	while (i < co - 3)
+	{
+	}
 }
 
 void	check_map(char **map, int *col, int *row)
@@ -56,6 +73,7 @@ void	check_map(char **map, int *col, int *row)
 			ft_error(map);
 		i++;
 	}
+	check_inside(map, &co, &ro);
 	free_map(map);
 }
 
