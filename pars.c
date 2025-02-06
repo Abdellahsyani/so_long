@@ -37,9 +37,6 @@ void	ft_error(char **map)
 
 void	verify_map(char **map, int c, int e, int p)
 {
-	printf("c: %d\n", c);
-	printf("e: %d\n", e);
-	printf("p: %d\n", p);
 	if (c < 1)
 		ft_error(map);
 	if (e != 1 || p != 1)
@@ -73,7 +70,7 @@ void	check_inside(char **map, int col, int row)
 	verify_map(map, C, E, P);
 	for (int i = 0; i < row; i++)
 	{
-		for (int j = 0; j < col -1; j++)
+		for (int j = 0; j < col - 1; j++)
 		{
 			printf("%c", map[i][j]);
 		}
@@ -191,6 +188,11 @@ int main()
 	int	fd;
 
 	fd = open("file.txt", O_RDONLY);
+	if (fd == -1)
+	{
+		perror("fail to open file");
+		exit(1);
+	}
 	pars_map(fd);
 	return 0;
 }
