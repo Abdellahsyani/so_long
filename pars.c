@@ -31,22 +31,53 @@ void	ft_error(char **map)
 {
 	free_map(map);
 	errno = EINVAL;
-	perror("Map must be surrounded by walls");
+	perror("Map is not valid");
 	exit(1);
 }
 
-void	check_inside(char **map, int *col, int *row)
+void	verify_map(char **map, int c, int e, int p)
 {
-	int	ro;
-	int	co;
+	printf("c: %d\n", c);
+	printf("e: %d\n", e);
+	printf("p: %d\n", p);
+	if (c < 1)
+		ft_error(map);
+	if (e != 1 || p != 1)
+		ft_error(map);
+}
+
+void	check_inside(char **map, int col, int row)
+{
 	int	i;
 	int	j;
+	int	C = 0;
+	int	P = 0;
+	int	E = 0;
 
-	ro = *row;
-	co = *col;
-	i = 0;
-	while (i < co - 3)
+	i = 1;
+	while (i < row - 1)
 	{
+		j = 1;
+		while (j < col - 2)
+		{
+			if (map[i][j] == 'C')
+				C++;
+			if (map[i][j] == 'E')
+				E++;
+			if (map[i][j] == 'P')
+				P++;
+			j++;
+		}
+		i++;
+	}
+	verify_map(map, C, E, P);
+	for (int i = 0; i < row; i++)
+	{
+		for (int j = 0; j < col -1; j++)
+		{
+			printf("%c", map[i][j]);
+		}
+		printf("\n");
 	}
 }
 
@@ -73,7 +104,7 @@ void	check_map(char **map, int *col, int *row)
 			ft_error(map);
 		i++;
 	}
-	check_inside(map, &co, &ro);
+	check_inside(map, co, ro);
 	free_map(map);
 }
 
