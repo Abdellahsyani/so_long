@@ -26,31 +26,37 @@ void	free_map(char **map)
 	free(map);
 }
 
+void	ft_error(char **map)
+{
+	free_map(map);
+	perror("Map must be surrounded by walls\n");
+	exit(1);
+}
+
 void	check_map(char **map, int *col, int *row)
 {
-	int	co = *col;
-	int	ro = *row;
+	int	co;
+	int	ro;
 	int	i;
 	int	j;
 
 	i = 0;
 	j = 0;
-	while (j < co)
+	co = *col;
+	ro = *row;
+	while (j < co - 1)
 	{
-		if (map[0][j] != '1' || map[ro - 1][j] != '1') {
-			perror("Map must be surrounded by walls\n");
-			exit(1);
-		}
+		if (map[0][j] != '1' || map[ro - 1][j] != '1')
+			ft_error(map);
 		j++;
 	}
 	while (i < ro)
 	{
-		if (map[i][0] != '1' || map[i][co - 1] != '1') {
-			perror("Map must be surrounded by walls\n");
-			exit(1);
-		}
+		if (map[i][0] != '1' || map[i][co - 2] != '1')
+			ft_error(map);
 		i++;
 	}
+	free_map(map);
 }
 
 void	fill_map(char **map, int *row, int *col)
