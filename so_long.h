@@ -6,7 +6,7 @@
 /*   By: asyani <asyani@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 09:57:59 by asyani            #+#    #+#             */
-/*   Updated: 2025/02/07 10:02:08 by asyani           ###   ########.fr       */
+/*   Updated: 2025/02/07 16:45:49 by asyani           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <errno.h>
+# include "mlx.h"
 # include "../get_next_line/get_next_line.h"
 
 typedef struct	s_pos
