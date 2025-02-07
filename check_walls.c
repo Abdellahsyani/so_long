@@ -20,7 +20,7 @@ void	flood_fill(char **map, t_pos *matrix, int x, int y)
 	int	right;
 
 	if (map[x][y] != 'E' && map[x][y] != 'C' && map[x][y] != 'P')
-		return; 
+		return;
 	top = (x > 0 && map[x - 1][y] == '1');
 	down = (x < matrix->row - 1 && map[x + 1][y] == '1');
 	left = (y > 0 && map[x][y - 1] == '1');

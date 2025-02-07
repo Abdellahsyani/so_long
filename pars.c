@@ -38,9 +38,10 @@ void	check_map(char **map, t_pos *matrix)
 
 void	fill_map(char **map, t_pos *matrix)
 {
-	int	fd;
+	int		fd;
 	char	*line;
-	int	i;
+	int		i;
+	int		j;
 
 	i = 0;
 	fd = open("file.txt", O_RDONLY);
@@ -49,7 +50,7 @@ void	fill_map(char **map, t_pos *matrix)
 	line = get_next_line(fd);
 	while (line && i < matrix->row)
 	{
-		int j = 0;
+		j = 0;
 		while (line[j] && j < matrix->col - 1)
 		{
 			map[i][j] = line[j];
@@ -87,7 +88,7 @@ void	pars_map(int fd)
 	char	*line;
 	t_pos	*matrix;
 	char	**map;
-	int	i;
+	int		i;
 
 	i = 0;
 	matrix = malloc(sizeof(t_pos));
@@ -116,7 +117,7 @@ void	pars_map(int fd)
 	fill_map(map, matrix);
 }
 
-int main()
+int	main(void)
 {
 	int	fd;
 
@@ -127,5 +128,5 @@ int main()
 		exit(1);
 	}
 	pars_map(fd);
-	return 0;
+	return (0);
 }
