@@ -26,8 +26,9 @@ void	free_map(char **map)
 	free(map);
 }
 
-void	ft_error(char **map)
+void	ft_error(char **map, t_pos *matrix)
 {
+	free(matrix);
 	free_map(map);
 	errno = EINVAL;
 	perror("Map is not valid");
@@ -40,7 +41,7 @@ void	verify_map(char **map, t_pos *matrix)
 	int	j;
 
 	if (matrix->coin < 1 || matrix->exit != 1 || matrix->player != 1)
-		ft_error(map);
+		ft_error(map, matrix);
 	else
 	{
 		i = 1;
@@ -107,17 +108,18 @@ void	check_map(char **map, t_pos *matrix)
 	while (j < matrix->col - 1)
 	{
 		if (map[0][j] != '1' || map[matrix->row - 1][j] != '1')
-			ft_error(map);
+			ft_error(map, matrix);
 		j++;
 	}
 	while (i < matrix->row)
 	{
 		if (map[i][0] != '1' || map[i][matrix->col - 2] != '1')
-			ft_error(map);
+			ft_error(map, matrix);
 		i++;
 	}
 	check_inside(map, matrix);
 	free_map(map);
+	free(matrix);
 }
 
 void	fill_map(char **map, t_pos *matrix)

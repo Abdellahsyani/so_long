@@ -27,7 +27,7 @@ typedef struct	s_pos
 }		t_pos;
 
 void	free_map(char **map);
-void	ft_error(char **map);
+void	ft_error(char **map, t_pos *matrix);
 void	verify_map(char **map, t_pos *matrix);
 void	check_inside(char **map, t_pos *matrix);
 void	check_map(char **map, t_pos *matrix);
