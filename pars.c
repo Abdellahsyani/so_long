@@ -6,97 +6,11 @@
 /*   By: asyani <asyani@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 16:48:12 by asyani            #+#    #+#             */
-/*   Updated: 2025/02/04 17:15:07 by asyani           ###   ########.fr       */
+/*   Updated: 2025/02/07 11:47:47 by asyani           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-#include <errno.h>
-
-void	free_map(char **map)
-{
-	int	i;
-
-	i = 0;
-	while (map[i])
-	{
-		free(map[i]);
-		i++;
-	}
-	free(map);
-}
-
-void	ft_error(char **map, t_pos *matrix)
-{
-	free(matrix);
-	free_map(map);
-	errno = EINVAL;
-	perror("Map is not valid");
-	exit(1);
-}
-
-void	verify_map(char **map, t_pos *matrix)
-{
-	int	i;
-	int	j;
-
-	if (matrix->coin < 1 || matrix->exit != 1 || matrix->player != 1)
-		ft_error(map, matrix);
-	else
-	{
-		i = 1;
-		while (i < matrix->row - 1)
-		{
-			j = 1;
-			while (j < matrix->col - 2)
-			{
-				if (map[i][j] == 'C')
-					flood_fill(map, matrix, i, j);
-				if (map[i][j] == 'E')
-					flood_fill(map, matrix, i, j);
-				if (map[i][j] == 'P')
-					flood_fill(map, matrix, i, j);
-				j++;
-			}
-			i++;
-		}
-	}
-}
-
-void	check_inside(char **map, t_pos *matrix)
-{
-	int	i;
-	int	j;
-
-	i = 1;
-	matrix->coin = 0;
-	matrix->player = 0;
-	matrix->exit = 0;
-	while (i < matrix->row - 1)
-	{
-		j = 1;
-		while (j < matrix->col - 2)
-		{
-			if (map[i][j] == 'C')
-				matrix->coin++;
-			if (map[i][j] == 'E')
-				matrix->exit++;
-			if (map[i][j] == 'P')
-				matrix->player++;
-			j++;
-		}
-		i++;
-	}
-	verify_map(map, matrix);
-	for (int i = 0; i < matrix->row; i++)
-	{
-		for (int j = 0; j < matrix->col - 1; j++)
-		{
-			printf("%c", map[i][j]);
-		}
-		printf("\n");
-	}
-}
 
 void	check_map(char **map, t_pos *matrix)
 {
