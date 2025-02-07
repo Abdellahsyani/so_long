@@ -10,14 +10,22 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-void	flood_fill(char **map, int x, int y)
+#include "so_long.h"
+
+void	flood_fill(char **map, t_pos *matrix, int x, int y)
 {
-	if (map[x][y] != 'E' && map[x][y] != 'C' && map[x][y] != 'P')
+	int	top;
+	int	down;
+	int	left;
+	int	right;
+
+	if (map[x][y] != 'E' && map[x][y] != 'C'
+			&& map[x][y] != 'P')
 		return; 
-	int top = (x > 0 && map[x - 1][y] == '1');
-	int down = (x < rows - 1 && map[x + 1][y] == '1');
-	int left = (y > 0 && map[x][y - 1] == '1');
-	int right = (y < cols - 1 && map[x][y + 1] == '1');
+	top = (x > 0 && map[x - 1][y] == '1');
+	down = (x < matrix->row - 1 && map[x + 1][y] == '1');
+	left = (y > 0 && map[x][y - 1] == '1');
+	right = (y < matrix->col - 1 && map[x][y + 1] == '1');
 
 	if (top && down && left && right) {
 		ft_error(map);

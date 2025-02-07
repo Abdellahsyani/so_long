@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
-#include <stdio.h>
+#include "so_long.h"
 #include <errno.h>
 
 void	free_map(char **map)
@@ -35,42 +34,62 @@ void	ft_error(char **map)
 	exit(1);
 }
 
-void	verify_map(char **map, int c, int e, int p)
-{
-	if (c < 1)
-		ft_error(map);
-	if (e != 1 || p != 1)
-		ft_error(map);
-}
-
-void	check_inside(char **map, int col, int row)
+void	verify_map(char **map, t_pos *matrix)
 {
 	int	i;
 	int	j;
-	int	C = 0;
-	int	P = 0;
-	int	E = 0;
+
+	if (matrix->coin < 1 || matrix->exit != 1 || matrix->player != 1)
+		ft_error(map);
+	else
+	{
+		i = 1;
+		while (i < matrix->row - 1)
+		{
+			j = 1;
+			while (j < matrix->col - 2)
+			{
+				if (map[i][j] == 'C')
+					flood_fill(map, matrix, i, j);
+				if (map[i][j] == 'E')
+					flood_fill(map, matrix, i, j);
+				if (map[i][j] == 'P')
+					flood_fill(map, matrix, i, j);
+				j++;
+			}
+			i++;
+		}
+	}
+}
+
+void	check_inside(char **map, t_pos *matrix)
+{
+	int	i;
+	int	j;
 
 	i = 1;
-	while (i < row - 1)
+	matrix->coin = 0;
+	matrix->player = 0;
+	matrix->exit = 0;
+	while (i < matrix->row - 1)
 	{
 		j = 1;
-		while (j < col - 2)
+		while (j < matrix->col - 2)
 		{
 			if (map[i][j] == 'C')
-				C++;
+				matrix->coin++;
 			if (map[i][j] == 'E')
-				E++;
+				matrix->exit++;
 			if (map[i][j] == 'P')
-				P++;
+				matrix->player++;
 			j++;
 		}
 		i++;
 	}
-	verify_map(map, C, E, P);
-	for (int i = 0; i < row; i++)
+	verify_map(map, matrix);
+	for (int i = 0; i < matrix->row; i++)
 	{
-		for (int j = 0; j < col - 1; j++)
+		for (int j = 0; j < matrix->col - 1; j++)
 		{
 			printf("%c", map[i][j]);
 		}
@@ -78,39 +97,33 @@ void	check_inside(char **map, int col, int row)
 	}
 }
 
-void	check_map(char **map, int *col, int *row)
+void	check_map(char **map, t_pos *matrix)
 {
-	int	co;
-	int	ro;
 	int	i;
 	int	j;
 
 	i = 0;
 	j = 0;
-	co = *col;
-	ro = *row;
-	while (j < co - 1)
+	while (j < matrix->col - 1)
 	{
-		if (map[0][j] != '1' || map[ro - 1][j] != '1')
+		if (map[0][j] != '1' || map[matrix->row - 1][j] != '1')
 			ft_error(map);
 		j++;
 	}
-	while (i < ro)
+	while (i < matrix->row)
 	{
-		if (map[i][0] != '1' || map[i][co - 2] != '1')
+		if (map[i][0] != '1' || map[i][matrix->col - 2] != '1')
 			ft_error(map);
 		i++;
 	}
-	check_inside(map, co, ro);
+	check_inside(map, matrix);
 	free_map(map);
 }
 
-void	fill_map(char **map, int *row, int *col)
+void	fill_map(char **map, t_pos *matrix)
 {
 	int	fd;
 	char	*line;
-	int	co = *col;
-	int	ro = *row;
 	int	i;
 
 	i = 0;
@@ -118,10 +131,10 @@ void	fill_map(char **map, int *row, int *col)
 	if (!fd)
 		perror("fail to open file");
 	line = get_next_line(fd);
-	while (line && i < ro)
+	while (line && i < matrix->row)
 	{
 		int j = 0;
-		while (line[j] && j < co - 1)
+		while (line[j] && j < matrix->col - 1)
 		{
 			map[i][j] = line[j];
 			j++;
@@ -131,56 +144,60 @@ void	fill_map(char **map, int *row, int *col)
 		i++;
 	}
 	close(fd);
-	check_map(map, &co, &ro);
+	check_map(map, matrix);
 }
 
-char	**allocation(char **map, int *row, int *col)
+char	**allocation(char **map, t_pos *matrix)
 {
-	int	ro;
-	int	co;
 	int	i;
 
-	ro = *row;
-	co = *col;
-	map = (char **)malloc(sizeof(char *) * (ro + 1));
+	map = (char **)malloc(sizeof(char *) * (matrix->row + 1));
 	if (!map)
 		free_map(map);
 	i = 0;
-	while (i < ro)
+	while (i < matrix->row)
 	{
-		map[i] = (char *)malloc(sizeof(char) * co - 1);
+		map[i] = (char *)malloc(sizeof(char) * (matrix->col - 1));
 		if (!map[i])
 			free_map(map);
 		i++;
 	}
-	map[ro] = NULL;
+	map[matrix->row] = NULL;
 	return (map);
 }
 
 void	pars_map(int fd)
 {
 	char	*line;
-	int	col;
-	int	row;
+	t_pos	*matrix;
 	char	**map;
+	int	i;
 
+	i = 0;
+	matrix = malloc(sizeof(t_pos));
+	if (!matrix)
+	{
+		perror("Memory allocation failed");
+		return ;
+	}
 	map = NULL;
-	row = 0;
-	col = 0;
+	matrix->row = 0;
+	matrix->col = 0;
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
-		while (line[col])
+		while (line[i])
 		{
-			col++;
+			i++;
+			matrix->col++;
 		}
-		row++;
+		matrix->row++;
 		free(line);
 		line = get_next_line(fd);
 	}
 	close(fd);
-	map = allocation(map, &row, &col);
-	fill_map(map, &row, &col);
+	map = allocation(map, matrix);
+	fill_map(map, matrix);
 }
 
 int main()

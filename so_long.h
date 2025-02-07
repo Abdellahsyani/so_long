@@ -1,0 +1,40 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: asyani <asyani@student.1337.ma>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/07 09:57:59 by asyani            #+#    #+#             */
+/*   Updated: 2025/02/07 10:02:08 by asyani           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef SO_LONG_H
+# define SO_LONG_H
+
+# include <stdio.h>
+# include <stdlib.h>
+# include "../get_next_line/get_next_line.h"
+
+typedef struct	s_pos
+{
+	int	coin;
+	int	player;
+	int	exit;
+	int	row;
+	int	col;
+}		t_pos;
+
+void	free_map(char **map);
+void	ft_error(char **map);
+void	verify_map(char **map, t_pos *matrix);
+void	check_inside(char **map, t_pos *matrix);
+void	check_map(char **map, t_pos *matrix);
+void	fill_map(char **map, t_pos *matrix);
+char	**allocation(char **map, t_pos *matrix);
+void	pars_map(int fd);
+void	flood_fill(char **map, t_pos *matrix, int x, int y);
+
+
+#endif
