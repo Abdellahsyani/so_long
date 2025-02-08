@@ -30,8 +30,11 @@ typedef struct	s_pos
 
 typedef struct	s_data
 {
+	void	*mlx;
+	void	*mlx_window;
 	void	*img;
 	char	*data;
+	int	color;
 	int	*addr;
 	int	bpp;
 	int	size_len;
@@ -47,7 +50,7 @@ void	fill_map(char **map, t_pos *matrix);
 char	**allocation(char **map, t_pos *matrix);
 void			pars_map(int fd);
 void	flood_fill(char **map, t_pos *matrix, int x, int y);
-void	draw_game(char **map, void *img, void *mlx_win, t_data win, t_pos *matrix);
+void	draw_game(char **map, t_data win, t_pos *matrix);
 void	so_long(char **map, t_pos *matrix);
 
 

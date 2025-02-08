@@ -12,13 +12,28 @@
 
 #include "so_long.h"
 
-void	draw_game(char **map, void *mlx, void *mlx_win, t_data win, t_pos *matrix)
+void	draw_pixels(t_data win, t_pos *matrix, int x, int y, int dx)
+{
+	int	dy;
+
+	while (dx < 50)
+	{
+		dy = 0;
+		while (dy < 50)
+		{
+			win.addr[(x * 50 + dx) * ((matrix->col - 1) * 50) + (y * 50 + dy)] = win.color;
+			dy++;
+		}
+		dx++;
+	}
+
+}
+
+void	draw_game(char **map, t_data win, t_pos *matrix)
 {
 	int	x;
 	int	y;
 	int	dx;
-	int	dy;
-	int	color;
 
 	x = 0;
 	while (x < matrix->row)
@@ -27,43 +42,30 @@ void	draw_game(char **map, void *mlx, void *mlx_win, t_data win, t_pos *matrix)
 		while (y < matrix->col - 1)
 		{
 			if (map[x][y] == '1')
-			{
-				color = 0xCD7054;
-			}
+				win.color = 0xCD7054;
 			else if (map[x][y] == '0')
-				color = 0xF1F7F7;
+				win.color = 0xF1F7F7;
 			else
-				color = 0x00FF00;
+				win.color = 0x00FF00;
 			dx = 0;
-			while (dx < 32)
-			{
-				dy = 0;
-				while (dy < 32)
-				{
-					win.addr[(x * 32 + dx) * ((matrix->col - 1) * 32) + (y * 32 + dy)] = color;
-					dy++;
-				}
-				dx++;
-			}
+			draw_pixels(win, matrix, x, y, dx);
 			y++;
 		}
 		x++;
 	}
-	mlx_put_image_to_window(mlx, mlx_win, win.img, 0, 0);
+	mlx_put_image_to_window(win.mlx, win.mlx_window, win.img, 0, 0);
 }
 
 void	so_long(char **map, t_pos *matrix)
 {
-	void	*mlx;
-	void	*mlx_window;
 	t_data	win;
 
-	mlx = mlx_init();
-	mlx_window = mlx_new_window(mlx, (matrix->col - 1) * 62, matrix->row * 62, "so_long");
-	win.img = mlx_new_image(mlx, (matrix->col - 1) * 32, matrix->row * 32);
+	win.mlx = mlx_init();
+	win.mlx_window = mlx_new_window(win.mlx, (matrix->col - 1) * 70, matrix->row * 70, "so_long");
+	win.img = mlx_new_image(win.mlx, (matrix->col - 1) * 50, matrix->row * 50);
 	win.addr = (int *)mlx_get_data_addr(win.img, &win.bpp, &win.size_len, &win.endian);
 
-	draw_game(map, mlx, mlx_window, win, matrix);
+	draw_game(map, win, matrix);
 
-	mlx_loop(mlx);
+	mlx_loop(win.mlx);
 }
