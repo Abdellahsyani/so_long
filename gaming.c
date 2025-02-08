@@ -12,6 +12,16 @@
 
 #include "so_long.h"
 
+void	draw_shapes(t_data win, char **map, int x, int y)
+{
+	if (map[x][y] == 'C')
+		coins_draw(win, x, y);
+	if (map[x][y] == 'P')
+		player_draw(win, x, y);
+	if (map[x][y] == 'E')
+		exit_draw(win, x, y);
+}
+
 void	draw_pixels(t_data win, t_pos *matrix, int x, int y, int dx)
 {
 	int	dy;
@@ -32,7 +42,7 @@ void	draw_pixels(t_data win, t_pos *matrix, int x, int y, int dx)
 void	draw_game(char **map, t_data win, t_pos *matrix)
 {
 	int	x;
-	int	y;
+	int	y;mlx_xpm_file_to_image(mlx, "coin.xpm", &img_width, &img_height)
 	int	dx;
 
 	x = 0;
@@ -46,7 +56,7 @@ void	draw_game(char **map, t_data win, t_pos *matrix)
 			else if (map[x][y] == '0')
 				win.color = 0xF1F7F7;
 			else
-				win.color = 0x00FF00;
+				draw_shapes(win, map, x, y);
 			dx = 0;
 			draw_pixels(win, matrix, x, y, dx);
 			y++;
