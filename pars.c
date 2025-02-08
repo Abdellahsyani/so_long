@@ -32,8 +32,6 @@ void	check_map(char **map, t_pos *matrix)
 		i++;
 	}
 	check_inside(map, matrix);
-	free_map(map);
-	free(matrix);
 }
 
 void	fill_map(char **map, t_pos *matrix)
@@ -115,6 +113,7 @@ void	pars_map(int fd)
 	close(fd);
 	map = allocation(map, matrix);
 	fill_map(map, matrix);
+	so_long(map, matrix);
 }
 
 int	main(void)
