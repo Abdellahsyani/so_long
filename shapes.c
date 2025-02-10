@@ -15,6 +15,8 @@
 void	coins_draw(t_data win, int x, int y)
 {
 	void	*coins;
+	int	img_width;
+	int	img_height;
 
 	coins = mlx_xpm_file_to_image(win.mlx, "coin.xpm", &img_width, &img_height);
 	if (coins)
@@ -23,6 +25,28 @@ void	coins_draw(t_data win, int x, int y)
 		perror("fail to draw coin");
 }
 
-void	player_draw(t_data win, int x, int y);
+void	player_draw(t_data win, int x, int y)
+{
+	void	*player;
+	int	img_width;
+	int	img_height;
 
-void	exit_draw(t_data win, int x, int y);
+	player = mlx_xpm_file_to_image(win.mlx, "player.xpm", &img_width, &img_height);
+	if (player)
+		mlx_put_image_to_window(win.mlx, win.mlx_window, player, x, y);
+	else
+		perror("fail to draw player");
+}
+
+void	exit_draw(t_data win, int x, int y)
+{
+	void	*exit;
+	int	img_width;
+	int	img_height;
+
+	exit = mlx_xpm_file_to_image(win.mlx, "exit.exp", &img_width, &img_height);
+	if (exit)
+		mlx_put_image_to_window(win.mlx, win.mlx_window, exit, x, y);
+	else
+		perror("fail to draw exit");
+}

@@ -25,13 +25,15 @@ void	draw_shapes(t_data win, char **map, int x, int y)
 void	draw_pixels(t_data win, t_pos *matrix, int x, int y, int dx)
 {
 	int	dy;
+	int	pixel;
 
 	while (dx < 50)
 	{
 		dy = 0;
 		while (dy < 50)
 		{
-			win.addr[(x * 50 + dx) * ((matrix->col - 1) * 50) + (y * 50 + dy)] = win.color;
+			pixel = (x * 50 + dx) * ((matrix->col - 1) * 50) + (y * 50 + dy);
+			win.addr[pixel] = win.color;
 			dy++;
 		}
 		dx++;
@@ -42,7 +44,7 @@ void	draw_pixels(t_data win, t_pos *matrix, int x, int y, int dx)
 void	draw_game(char **map, t_data win, t_pos *matrix)
 {
 	int	x;
-	int	y;mlx_xpm_file_to_image(mlx, "coin.xpm", &img_width, &img_height)
+	int	y;
 	int	dx;
 
 	x = 0;
