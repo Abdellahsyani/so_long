@@ -18,6 +18,8 @@ void	coins_draw(t_data win, int x, int y)
 	int	img_width;
 	int	img_height;
 
+	printf("x: %d\n", x);
+	printf("y: %d\n", y);
 	coins = mlx_xpm_file_to_image(win.mlx, "coin.xpm", &img_width, &img_height);
 	if (coins)
 		mlx_put_image_to_window(win.mlx, win.mlx_window, coins, x, y);
