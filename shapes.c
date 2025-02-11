@@ -35,7 +35,7 @@ void	player_draw(t_data win, int x, int y)
 
 	player = mlx_xpm_file_to_image(win.mlx, "tools/player.xpm", &img_width, &img_height);
 	if (player)
-		mlx_put_image_to_window(win.mlx, win.mlx_window, player, x * 50, y * 50);
+		mlx_put_image_to_window(win.mlx, win.mlx_window, player, x, y);
 	else
 		perror("fail to draw player");
 }
@@ -48,7 +48,7 @@ void	exit_draw(t_data win, int x, int y)
 
 	exit = mlx_xpm_file_to_image(win.mlx, "tools/exit.xpm", &img_width, &img_height);
 	if (exit)
-		mlx_put_image_to_window(win.mlx, win.mlx_window, exit, x * 50, y * 50);
+		mlx_put_image_to_window(win.mlx, win.mlx_window, exit, x, y);
 	else
 		perror("fail to draw exit");
 }
@@ -65,7 +65,7 @@ void	wall_draw(t_data win, int x, int y)
 		perror("fail to draw wall");
 		return ;
 	}
-	mlx_put_image_to_window(win.mlx, win.mlx_window, wall, x * 50, y * 50);
+	mlx_put_image_to_window(win.mlx, win.mlx_window, wall, x, y);
 }
 
 void	floor_draw(t_data win, int x, int y)
@@ -80,5 +80,5 @@ void	floor_draw(t_data win, int x, int y)
 		perror("fail to draw floor");
 		return ;
 	}
-	mlx_put_image_to_window(win.mlx, win.mlx_window, floor, x * 50, y * 50);
+	mlx_put_image_to_window(win.mlx, win.mlx_window, floor, x, y);
 }
