@@ -19,13 +19,12 @@ void	coins_draw(t_data win, int x, int y)
 	int	img_height;
 
 	coins = mlx_xpm_file_to_image(win.mlx, "tools/coin.xpm", &img_width, &img_height);
-	printf("x: %d, y: %d\n", x, y);
 	if (!coins)
 	{
 		perror("fail to draw coin");
 		return ;
 	}
-	mlx_put_image_to_window(win.mlx, win.mlx_window, coins, x, y);
+	mlx_put_image_to_window(win.mlx, win.mlx_window, coins, y * 50, x * 50);
 }
 
 void	player_draw(t_data win, int x, int y)
@@ -35,9 +34,8 @@ void	player_draw(t_data win, int x, int y)
 	int	img_height;
 
 	player = mlx_xpm_file_to_image(win.mlx, "tools/player.xpm", &img_width, &img_height);
-	printf("x: %d, y: %d\n", x, y);
 	if (player)
-		mlx_put_image_to_window(win.mlx, win.mlx_window, player, x, y);
+		mlx_put_image_to_window(win.mlx, win.mlx_window, player, y * 50, x * 50);
 	else
 		perror("fail to draw player");
 }
@@ -48,10 +46,9 @@ void	exit_draw(t_data win, int x, int y)
 	int	img_width;
 	int	img_height;
 
-	exit = mlx_xpm_file_to_image(win.mlx, "tools/exit.xpm", &img_width, &img_height);
-	printf("x: %d, y: %d\n", x, y);
+	exit = mlx_xpm_file_to_image(win.mlx, "tools/door.xpm", &img_width, &img_height);
 	if (exit)
-		mlx_put_image_to_window(win.mlx, win.mlx_window, exit, x, y);
+		mlx_put_image_to_window(win.mlx, win.mlx_window, exit, y * 50, x * 50);
 	else
 		perror("fail to draw exit");
 }
@@ -63,13 +60,12 @@ void	wall_draw(t_data win, int x, int y)
 	int	img_height;
 
 	wall = mlx_xpm_file_to_image(win.mlx, "tools/wall.xpm", &img_width, &img_height);
-	printf("wall=> x: %d, y: %d\n", x, y);
 	if (!wall)
 	{
 		perror("fail to draw wall");
 		return ;
 	}
-	mlx_put_image_to_window(win.mlx, win.mlx_window, wall, x, y);
+	mlx_put_image_to_window(win.mlx, win.mlx_window, wall, y * 50, x * 50);
 }
 
 void	floor_draw(t_data win, int x, int y)
@@ -79,11 +75,10 @@ void	floor_draw(t_data win, int x, int y)
 	int	img_height;
 
 	floor = mlx_xpm_file_to_image(win.mlx, "tools/floor.xpm", &img_width, &img_height);
-	printf("floor=> x: %d, y: %d\n", x, y);
 	if (!floor)
 	{
 		perror("fail to draw floor");
 		return ;
 	}
-	mlx_put_image_to_window(win.mlx, win.mlx_window, floor, x, y);
+	mlx_put_image_to_window(win.mlx, win.mlx_window, floor, y * 50, x * 50);
 }

@@ -35,10 +35,11 @@ void	draw_game(char **map, t_data win, t_pos *matrix)
 		{
 			if (map[x][y] == '1')
 				wall_draw(win, x, y);
-			else if (map[x][y] == 'C' || map[x][y] == 'E' || map[x][y] == 'P')
-				draw_shapes(win, map, x, y);
 			else 
 				floor_draw(win, x, y);
+			/*else if (map[x][y] == 'C' || map[x][y] == 'E' || map[x][y] == 'P')*/
+			/*	draw_shapes(win, map, x, y);*/
+			draw_shapes(win, map, x, y);
 			y++;
 		}
 		x++;
