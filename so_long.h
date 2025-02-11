@@ -53,7 +53,9 @@ void	flood_fill(char **map, t_pos *matrix, int x, int y);
 void	draw_game(char **map, t_data win, t_pos *matrix);
 void	so_long(char **map, t_pos *matrix);
 
-
+/* all tools about game */
+void	floor_draw(t_data win, int x, int y);
+void	wall_draw(t_data win, int x, int y);
 void	coins_draw(t_data win, int x, int y);
 void	player_draw(t_data win, int x, int y);
 void	exit_draw(t_data win, int x, int y);
