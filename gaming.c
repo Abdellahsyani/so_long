@@ -20,36 +20,35 @@ void	draw_shapes(t_data win, char **map, int x, int y)
 		player_draw(win, x, y);
 	if (map[x][y] == 'E')
 		exit_draw(win, x, y);
-	if (map[x][y] == '1')
-		wall_draw(win, x, y);
-	else
-		floor_draw(win, x, y);
+	/*if (map[x][y] == '1')*/
+	/*	wall_draw(win, x, y);*/
+	/*else*/
+	/*	floor_draw(win, x, y);*/
 }
 
-void	draw_pixels(t_data win, t_pos *matrix, int x, int y, int dx)
-{
-	int	dy;
-	int	pixel;
-
-	while (dx < 50)
-	{
-		dy = 0;
-		while (dy < 50)
-		{
-			pixel = (x * 50 + dx) * ((matrix->col - 1) * 50) + (y * 50 + dy);
-			win.addr[pixel] = win.color;
-			dy++;
-		}
-		dx++;
-	}
-
-}
+/*void	draw_pixels(t_data win, t_pos *matrix, int x, int y, int dx)*/
+/*{*/
+/*	int	dy;*/
+/*	int	pixel;*/
+/**/
+/*	while (dx < 50)*/
+/*	{*/
+/*		dy = 0;*/
+/*		while (dy < 50)*/
+/*		{*/
+/*			pixel = (x * 50 + dx) * ((matrix->col - 1) * 50) + (y * 50 + dy);*/
+/*			win.addr[pixel] = win.color;*/
+/*			dy++;*/
+/*		}*/
+/*		dx++;*/
+/*	}*/
+/**/
+/*}*/
 
 void	draw_game(char **map, t_data win, t_pos *matrix)
 {
 	int	x;
 	int	y;
-	int	dx;
 
 	x = 0;
 	while (x < matrix->row)
@@ -58,13 +57,11 @@ void	draw_game(char **map, t_data win, t_pos *matrix)
 		while (y < matrix->col - 1)
 		{
 			if (map[x][y] == '1')
+				wall_draw(win, x, y);
+			else if (map[x][y] == 'C' || map[x][y] == 'E' || map[x][y] == 'P')
 				draw_shapes(win, map, x, y);
 			else 
-				draw_shapes(win, map, x, y);
-			dx = 0;
-			draw_pixels(win, matrix, x, y, dx);
-			if (map[x][y] == 'C' || map[x][y] == 'E' || map[x][y] == 'P')
-				draw_shapes(win, map, x, y);
+				floor_draw(win, x, y);
 			y++;
 		}
 		x++;
