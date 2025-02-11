@@ -20,10 +20,6 @@ void	draw_shapes(t_data win, char **map, int x, int y)
 		player_draw(win, x, y);
 	if (map[x][y] == 'E')
 		exit_draw(win, x, y);
-	/*if (map[x][y] == '1')*/
-	/*	wall_draw(win, x, y);*/
-	/*else*/
-	/*	floor_draw(win, x, y);*/
 }
 
 void	draw_game(char **map, t_data win, t_pos *matrix)
@@ -35,7 +31,7 @@ void	draw_game(char **map, t_data win, t_pos *matrix)
 	while (x < matrix->row)
 	{
 		y = 0;
-		while (y < matrix->col - 2)
+		while (y < matrix->col - 1)
 		{
 			if (map[x][y] == '1')
 				wall_draw(win, x, y);
@@ -47,7 +43,6 @@ void	draw_game(char **map, t_data win, t_pos *matrix)
 		}
 		x++;
 	}
-	mlx_put_image_to_window(win.mlx, win.mlx_window, win.img, 0, 0);
 }
 
 void	so_long(char **map, t_pos *matrix)
@@ -56,6 +51,8 @@ void	so_long(char **map, t_pos *matrix)
 
 	win.mlx = mlx_init();
 	win.mlx_window = mlx_new_window(win.mlx, (matrix->col - 1) * 50, matrix->row * 50, "so_long");
+	/*win.img = mlx_new_image(win.mlx, (matrix->col - 1) * 50, matrix->row * 50);*/
+	/*win.addr = (int *)mlx_get_data_addr(win.img, &win.bpp, &win.size_len, &win.endian);*/
 
 	draw_game(map, win, matrix);
 

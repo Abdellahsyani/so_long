@@ -19,6 +19,7 @@ void	coins_draw(t_data win, int x, int y)
 	int	img_height;
 
 	coins = mlx_xpm_file_to_image(win.mlx, "tools/coin.xpm", &img_width, &img_height);
+	printf("x: %d, y: %d\n", x, y);
 	if (!coins)
 	{
 		perror("fail to draw coin");
@@ -34,6 +35,7 @@ void	player_draw(t_data win, int x, int y)
 	int	img_height;
 
 	player = mlx_xpm_file_to_image(win.mlx, "tools/player.xpm", &img_width, &img_height);
+	printf("x: %d, y: %d\n", x, y);
 	if (player)
 		mlx_put_image_to_window(win.mlx, win.mlx_window, player, x, y);
 	else
@@ -47,6 +49,7 @@ void	exit_draw(t_data win, int x, int y)
 	int	img_height;
 
 	exit = mlx_xpm_file_to_image(win.mlx, "tools/exit.xpm", &img_width, &img_height);
+	printf("x: %d, y: %d\n", x, y);
 	if (exit)
 		mlx_put_image_to_window(win.mlx, win.mlx_window, exit, x, y);
 	else
@@ -60,6 +63,7 @@ void	wall_draw(t_data win, int x, int y)
 	int	img_height;
 
 	wall = mlx_xpm_file_to_image(win.mlx, "tools/wall.xpm", &img_width, &img_height);
+	printf("wall=> x: %d, y: %d\n", x, y);
 	if (!wall)
 	{
 		perror("fail to draw wall");
@@ -75,6 +79,7 @@ void	floor_draw(t_data win, int x, int y)
 	int	img_height;
 
 	floor = mlx_xpm_file_to_image(win.mlx, "tools/floor.xpm", &img_width, &img_height);
+	printf("floor=> x: %d, y: %d\n", x, y);
 	if (!floor)
 	{
 		perror("fail to draw floor");
