@@ -12,30 +12,30 @@
 
 #include "so_long.h"
 
-void	flood_fill(char **map, t_pos *matrix, int x, int y)
+void	flood_fill(t_pos *matrix, int x, int y)
 {
 	int	top;
 	int	down;
 	int	left;
 	int	right;
 
-	if (map[x][y] != 'E' && map[x][y] != 'C' && map[x][y] != 'P')
+	if (matrix->map[x][y] != 'E' && matrix->map[x][y] != 'C' && matrix->map[x][y] != 'P')
 		return;
-	top = (x > 0 && map[x - 1][y] == '1');
-	down = (x < matrix->row - 1 && map[x + 1][y] == '1');
-	left = (y > 0 && map[x][y - 1] == '1');
-	right = (y < matrix->col - 1 && map[x][y + 1] == '1');
+	top = (x > 0 && matrix->map[x - 1][y] == '1');
+	down = (x < matrix->row - 1 && matrix->map[x + 1][y] == '1');
+	left = (y > 0 && matrix->map[x][y - 1] == '1');
+	right = (y < matrix->col - 1 && matrix->map[x][y + 1] == '1');
 	if (top && down && left && right)
-		ft_error(map, matrix);
+		ft_error(matrix);
 }
 
-void	verify_map(char **map, t_pos *matrix)
+void	verify_map(t_pos *matrix)
 {
 	int	i;
 	int	j;
 
 	if (matrix->coin < 1 || matrix->exit != 1 || matrix->player != 1)
-		ft_error(map, matrix);
+		ft_error(matrix);
 	else
 	{
 		i = 1;
@@ -44,12 +44,12 @@ void	verify_map(char **map, t_pos *matrix)
 			j = 1;
 			while (j < matrix->col - 2)
 			{
-				if (map[i][j] == 'C')
-					flood_fill(map, matrix, i, j);
-				if (map[i][j] == 'E')
-					flood_fill(map, matrix, i, j);
-				if (map[i][j] == 'P')
-					flood_fill(map, matrix, i, j);
+				if (matrix->map[i][j] == 'C')
+					flood_fill(matrix, i, j);
+				if (matrix->map[i][j] == 'E')
+					flood_fill(matrix, i, j);
+				if (matrix->map[i][j] == 'P')
+					flood_fill(matrix, i, j);
 				j++;
 			}
 			i++;
@@ -57,7 +57,7 @@ void	verify_map(char **map, t_pos *matrix)
 	}
 }
 
-void	check_inside(char **map, t_pos *matrix)
+void	check_inside(t_pos *matrix)
 {
 	int	i;
 	int	j;
@@ -71,15 +71,15 @@ void	check_inside(char **map, t_pos *matrix)
 		j = 1;
 		while (j < matrix->col - 2)
 		{
-			if (map[i][j] == 'C')
+			if (matrix->map[i][j] == 'C')
 				matrix->coin++;
-			if (map[i][j] == 'E')
+			if (matrix->map[i][j] == 'E')
 				matrix->exit++;
-			if (map[i][j] == 'P')
+			if (matrix->map[i][j] == 'P')
 				matrix->player++;
 			j++;
 		}
 		i++;
 	}
-	verify_map(map, matrix);
+	verify_map(matrix);
 }

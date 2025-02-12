@@ -19,6 +19,9 @@
 # include "mlx.h"
 # include "../get_next_line/get_next_line.h"
 
+# define WIN_WIDTH 50
+# define WIN_HEIGHT 50
+
 typedef struct	s_pos
 {
 	int	coin;
@@ -26,6 +29,7 @@ typedef struct	s_pos
 	int	exit;
 	int	row;
 	int	col;
+	char	**map;
 }		t_pos;
 
 typedef struct	s_data
@@ -41,17 +45,25 @@ typedef struct	s_data
 	int	endian;
 }		t_data;
 
+typedef struct	s_game
+{
+	void	*player[3];
+	int frame;
+}		t_game;
+
+
+void	ft_putstr_fd(char *s, int fd);
 void			free_map(char **map);
-void	ft_error(char **map, t_pos *matrix);
-void	verify_map(char **map, t_pos *matrix);
-void	check_inside(char **map, t_pos *matrix);
-void	check_map(char **map, t_pos *matrix);
-void	fill_map(char **map, t_pos *matrix);
-char	**allocation(char **map, t_pos *matrix);
-void			pars_map(int fd);
-void	flood_fill(char **map, t_pos *matrix, int x, int y);
-void	draw_game(char **map, t_data win, t_pos *matrix);
-void	so_long(char **map, t_pos *matrix);
+void	ft_error(t_pos *matrix);
+void	verify_map(t_pos *matrix);
+void	check_inside(t_pos *matrix);
+void	check_map(t_pos *matrix);
+void	fill_map(t_pos *matrix, char **av);
+void	allocation(t_pos *matrix);
+void			pars_map(int fd, char **av);
+void	flood_fill(t_pos *matrix, int x, int y);
+void	draw_game(t_data win, t_pos *matrix);
+void	so_long(t_pos *matrix);
 
 /* all tools about game */
 void	floor_draw(t_data win, int x, int y);

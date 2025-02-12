@@ -22,7 +22,7 @@ void	draw_shapes(t_data win, char **map, int x, int y)
 		exit_draw(win, x, y);
 }
 
-void	draw_game(char **map, t_data win, t_pos *matrix)
+void	draw_game(t_data win, t_pos *matrix)
 {
 	int	x;
 	int	y;
@@ -33,25 +33,26 @@ void	draw_game(char **map, t_data win, t_pos *matrix)
 		y = 0;
 		while (y < matrix->col - 1)
 		{
-			if (map[x][y] == '1')
+			if (matrix->map[x][y] == '1')
 				wall_draw(win, x, y);
 			else 
 				floor_draw(win, x, y);
-			draw_shapes(win, map, x, y);
+			draw_shapes(win, matrix->map, x, y);
 			y++;
 		}
 		x++;
 	}
 }
 
-void	so_long(char **map, t_pos *matrix)
+void	so_long(t_pos *matrix)
 {
 	t_data	win;
 
 	win.mlx = mlx_init();
-	win.mlx_window = mlx_new_window(win.mlx, (matrix->col - 1) * 50, matrix->row * 50, "so_long");
+	win.mlx_window = mlx_new_window(win.mlx, (matrix->col - 1) * WIN_WIDTH, matrix->row * WIN_HEIGHT, "so_long");
 
-	draw_game(map, win, matrix);
+	draw_game(win, matrix);
+	mlx_hook_loop();
 
 	mlx_loop(win.mlx);
 }

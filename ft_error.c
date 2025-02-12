@@ -12,6 +12,10 @@
 
 #include "so_long.h"
 
+/**
+ * free_map _ fucntion t free map
+ * @map: map to be frred
+ */
 void	free_map(char **map)
 {
 	int	i;
@@ -25,11 +29,34 @@ void	free_map(char **map)
 	free(map);
 }
 
-void	ft_error(char **map, t_pos *matrix)
+/**
+ * ft_error _ function to clean and prnt error message
+ * @matrix: a struct that hold map with other elements
+ */
+void	ft_error(t_pos *matrix)
 {
 	free(matrix);
-	free_map(map);
+	free_map(matrix->map);
 	errno = EINVAL;
 	perror("Map is not valid");
 	exit(1);
+}
+
+/**
+ * ft_putstr_fd _ the function that print to any side
+ * @s: the strin g that will be printed
+ * @fd: the file discriptor that will print to it
+ */
+void	ft_putstr_fd(char *s, int fd)
+{
+	int	i;
+
+	i = 0;
+	if (!s || fd == -1)
+		return ;
+	while (s[i])
+	{
+		write(fd, &s[i], 1);
+		i++;
+	}
 }

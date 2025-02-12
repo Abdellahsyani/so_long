@@ -27,17 +27,39 @@ void	coins_draw(t_data win, int x, int y)
 	mlx_put_image_to_window(win.mlx, win.mlx_window, coins, y * 50, x * 50);
 }
 
+int update_frame(t_data *matrix, t_game *game)
+{
+    // Clear window before drawing
+    mlx_clear_window(matrix->mlx, matrix->mlx_window);
+
+    // Draw player at (x, y) = (5, 5)
+    player_draw(matrix, 5, 5);
+
+    // Cycle through frames for animation
+    game->frame = (game->frame + 1) % 3;
+
+    return (0);
+}
+
 void	player_draw(t_data win, int x, int y)
 {
-	void	*player;
 	int	img_width;
 	int	img_height;
+	t_game	*game;
 
-	player = mlx_xpm_file_to_image(win.mlx, "tools/player.xpm", &img_width, &img_height);
-	if (player)
-		mlx_put_image_to_window(win.mlx, win.mlx_window, player, y * 50, x * 50);
-	else
-		perror("fail to draw player");
+	game = malloc(sizeof(t_game));
+	if (!game->player[0])
+	{
+		game->player[0] = mlx_xpm_file_to_image(win.mlx, "tools/p_1.xpm", &img_width, &img_height);
+		game->player[1] = mlx_xpm_file_to_image(win.mlx, "tools/p_2.xpm", &img_width, &img_height);
+		game->player[2] = mlx_xpm_file_to_image(win.mlx, "tools/p_3.xpm", &img_width, &img_height);
+		if (!game->player[0] || !game->player[1] || !game->player[3])
+		{
+			perror("fail to draw player");
+			exit(1);
+		}
+	}
+	mlx_put_image_to_window(win.mlx, win.mlx_window, game->player[game->frame], y * 50, x * 50);
 }
 
 void	exit_draw(t_data win, int x, int y)
