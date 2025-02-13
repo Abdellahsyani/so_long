@@ -132,6 +132,23 @@ void	pars_map(int fd, char **av)
 	so_long(matrix);
 }
 
+int	is_valid_file(char **av)
+{
+	int	i;
+
+	i = 0;
+	while (av[1][i])
+	{
+		if (av[1][i] == '/')
+		{
+			if (av[1][i + 1] >= 'a' && av[1][i + 1] <= 'z')
+				return (1);
+		}
+		i++;
+	}
+	return (0);
+}
+
 int	main(int ac, char **av)
 {
 	int	fd;
@@ -140,6 +157,11 @@ int	main(int ac, char **av)
 	{
 		ft_putstr_fd("❌ The game must take 2 argument!!\n", 2);
 		return (1);
+	}
+	if (!is_valid_file(av))
+	{
+		perror("Invalid file");
+		return (0);
 	}
 	// check for .ber file they should not eneter if a file just .ber
 	fd = open(av[1], O_RDONLY);
