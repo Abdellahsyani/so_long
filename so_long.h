@@ -48,10 +48,16 @@ typedef struct	s_data
 typedef struct	s_game
 {
 	void	*player[3];
-	int frame;
+	int	frame;
+	int	player_x;
+	int	player_y;
+	t_pos	*matrix;
+	t_data	win;
+
 }		t_game;
 
 
+void animate_player(t_game *game);
 int	update_frame(t_pos *matrix, t_data win, int x, int y);
 void	ft_putstr_fd(char *s, int fd);
 void			free_map(char **map);
@@ -70,7 +76,7 @@ void	so_long(t_pos *matrix);
 void	floor_draw(t_data win, int x, int y);
 void	wall_draw(t_data win, int x, int y);
 void	coins_draw(t_data win, int x, int y);
-void	player_draw(t_data win, int x, int y);
+void	player_draw(t_data win, t_game *game, int x, int y);
 void	exit_draw(t_data win, int x, int y);
 
 #endif
