@@ -56,7 +56,8 @@ typedef struct	s_game
 
 }		t_game;
 
-
+void	find_player_position(t_pos *matrix, t_game *game);
+int	handle_keypress(int keycode, t_game *game);
 void animate_player(t_game *game);
 int	update_frame(t_pos *matrix, t_data win, int x, int y);
 void	ft_putstr_fd(char *s, int fd);

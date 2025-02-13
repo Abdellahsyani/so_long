@@ -27,27 +27,6 @@ void	coins_draw(t_data win, int x, int y)
 	mlx_put_image_to_window(win.mlx, win.mlx_window, coins, y * 50, x * 50);
 }
 
-
-void animate_player(t_game *game)
-{
-    if (!game || !game->win.mlx || !game->win.mlx_window || 
-        game->player_x < 0 || game->player_y < 0)
-        return;
-
-    game->frame = (game->frame + 1) % 3;
-    
-    if (!game->player[game->frame])
-        game->frame = 0;  
-    
-    if (game->player[game->frame])
-        player_draw(game->win, game, game->player_x, game->player_y);
-}
-
-void	player_draw(t_data win, t_game *game, int x, int y)
-{
-	mlx_put_image_to_window(win.mlx, win.mlx_window, game->player[game->frame], y * 50, x * 50);
-}
-
 void	exit_draw(t_data win, int x, int y)
 {
 	void	*exit;

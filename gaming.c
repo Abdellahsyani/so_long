@@ -6,7 +6,7 @@
 /*   By: asyani <asyani@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 16:43:50 by asyani            #+#    #+#             */
-/*   Updated: 2025/02/07 17:06:15 by asyani           ###   ########.fr       */
+/*   Updated: 2025/02/13 16:29:22 by asyani           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,62 +44,6 @@ void	draw_game(t_data win, t_pos *matrix)
 	}
 }
 
-int handle_keypress(int keycode, t_game *game)
-{
-	if (!game || !game->matrix || !game->matrix->map || 
-		!game->win.mlx || !game->win.mlx_window)
-		return (0);
-
-	int new_x = game->player_x;
-	int new_y = game->player_y;
-
-	if (keycode == 65361 || keycode == 'a') 
-		new_y--;
-	if (keycode == 65363 || keycode == 'd')
-		new_y++;
-	if (keycode == 65362 || keycode == 'w')
-		new_x--;
-	if (keycode == 65364 || keycode == 's')
-		new_x++;
-	if (new_x < 0 || new_x >= game->matrix->row || 
-		new_y < 0 || new_y >= game->matrix->col - 1)
-		return (0);
-
-	if (game->matrix->map[new_x] && game->matrix->map[new_x][new_y] != '1')
-	{
-		game->matrix->map[game->player_x][game->player_y] = '0';
-		game->matrix->map[new_x][new_y] = 'P';
-		floor_draw(game->win, game->player_x, game->player_y);
-		game->player_x = new_x;
-		game->player_y = new_y;
-		animate_player(game);
-	}
-	return (0);
-}
-
-void find_player_position(t_pos *matrix, t_game *game)
-{
-	if (!matrix || !matrix->map || !game)
-		return;
-
-	game->player_x = -1;
-	game->player_y = -1;
-
-	for (int x = 0; x < matrix->row; x++)
-	{
-		if (!matrix->map[x])
-			continue;
-		for (int y = 0; y < matrix->col - 1; y++)
-		{
-			if (matrix->map[x][y] == 'P')
-			{
-				game->player_x = x;
-				game->player_y = y;
-				return;
-			}
-		}
-	}
-}
 
 void init_game(t_data *win, t_game *game, t_pos *matrix)
 {
