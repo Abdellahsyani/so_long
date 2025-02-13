@@ -52,6 +52,7 @@ typedef struct	s_game
 }		t_game;
 
 
+int	update_frame(t_pos *matrix, t_data win, int x, int y);
 void	ft_putstr_fd(char *s, int fd);
 void			free_map(char **map);
 void	ft_error(t_pos *matrix);

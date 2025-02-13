@@ -27,27 +27,25 @@ void	coins_draw(t_data win, int x, int y)
 	mlx_put_image_to_window(win.mlx, win.mlx_window, coins, y * 50, x * 50);
 }
 
-int update_frame(t_data *matrix, t_game *game)
+int update_frame(t_data *matrix, t_pos win, int x, int y)
 {
-    // Clear window before drawing
+	t_game	*game;
+
+	game = malloc(sizeof(t_game));
+
     mlx_clear_window(matrix->mlx, matrix->mlx_window);
+    player_draw(win, game, x, y);
 
-    // Draw player at (x, y) = (5, 5)
-    player_draw(matrix, 5, 5);
-
-    // Cycle through frames for animation
     game->frame = (game->frame + 1) % 3;
 
     return (0);
 }
 
-void	player_draw(t_data win, int x, int y)
+void	player_draw(t_data win, t_game *game, int x, int y)
 {
 	int	img_width;
 	int	img_height;
-	t_game	*game;
 
-	game = malloc(sizeof(t_game));
 	if (!game->player[0])
 	{
 		game->player[0] = mlx_xpm_file_to_image(win.mlx, "tools/p_1.xpm", &img_width, &img_height);

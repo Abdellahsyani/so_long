@@ -12,13 +12,13 @@
 
 #include "so_long.h"
 
-void	draw_shapes(t_data win, char **map, int x, int y)
+void	draw_shapes(t_data win, t_pos *matrix, int x, int y)
 {
-	if (map[x][y] == 'C')
+	if (matrix->map[x][y] == 'C')
 		coins_draw(win, x, y);
-	if (map[x][y] == 'P')
-		player_draw(win, x, y);
-	if (map[x][y] == 'E')
+	if (matrix->map[x][y] == 'P')
+		update_frame(matrix, win, x, y);
+	if (matrix->map[x][y] == 'E')
 		exit_draw(win, x, y);
 }
 
@@ -37,7 +37,7 @@ void	draw_game(t_data win, t_pos *matrix)
 				wall_draw(win, x, y);
 			else 
 				floor_draw(win, x, y);
-			draw_shapes(win, matrix->map, x, y);
+			draw_shapes(win, matrix, x, y);
 			y++;
 		}
 		x++;
@@ -52,7 +52,7 @@ void	so_long(t_pos *matrix)
 	win.mlx_window = mlx_new_window(win.mlx, (matrix->col - 1) * WIN_WIDTH, matrix->row * WIN_HEIGHT, "so_long");
 
 	draw_game(win, matrix);
-	mlx_hook_loop();
+	mlx_loop_hook();
 
 	mlx_loop(win.mlx);
 }
