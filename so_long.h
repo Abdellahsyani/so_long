@@ -47,12 +47,14 @@ typedef struct	s_data
 
 typedef struct	s_game
 {
-	void	*player[10];
+	void	*player_left[3];
+	void	*player_right[3];
+	void	*player_up[3];
+	void	*player_down[3];
 	int	frame;
 	int	player_x;
 	int	player_y;
-	int	jump_offset;
-	int	jumping;
+	int	is_moving;
 	t_pos	*matrix;
 	t_data	win;
 

@@ -72,17 +72,17 @@ void init_game(t_data *win, t_game *game, t_pos *matrix)
 	p_left(game, win);
 }
 
-void	first_handle(t_game *game, t_data *win)
-{
-	if (game->is_moving == 1)
-		mlx_xpm_file_to_image(win->mlx, "tools/p1_down.xpm", &img_width, &img_height);
-	else
-}
+/*void	first_handle(t_game *game, t_data *win)*/
+/*{*/
+/*	if (game->is_moving == 1)*/
+/*		mlx_xpm_file_to_image(win->mlx, "tools/p1_down.xpm", &img_width, &img_height);*/
+/*	else*/
+/*}*/
 
 void so_long(t_pos *matrix)
 {
-	t_data win;
-	t_game game;
+	t_data	win;
+	t_game	game;
 
 	if (!matrix || !matrix->map || matrix->row <= 0 || matrix->col <= 0)
 	{
