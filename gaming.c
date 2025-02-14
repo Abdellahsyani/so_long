@@ -54,6 +54,8 @@ void init_game(t_data *win, t_game *game, t_pos *matrix)
 	game->player_x = -1;
 	game->player_y = -1;
 	game->matrix = matrix;
+	game->jumping = 1;
+	game->jump_offset = 0;
 
 	win->mlx = mlx_init();
 	if (!win->mlx)
@@ -73,9 +75,9 @@ void init_game(t_data *win, t_game *game, t_pos *matrix)
 		perror("Player position not found");
 		exit(1);
 	}
-	game->player[0] = mlx_xpm_file_to_image(win->mlx, "tools/p_1.xpm", &img_width, &img_height);
-	game->player[1] = mlx_xpm_file_to_image(win->mlx, "tools/p_2.xpm", &img_width, &img_height);
-	game->player[2] = mlx_xpm_file_to_image(win->mlx, "tools/p_3.xpm", &img_width, &img_height);
+	game->player[0] = mlx_xpm_file_to_image(win->mlx, "tools/p2.xpm", &img_width, &img_height);
+	game->player[1] = mlx_xpm_file_to_image(win->mlx, "tools/p1.xpm", &img_width, &img_height);
+	game->player[2] = mlx_xpm_file_to_image(win->mlx, "tools/p3.xpm", &img_width, &img_height);
 	if (!game->player[0] || !game->player[1] || !game->player[2])
 	{
 		perror("Failed to load player sprites");
@@ -97,6 +99,7 @@ void so_long(t_pos *matrix)
 	init_game(&win, &game, matrix);
 	draw_game(win, matrix);
 	player_draw(win, &game, game.player_x, game.player_y);
+	//mlx_loop_hook(win.mlx, idle_animate, &game);
 	mlx_key_hook(win.mlx_window, handle_keypress, &game);
 
 	mlx_loop(win.mlx);

@@ -51,11 +51,14 @@ typedef struct	s_game
 	int	frame;
 	int	player_x;
 	int	player_y;
+	int	jump_offset;
+	int	jumping;
 	t_pos	*matrix;
 	t_data	win;
 
 }		t_game;
 
+int	idle_animate(t_game *game);
 void	find_player_position(t_pos *matrix, t_game *game);
 int	handle_keypress(int keycode, t_game *game);
 void animate_player(t_game *game);

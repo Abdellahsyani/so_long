@@ -22,6 +22,19 @@ static void	execute_key(t_game *game, int new_x, int new_y)
 	animate_player(game);
 }
 
+/*int	idle_animate(t_game *game)*/
+/*{*/
+/*	static int direction = 1;*/
+/*	if (game->jumping == 1)*/
+/*	{*/
+/*		game->jump_offset += direction;*/
+/*		if (game->jump_offset > 5 || game->jump_offset < -5)*/
+/*			direction *= -1;*/
+/*	}*/
+/*	player_draw(game->win, game, game->player_x, game->player_y);*/
+/*	return (0);*/
+/*}*/
+
 int	handle_keypress(int keycode, t_game *game)
 {
 	int	new_x;
