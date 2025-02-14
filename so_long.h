@@ -47,7 +47,7 @@ typedef struct	s_data
 
 typedef struct	s_game
 {
-	void	*player[3];
+	void	*player[10];
 	int	frame;
 	int	player_x;
 	int	player_y;

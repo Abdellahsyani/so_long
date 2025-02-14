@@ -25,7 +25,7 @@ void	p_left(t_game *game, t_data *win)
 		perror("Failed to load player sprites");
 		exit(1);
 	}
-	game->win = *win;
+	game->win = *win
 }
 
 void	p_right(t_game *game, t_data *win)
