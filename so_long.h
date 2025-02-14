@@ -58,6 +58,7 @@ typedef struct	s_game
 
 }		t_game;
 
+void	p_left(t_game *game, t_data *win);
 int	idle_animate(t_game *game);
 void	find_player_position(t_pos *matrix, t_game *game);
 int	handle_keypress(int keycode, t_game *game);
