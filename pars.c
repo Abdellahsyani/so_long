@@ -135,7 +135,11 @@ void	pars_map(int fd, char **av)
 int	is_valid_file(char **av)
 {
 	int	i;
+	int	len;
 
+	len = strlen(av[1]);
+	if (strcmp(av[1] + len - 4, ".ber") != 0)
+		return (0);
 	i = 0;
 	while (av[1][i])
 	{
