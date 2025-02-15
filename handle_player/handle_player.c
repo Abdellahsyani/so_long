@@ -12,16 +12,45 @@
 
 #include "../so_long.h"
 
-static void	execute_key(t_game *game, int new_x, int new_y)
+static void	execute_key_left(t_game *game, int new_x, int new_y)
 {
 	game->matrix->map[game->player_x][game->player_y] = '0';
 	game->matrix->map[new_x][new_y] = 'P';
 	floor_draw(game->win, game->player_x, game->player_y);
 	game->player_x = new_x;
 	game->player_y = new_y;
-	animate_player(game);
+	animate_player_left(game);
 }
 
+static void	execute_key_right(t_game *game, int new_x, int new_y)
+{
+	game->matrix->map[game->player_x][game->player_y] = '0';
+	game->matrix->map[new_x][new_y] = 'P';
+	floor_draw(game->win, game->player_x, game->player_y);
+	game->player_x = new_x;
+	game->player_y = new_y;
+	animate_player_right(game);
+}
+
+static void	execute_key_up(t_game *game, int new_x, int new_y)
+{
+	game->matrix->map[game->player_x][game->player_y] = '0';
+	game->matrix->map[new_x][new_y] = 'P';
+	floor_draw(game->win, game->player_x, game->player_y);
+	game->player_x = new_x;
+	game->player_y = new_y;
+	animate_player_up(game);
+}
+
+static void	execute_key_down(t_game *game, int new_x, int new_y)
+{
+	game->matrix->map[game->player_x][game->player_y] = '0';
+	game->matrix->map[new_x][new_y] = 'P';
+	floor_draw(game->win, game->player_x, game->player_y);
+	game->player_x = new_x;
+	game->player_y = new_y;
+	animate_player_down(game);
+}
 /*int	idle_animate(t_game *game)*/
 /*{*/
 /*	static int direction = 1;*/
@@ -49,25 +78,25 @@ int	handle_keypress(int keycode, t_game *game)
 	{
 		new_y--;
 		if (game->matrix->map[new_x] && game->matrix->map[new_x][new_y] != '1')
-			execute_key(game, new_x, new_y);
+			execute_key_left(game, new_x, new_y);
 	}
 	if (keycode == 65363 || keycode == 'd')
 	{
 		new_y++;
 		if (game->matrix->map[new_x] && game->matrix->map[new_x][new_y] != '1')
-			execute_key(game, new_x, new_y);
+			execute_key_right(game, new_x, new_y);
 	}
 	if (keycode == 65362 || keycode == 'w')
 	{
 		new_x--;
 		if (game->matrix->map[new_x] && game->matrix->map[new_x][new_y] != '1')
-			execute_key(game, new_x, new_y);
+			execute_key_up(game, new_x, new_y);
 	}
 	if (keycode == 65364 || keycode == 's')
 	{
 		new_x++;
 		if (game->matrix->map[new_x] && game->matrix->map[new_x][new_y] != '1')
-			execute_key(game, new_x, new_y);
+			execute_key_down(game, new_x, new_y);
 	}
 	if (new_x < 0 || new_x >= game->matrix->row || 
 		new_y < 0 || new_y >= game->matrix->col - 1)

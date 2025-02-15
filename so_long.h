@@ -86,4 +86,18 @@ void	coins_draw(t_data win, int x, int y);
 void	player_draw(t_data win, t_game *game, int x, int y);
 void	exit_draw(t_data win, int x, int y);
 
+/*players */
+void	animate_player_left(t_game *game);
+void	animate_player_right(t_game *game);
+void	animate_player_up(t_game *game);
+void	animate_player_down(t_game *game);
+void	player_draw_left(t_data win, t_game *game, int x, int y);
+void	player_draw_right(t_data win, t_game *game, int x, int y);
+void	player_draw_up(t_data win, t_game *game, int x, int y);
+void	player_draw_down(t_data win, t_game *game, int x, int y);
+// all_p's
+void	p_left(t_game *game, t_data *win);
+void	p_right(t_game *game, t_data *win);
+void	p_up(t_game *game, t_data *win);
+void	p_down(t_game *game, t_data *win);
 #endif

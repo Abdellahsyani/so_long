@@ -44,6 +44,14 @@ void	draw_game(t_data win, t_pos *matrix)
 	}
 }
 
+void	all_arrays(t_game *game, t_data *win)
+{
+	p_left(game, win);
+	p_right(game, win);
+	p_up(game, win);
+	p_down(game, win);
+}
+
 void init_game(t_data *win, t_game *game, t_pos *matrix)
 {
 	game->frame = 0;
@@ -69,7 +77,7 @@ void init_game(t_data *win, t_game *game, t_pos *matrix)
 		perror("Player position not found");
 		exit(1);
 	}
-	p_left(game, win);
+	all_arrays(game, win);
 }
 
 /*void	first_handle(t_game *game, t_data *win)*/
@@ -91,7 +99,7 @@ void so_long(t_pos *matrix)
 	}
 	init_game(&win, &game, matrix);
 	draw_game(win, matrix);
-	player_draw(win, &game, game.player_x, game.player_y);
+	player_draw_down(win, &game, game.player_x, game.player_y);
 	//mlx_loop_hook(win.mlx, idle_animate, &game);
 	mlx_key_hook(win.mlx_window, handle_keypress, &game);
 
