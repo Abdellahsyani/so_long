@@ -6,51 +6,12 @@
 /*   By: asyani <asyani@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:22:09 by asyani            #+#    #+#             */
-/*   Updated: 2025/02/13 16:25:39 by asyani           ###   ########.fr       */
+/*   Updated: 2025/02/16 10:27:53 by asyani           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-static void	execute_key_left(t_game *game, int new_x, int new_y)
-{
-	game->matrix->map[game->player_x][game->player_y] = '0';
-	game->matrix->map[new_x][new_y] = 'P';
-	floor_draw(game->win, game->player_x, game->player_y);
-	game->player_x = new_x;
-	game->player_y = new_y;
-	animate_player_left(game);
-}
-
-static void	execute_key_right(t_game *game, int new_x, int new_y)
-{
-	game->matrix->map[game->player_x][game->player_y] = '0';
-	game->matrix->map[new_x][new_y] = 'P';
-	floor_draw(game->win, game->player_x, game->player_y);
-	game->player_x = new_x;
-	game->player_y = new_y;
-	animate_player_right(game);
-}
-
-static void	execute_key_up(t_game *game, int new_x, int new_y)
-{
-	game->matrix->map[game->player_x][game->player_y] = '0';
-	game->matrix->map[new_x][new_y] = 'P';
-	floor_draw(game->win, game->player_x, game->player_y);
-	game->player_x = new_x;
-	game->player_y = new_y;
-	animate_player_up(game);
-}
-
-static void	execute_key_down(t_game *game, int new_x, int new_y)
-{
-	game->matrix->map[game->player_x][game->player_y] = '0';
-	game->matrix->map[new_x][new_y] = 'P';
-	floor_draw(game->win, game->player_x, game->player_y);
-	game->player_x = new_x;
-	game->player_y = new_y;
-	animate_player_down(game);
-}
 /*int	idle_animate(t_game *game)*/
 /*{*/
 /*	static int direction = 1;*/
@@ -64,6 +25,50 @@ static void	execute_key_down(t_game *game, int new_x, int new_y)
 /*	return (0);*/
 /*}*/
 
+void	key_left_helper(t_game *game, int new_x, int new_y)
+{
+	new_y--;
+	if (new_x < 0 || new_x >= game->matrix->row || 
+		new_y < 0 || new_y >= game->matrix->col - 1)
+		return ;
+	if (game->matrix->map[new_x] && game->matrix->map[new_x][new_y] != '1')
+		execute_key_left(game, new_x, new_y);
+}
+
+void	key_right_helper(t_game *game, int new_x, int new_y)
+{
+	new_y++;
+	if (new_x < 0 || new_x >= game->matrix->row || 
+		new_y < 0 || new_y >= game->matrix->col - 1)
+		return ;
+	if (game->matrix->map[new_x] && game->matrix->map[new_x][new_y] != '1')
+		execute_key_right(game, new_x, new_y);
+}
+
+void	key_up_helper(t_game *game, int new_x, int new_y)
+{
+	new_x--;
+	if (new_x < 0 || new_x >= game->matrix->row || 
+		new_y < 0 || new_y >= game->matrix->col - 1)
+		return ;
+	if (game->matrix->map[new_x] && game->matrix->map[new_x][new_y] != '1')
+		execute_key_up(game, new_x, new_y);
+}
+
+void	key_down_helper(t_game *game, int new_x, int new_y)
+{
+	new_x++;
+	if (new_x < 0 || new_x >= game->matrix->row || 
+		new_y < 0 || new_y >= game->matrix->col - 1)
+		return ;
+	if (game->matrix->map[new_x] && game->matrix->map[new_x][new_y] != '1')
+		execute_key_down(game, new_x, new_y);
+}
+
+void	exit_game(t_game *game)
+{
+}
+
 int	handle_keypress(int keycode, t_game *game)
 {
 	int	new_x;
@@ -75,41 +80,15 @@ int	handle_keypress(int keycode, t_game *game)
 	new_x = game->player_x;
 	new_y = game->player_y;
 	if (keycode == KEY_LEFT || keycode == 'a') 
-	{
-		new_y--;
-		if (new_x < 0 || new_x >= game->matrix->row || 
-			new_y < 0 || new_y >= game->matrix->col - 1)
-			return (0);
-		if (game->matrix->map[new_x] && game->matrix->map[new_x][new_y] != '1')
-			execute_key_left(game, new_x, new_y);
-	}
+		key_left_helper(game, new_x, new_y);
 	if (keycode == KEY_RIGHT || keycode == 'd')
-	{
-		new_y++;
-		if (new_x < 0 || new_x >= game->matrix->row || 
-			new_y < 0 || new_y >= game->matrix->col - 1)
-			return (0);
-		if (game->matrix->map[new_x] && game->matrix->map[new_x][new_y] != '1')
-			execute_key_right(game, new_x, new_y);
-	}
+		key_right_helper(game, new_x, new_y);
 	if (keycode == KEY_UP || keycode == 'w')
-	{
-		new_x--;
-		if (new_x < 0 || new_x >= game->matrix->row || 
-			new_y < 0 || new_y >= game->matrix->col - 1)
-			return (0);
-		if (game->matrix->map[new_x] && game->matrix->map[new_x][new_y] != '1')
-			execute_key_up(game, new_x, new_y);
-	}
+		key_up_helper(game, new_x, new_y);
 	if (keycode == KEY_DOWN || keycode == 's')
-	{
-		new_x++;
-		if (new_x < 0 || new_x >= game->matrix->row || 
-			new_y < 0 || new_y >= game->matrix->col - 1)
-			return (0);
-		if (game->matrix->map[new_x] && game->matrix->map[new_x][new_y] != '1')
-			execute_key_down(game, new_x, new_y);
-	}
+		key_down_helper(game, new_x, new_y);
+	if (keycode == ESC_KEY)
+		exit_game(game);
 	return (0);
 }
 

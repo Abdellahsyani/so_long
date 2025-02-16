@@ -25,6 +25,7 @@
 # define KEY_RIGHT 65363
 # define KEY_UP 65362
 # define KEY_DOWN 65364
+# define ESC_KEY 65307
 
 typedef struct	s_pos
 {
@@ -64,19 +65,13 @@ typedef struct	s_game
 
 }		t_game;
 
-/*error handling*/
-
-
-
-void	p_left(t_game *game, t_data *win);
-int	idle_animate(t_game *game);
-void	find_player_position(t_pos *matrix, t_game *game);
-int	handle_keypress(int keycode, t_game *game);
-void animate_player(t_game *game);
-int	update_frame(t_pos *matrix, t_data win, int x, int y);
-void	ft_putstr_fd(char *s, int fd);
+/* ========> error handling <======== */
 void			free_map(char **map);
 void	ft_error(t_pos *matrix);
+
+
+/* =====> parsing function's <========= */
+void	ft_putstr_fd(char *s, int fd);
 void	verify_map(t_pos *matrix);
 void	check_inside(t_pos *matrix);
 void	check_map(t_pos *matrix);
@@ -84,17 +79,20 @@ void	fill_map(t_pos *matrix, char **av);
 void	allocation(t_pos *matrix);
 void			pars_map(int fd, char **av);
 void	flood_fill(t_pos *matrix, int x, int y);
-void	draw_game(t_data win, t_pos *matrix);
-void	so_long(t_pos *matrix);
 
-/* all tools about game */
+/* =========> all tools about game <========== */
+int	handle_keypress(int keycode, t_game *game);
+void	so_long(t_pos *matrix);
+void	draw_game(t_data win, t_pos *matrix);
+void	find_player_position(t_pos *matrix, t_game *game);
 void	floor_draw(t_data win, int x, int y);
 void	wall_draw(t_data win, int x, int y);
 void	coins_draw(t_data win, int x, int y);
 void	player_draw(t_data win, t_game *game, int x, int y);
 void	exit_draw(t_data win, int x, int y);
+int	update_frame(t_pos *matrix, t_data win, int x, int y);
 
-/*animate players */
+/* ===========> animate players <=========== */
 void	animate_player_left(t_game *game);
 void	animate_player_right(t_game *game);
 void	animate_player_up(t_game *game);
@@ -104,9 +102,22 @@ void	player_draw_right(t_data win, t_game *game, int x, int y);
 void	player_draw_up(t_data win, t_game *game, int x, int y);
 void	player_draw_down(t_data win, t_game *game, int x, int y);
 
-/* fill the array's */
+int	idle_animate(t_game *game);
+
+/* ==========> fill the array's <=========== */
 void	p_left(t_game *game, t_data *win);
 void	p_right(t_game *game, t_data *win);
 void	p_up(t_game *game, t_data *win);
 void	p_down(t_game *game, t_data *win);
+
+/* =========> helper functions <========== */
+void	execute_key_left(t_game *game, int new_x, int new_y);
+void	execute_key_right(t_game *game, int new_x, int new_y);
+void	execute_key_up(t_game *game, int new_x, int new_y);
+void	execute_key_down(t_game *game, int new_x, int new_y);
+void	key_left_helper(t_game *game, int new_x, int new_y);
+void	key_right_helper(t_game *game, int new_x, int new_y);
+void	key_up_helper(t_game *game, int new_x, int new_y);
+void	key_down_helper(t_game *game, int new_x, int new_y);
+
 #endif
