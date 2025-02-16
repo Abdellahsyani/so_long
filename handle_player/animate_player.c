@@ -12,6 +12,10 @@
 
 #include "so_long.h"
 
+/**
+ * animate_player_left _ the function that set animation in player left
+ * @game: the struct that hold all information about player
+ */
 void	animate_player_left(t_game *game)
 {
 	if (!game || !game->win.mlx || !game->win.mlx_window || 
@@ -24,6 +28,10 @@ void	animate_player_left(t_game *game)
 		player_draw_left(game->win, game, game->player_x, game->player_y);
 }
 
+/**
+ * animate_player_right _ the function that set animation in player right
+ * @game: the struct that hold all information about player
+ */
 void	animate_player_right(t_game *game)
 {
 	if (!game || !game->win.mlx || !game->win.mlx_window || 
@@ -36,6 +44,10 @@ void	animate_player_right(t_game *game)
 		player_draw_right(game->win, game, game->player_x, game->player_y);
 }
 
+/**
+ * animate_player_up _ the function that set animation in player up
+ * @game: the struct that hold all information about player
+ */
 void	animate_player_up(t_game *game)
 {
 	if (!game || !game->win.mlx || !game->win.mlx_window || 
@@ -48,6 +60,10 @@ void	animate_player_up(t_game *game)
 		player_draw_up(game->win, game, game->player_x, game->player_y);
 }
 
+/**
+ * animate_player_down _ the function that set animation in player down
+ * @game: the struct that hold all information about player
+ */
 void	animate_player_down(t_game *game)
 {
 	if (!game || !game->win.mlx || !game->win.mlx_window || 
