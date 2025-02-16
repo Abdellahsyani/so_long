@@ -74,35 +74,42 @@ int	handle_keypress(int keycode, t_game *game)
 		return (0);
 	new_x = game->player_x;
 	new_y = game->player_y;
-	if (keycode == 65361 || keycode == 'a') 
+	if (keycode == KEY_LEFT || keycode == 'a') 
 	{
 		new_y--;
+		if (new_x < 0 || new_x >= game->matrix->row || 
+			new_y < 0 || new_y >= game->matrix->col - 1)
+			return (0);
 		if (game->matrix->map[new_x] && game->matrix->map[new_x][new_y] != '1')
 			execute_key_left(game, new_x, new_y);
 	}
-	if (keycode == 65363 || keycode == 'd')
+	if (keycode == KEY_RIGHT || keycode == 'd')
 	{
 		new_y++;
+		if (new_x < 0 || new_x >= game->matrix->row || 
+			new_y < 0 || new_y >= game->matrix->col - 1)
+			return (0);
 		if (game->matrix->map[new_x] && game->matrix->map[new_x][new_y] != '1')
 			execute_key_right(game, new_x, new_y);
 	}
-	if (keycode == 65362 || keycode == 'w')
+	if (keycode == KEY_UP || keycode == 'w')
 	{
 		new_x--;
+		if (new_x < 0 || new_x >= game->matrix->row || 
+			new_y < 0 || new_y >= game->matrix->col - 1)
+			return (0);
 		if (game->matrix->map[new_x] && game->matrix->map[new_x][new_y] != '1')
 			execute_key_up(game, new_x, new_y);
 	}
-	if (keycode == 65364 || keycode == 's')
+	if (keycode == KEY_DOWN || keycode == 's')
 	{
 		new_x++;
+		if (new_x < 0 || new_x >= game->matrix->row || 
+			new_y < 0 || new_y >= game->matrix->col - 1)
+			return (0);
 		if (game->matrix->map[new_x] && game->matrix->map[new_x][new_y] != '1')
 			execute_key_down(game, new_x, new_y);
 	}
-	if (new_x < 0 || new_x >= game->matrix->row || 
-		new_y < 0 || new_y >= game->matrix->col - 1)
-		return (0);
-	/*if (game->matrix->map[new_x] && game->matrix->map[new_x][new_y] != '1')*/
-	/*	execute_key(game, new_x, new_y);*/
 	return (0);
 }
 

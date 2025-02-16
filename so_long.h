@@ -21,6 +21,10 @@
 
 # define WIN_WIDTH 50
 # define WIN_HEIGHT 50
+# define KEY_LEFT 65361
+# define KEY_RIGHT 65363
+# define KEY_UP 65362
+# define KEY_DOWN 65364
 
 typedef struct	s_pos
 {
@@ -60,6 +64,10 @@ typedef struct	s_game
 
 }		t_game;
 
+/*error handling*/
+
+
+
 void	p_left(t_game *game, t_data *win);
 int	idle_animate(t_game *game);
 void	find_player_position(t_pos *matrix, t_game *game);
@@ -86,7 +94,7 @@ void	coins_draw(t_data win, int x, int y);
 void	player_draw(t_data win, t_game *game, int x, int y);
 void	exit_draw(t_data win, int x, int y);
 
-/*players */
+/*animate players */
 void	animate_player_left(t_game *game);
 void	animate_player_right(t_game *game);
 void	animate_player_up(t_game *game);
@@ -95,7 +103,8 @@ void	player_draw_left(t_data win, t_game *game, int x, int y);
 void	player_draw_right(t_data win, t_game *game, int x, int y);
 void	player_draw_up(t_data win, t_game *game, int x, int y);
 void	player_draw_down(t_data win, t_game *game, int x, int y);
-// all_p's
+
+/* fill the array's */
 void	p_left(t_game *game, t_data *win);
 void	p_right(t_game *game, t_data *win);
 void	p_up(t_game *game, t_data *win);
