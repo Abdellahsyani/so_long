@@ -6,7 +6,7 @@
 /*   By: asyani <asyani@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:22:09 by asyani            #+#    #+#             */
-/*   Updated: 2025/02/16 10:27:53 by asyani           ###   ########.fr       */
+/*   Updated: 2025/02/16 13:42:31 by asyani           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,48 +25,22 @@
 /*	return (0);*/
 /*}*/
 
-void	key_left_helper(t_game *game, int new_x, int new_y)
-{
-	new_y--;
-	if (new_x < 0 || new_x >= game->matrix->row || 
-		new_y < 0 || new_y >= game->matrix->col - 1)
-		return ;
-	if (game->matrix->map[new_x] && game->matrix->map[new_x][new_y] != '1')
-		execute_key_left(game, new_x, new_y);
-}
 
-void	key_right_helper(t_game *game, int new_x, int new_y)
+static void exit_game(t_game *game)
 {
-	new_y++;
-	if (new_x < 0 || new_x >= game->matrix->row || 
-		new_y < 0 || new_y >= game->matrix->col - 1)
-		return ;
-	if (game->matrix->map[new_x] && game->matrix->map[new_x][new_y] != '1')
-		execute_key_right(game, new_x, new_y);
-}
+    if (game->win.mlx)
+    {
+        mlx_destroy_window(game->win.mlx, game->win.mlx_window);
+        mlx_destroy_display(game->win.mlx);
+        free(game->win.mlx);
+    }
+    if (game->matrix && game->matrix->map)
+    {
+        free_map(game->matrix->map);
+        free(game->matrix);
+    }
 
-void	key_up_helper(t_game *game, int new_x, int new_y)
-{
-	new_x--;
-	if (new_x < 0 || new_x >= game->matrix->row || 
-		new_y < 0 || new_y >= game->matrix->col - 1)
-		return ;
-	if (game->matrix->map[new_x] && game->matrix->map[new_x][new_y] != '1')
-		execute_key_up(game, new_x, new_y);
-}
-
-void	key_down_helper(t_game *game, int new_x, int new_y)
-{
-	new_x++;
-	if (new_x < 0 || new_x >= game->matrix->row || 
-		new_y < 0 || new_y >= game->matrix->col - 1)
-		return ;
-	if (game->matrix->map[new_x] && game->matrix->map[new_x][new_y] != '1')
-		execute_key_down(game, new_x, new_y);
-}
-
-void	exit_game(t_game *game)
-{
+    exit(1);
 }
 
 int	handle_keypress(int keycode, t_game *game)
