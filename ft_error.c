@@ -20,6 +20,8 @@ void	free_map(char **map)
 {
 	int	i;
 
+	if (!map)
+		return ;
 	i = 0;
 	while (map[i])
 	{
@@ -59,4 +61,15 @@ void	ft_putstr_fd(char *s, int fd)
 		write(fd, &s[i], 1);
 		i++;
 	}
+}
+
+
+void	write_number(int n)
+{
+	if (n > 9)
+	{
+		write_number(n / 10);
+	}
+	n = n % 10 + '0';
+	write(1, &n, 1);
 }

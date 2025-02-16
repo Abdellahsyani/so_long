@@ -57,6 +57,7 @@ typedef struct	s_game
 	void	*player_up[3];
 	void	*player_down[3];
 	int	frame;
+	int	counter;
 	int	player_x;
 	int	player_y;
 	int	is_moving;
@@ -119,5 +120,6 @@ void	key_left_helper(t_game *game, int new_x, int new_y);
 void	key_right_helper(t_game *game, int new_x, int new_y);
 void	key_up_helper(t_game *game, int new_x, int new_y);
 void	key_down_helper(t_game *game, int new_x, int new_y);
+void	write_number(int num);
 
 #endif

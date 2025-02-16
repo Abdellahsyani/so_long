@@ -55,6 +55,7 @@ void	all_arrays(t_game *game, t_data *win)
 void init_game(t_data *win, t_game *game, t_pos *matrix)
 {
 	game->frame = 0;
+	game->counter = 0;
 	game->player_x = -1;
 	game->player_y = -1;
 	game->matrix = matrix;

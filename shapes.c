@@ -25,6 +25,7 @@ void	coins_draw(t_data win, int x, int y)
 		return ;
 	}
 	mlx_put_image_to_window(win.mlx, win.mlx_window, coins, y * 50, x * 50);
+	mlx_destroy_image(win.mlx, coins);
 }
 
 void	exit_draw(t_data win, int x, int y)
@@ -34,10 +35,13 @@ void	exit_draw(t_data win, int x, int y)
 	int	img_height;
 
 	exit = mlx_xpm_file_to_image(win.mlx, "tools/door.xpm", &img_width, &img_height);
-	if (exit)
-		mlx_put_image_to_window(win.mlx, win.mlx_window, exit, y * 50, x * 50);
-	else
+	if (!exit)
+	{
 		perror("fail to draw exit");
+		return ;
+	}
+	mlx_put_image_to_window(win.mlx, win.mlx_window, exit, y * 50, x * 50);
+	mlx_destroy_image(win.mlx, exit);
 }
 
 void	wall_draw(t_data win, int x, int y)
@@ -53,6 +57,7 @@ void	wall_draw(t_data win, int x, int y)
 		return ;
 	}
 	mlx_put_image_to_window(win.mlx, win.mlx_window, wall, y * 50, x * 50);
+	mlx_destroy_image(win.mlx, wall);
 }
 
 void	floor_draw(t_data win, int x, int y)
@@ -68,4 +73,5 @@ void	floor_draw(t_data win, int x, int y)
 		return ;
 	}
 	mlx_put_image_to_window(win.mlx, win.mlx_window, floor, y * 50, x * 50);
+	mlx_destroy_image(win.mlx, floor);
 }
