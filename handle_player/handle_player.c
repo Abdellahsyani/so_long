@@ -25,22 +25,33 @@
 /*	return (0);*/
 /*}*/
 
+void	free_images(t_game *game)
+{
+	int	i;
+
+	i = 0;
+	while (i < 3)
+	{
+		if (game->player_left[i])
+			mlx_destroy_image(game->win.mlx, game->player_left[i]);
+		if (game->player_right[i])
+			mlx_destroy_image(game->win.mlx, game->player_right[i]);
+		if (game->player_up[i])
+			mlx_destroy_image(game->win.mlx, game->player_up[i]);
+		if (game->player_down[i])
+			mlx_destroy_image(game->win.mlx, game->player_down[i]);
+		i++;
+	}
+}
 
 static void exit_game(t_game *game)
 {
-    if (game->win.mlx)
-    {
+	free_images(game);
         mlx_destroy_window(game->win.mlx, game->win.mlx_window);
         mlx_destroy_display(game->win.mlx);
         free(game->win.mlx);
-    }
-    if (game->matrix && game->matrix->map)
-    {
         free_map(game->matrix->map);
-        free(game->matrix);
-    }
-
-    exit(1);
+	exit(1);
 }
 
 int	handle_keypress(int keycode, t_game *game)

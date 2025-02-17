@@ -101,35 +101,29 @@ void	allocation(t_pos *matrix)
 void	pars_map(int fd, char **av)
 {
 	char	*line;
-	t_pos	*matrix;
+	t_pos	matrix;
 	int		i;
 
 	i = 0;
-	matrix = malloc(sizeof(t_pos));
-	if (!matrix)
-	{
-		perror("Memory allocation failed");
-		return ;
-	}
-	matrix->map = NULL;
-	matrix->row = 0;
-	matrix->col = 0;
+	matrix.map = NULL;
+	matrix.row = 0;
+	matrix.col = 0;
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
 		while (line[i])
 		{
 			i++;
-			matrix->col++;
+			matrix.col++;
 		}
-		matrix->row++;
+		matrix.row++;
 		free(line);
 		line = get_next_line(fd);
 	}
 	close(fd);
-	allocation(matrix);
-	fill_map(matrix, av);
-	so_long(matrix);
+	allocation(&matrix);
+	fill_map(&matrix, av);
+	so_long(&matrix);
 }
 
 int	is_valid_file(char **av)
