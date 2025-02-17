@@ -75,9 +75,12 @@ void	execute_key_up(t_game *game, int new_x, int new_y)
 	exit_y = game->matrix->exit_y;
 	game->matrix->map[game->player_x][game->player_y] = '0';
 	game->matrix->map[new_x][new_y] = 'P';
-	if (game->matrix->map[new_x] == game->matrix->map[exit_x] &&
-		game->matrix->map[new_y] == game->matrix->map[exit_y])
-		exit_game(game);
+	if (game->matrix->coin == 0)
+	{
+		if (game->matrix->map[new_x] == game->matrix->map[exit_x] &&
+			game->matrix->map[new_y] == game->matrix->map[exit_y])
+			exit_game(game);
+	}
 	floor_draw(game->win, game->player_x, game->player_y);
 	game->player_x = new_x;
 	game->player_y = new_y;
