@@ -20,15 +20,25 @@
  */
 void	key_left_helper(t_game *game, int new_x, int new_y)
 {
+	int	exit_x;
+	int	exit_y;
+
+	exit_x = game->matrix->exit_x;
+	exit_y = game->matrix->exit_y;
 	new_y--;
 	game->counter += 1;
 	if (new_x < 0 || new_x >= game->matrix->row || 
 		new_y < 0 || new_y >= game->matrix->col - 1)
 		return ;
 	if (game->matrix->map[new_x] && game->matrix->map[new_x][new_y] != '1')
+	{
 		execute_key_left(game, new_x, new_y);
-	write_number(game->counter);
-	write(1, "\n", 1);
+		write_number(game->counter);
+		write(1, "\n", 1);
+	}
+	if (game->matrix->map[new_x] == game->matrix->map[exit_x] &&
+		game->matrix->map[new_y] == game->matrix->map[exit_y])
+		exit_game(game);
 }
 
 /**
@@ -39,15 +49,25 @@ void	key_left_helper(t_game *game, int new_x, int new_y)
  */
 void	key_right_helper(t_game *game, int new_x, int new_y)
 {
+	int	exit_x;
+	int	exit_y;
+
+	exit_x = game->matrix->exit_x;
+	exit_y = game->matrix->exit_y;
 	new_y++;
 	game->counter += 1;
 	if (new_x < 0 || new_x >= game->matrix->row || 
 		new_y < 0 || new_y >= game->matrix->col - 1)
 		return ;
 	if (game->matrix->map[new_x] && game->matrix->map[new_x][new_y] != '1')
+	{
 		execute_key_right(game, new_x, new_y);
-	write_number(game->counter);
-	write(1, "\n", 1);
+		write_number(game->counter);
+		write(1, "\n", 1);
+	}
+	if (game->matrix->map[new_x] == game->matrix->map[exit_x] &&
+		game->matrix->map[new_y] == game->matrix->map[exit_y])
+		exit_game(game);
 }
 
 /**
@@ -58,15 +78,25 @@ void	key_right_helper(t_game *game, int new_x, int new_y)
  */
 void	key_up_helper(t_game *game, int new_x, int new_y)
 {
+	int	exit_x;
+	int	exit_y;
+
+	exit_x = game->matrix->exit_x;
+	exit_y = game->matrix->exit_y;
 	new_x--;
 	game->counter += 1;
 	if (new_x < 0 || new_x >= game->matrix->row || 
 		new_y < 0 || new_y >= game->matrix->col - 1)
 		return ;
 	if (game->matrix->map[new_x] && game->matrix->map[new_x][new_y] != '1')
+	{
 		execute_key_up(game, new_x, new_y);
-	write_number(game->counter);
-	write(1, "\n", 1);
+		write_number(game->counter);
+		write(1, "\n", 1);
+	}
+	if (game->matrix->map[new_x] == game->matrix->map[exit_x] &&
+		game->matrix->map[new_y] == game->matrix->map[exit_y])
+		exit_game(game);
 }
 
 /**
@@ -77,13 +107,23 @@ void	key_up_helper(t_game *game, int new_x, int new_y)
  */
 void	key_down_helper(t_game *game, int new_x, int new_y)
 {
+	int	exit_x;
+	int	exit_y;
+
+	exit_x = game->matrix->exit_x;
+	exit_y = game->matrix->exit_y;
 	new_x++;
 	game->counter++;
 	if (new_x < 0 || new_x >= game->matrix->row || 
 		new_y < 0 || new_y >= game->matrix->col - 1)
 		return ;
 	if (game->matrix->map[new_x] && game->matrix->map[new_x][new_y] != '1')
+	{
 		execute_key_down(game, new_x, new_y);
-	write_number(game->counter);
-	write(1, "\n", 1);
+		write_number(game->counter);
+		write(1, "\n", 1);
+	}
+	if (game->matrix->map[new_x] == game->matrix->map[exit_x] &&
+		game->matrix->map[new_y] == game->matrix->map[exit_y])
+		exit_game(game);
 }

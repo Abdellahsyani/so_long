@@ -21,6 +21,11 @@ void	flood_fill(t_pos *matrix, int x, int y)
 
 	if (matrix->map[x][y] != 'E' && matrix->map[x][y] != 'C' && matrix->map[x][y] != 'P')
 		return;
+	if (matrix->map[x][y] == 'E')
+	{
+		matrix->exit_x = x;
+		matrix->exit_y = y;
+	}
 	top = (x > 0 && matrix->map[x - 1][y] == '1');
 	down = (x < matrix->row - 1 && matrix->map[x + 1][y] == '1');
 	left = (y > 0 && matrix->map[x][y - 1] == '1');

@@ -44,7 +44,7 @@ void	free_images(t_game *game)
 	}
 }
 
-static void exit_game(t_game *game)
+void exit_game(t_game *game)
 {
 	free_images(game);
         mlx_destroy_window(game->win.mlx, game->win.mlx_window);

@@ -29,6 +29,8 @@
 
 typedef struct	s_pos
 {
+	int	exit_x;
+	int	exit_y;
 	int	coin;
 	int	player;
 	int	exit;
@@ -69,6 +71,7 @@ typedef struct	s_game
 /* ========> error handling <======== */
 void			free_map(char **map);
 void	ft_error(t_pos *matrix);
+void	exit_game(t_game *game);
 
 
 /* =====> parsing function's <========= */
@@ -84,7 +87,7 @@ void	flood_fill(t_pos *matrix, int x, int y);
 /* =========> all tools about game <========== */
 int	handle_keypress(int keycode, t_game *game);
 void	so_long(t_pos *matrix);
-void	draw_game(t_data win, t_pos *matrix);
+void	draw_game(t_game *game);
 void	find_player_position(t_pos *matrix, t_game *game);
 void	floor_draw(t_data win, int x, int y);
 void	wall_draw(t_data win, int x, int y);

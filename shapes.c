@@ -30,18 +30,18 @@ void	coins_draw(t_data win, int x, int y)
 
 void	exit_draw(t_data win, int x, int y)
 {
-	void	*exit;
+	void	*exit_door;
 	int	img_width;
 	int	img_height;
 
-	exit = mlx_xpm_file_to_image(win.mlx, "tools/door.xpm", &img_width, &img_height);
-	if (!exit)
+	exit_door = mlx_xpm_file_to_image(win.mlx, "tools/door1.xpm", &img_width, &img_height);
+	if (!exit_door)
 	{
 		perror("fail to draw exit");
 		return ;
 	}
-	mlx_put_image_to_window(win.mlx, win.mlx_window, exit, y * 50, x * 50);
-	mlx_destroy_image(win.mlx, exit);
+	mlx_put_image_to_window(win.mlx, win.mlx_window, exit_door, y * 50, x * 50);
+	mlx_destroy_image(win.mlx, exit_door);
 }
 
 void	wall_draw(t_data win, int x, int y)

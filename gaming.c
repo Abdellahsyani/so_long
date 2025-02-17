@@ -12,32 +12,32 @@
 
 #include "so_long.h"
 
-void	draw_shapes(t_data win, t_pos *matrix, int x, int y)
+void	draw_shapes(t_game *game, int x, int y)
 {
-	if (matrix->map[x][y] == 'C')
-		coins_draw(win, x, y);
-	if (matrix->map[x][y] == 'E')
-		exit_draw(win, x, y);
+	if (game->matrix->map[x][y] == 'C')
+		coins_draw(game->win, x, y);
+	if (game->matrix->map[x][y] == 'E')
+		exit_draw(game->win, x, y);
 }
 
-void	draw_game(t_data win, t_pos *matrix)
+void	draw_game(t_game *game)
 {
 	int	x;
 	int	y;
 
-	if (!matrix || !matrix->map || !win.mlx || !win.mlx_window)
+	if (!game->matrix || !game->matrix->map || !game->win.mlx || !game->win.mlx_window)
 		return ;
 	x = 0;
-	while (x < matrix->row)
+	while (x < game->matrix->row)
 	{
 		y = 0;
-		while (y < matrix->col - 1)
+		while (y < game->matrix->col - 1)
 		{
-			if (matrix->map[x][y] == '1')
-				wall_draw(win, x, y);
+			if (game->matrix->map[x][y] == '1')
+				wall_draw(game->win, x, y);
 			else 
-				floor_draw(win, x, y);
-			draw_shapes(win, matrix, x, y);
+				floor_draw(game->win, x, y);
+			draw_shapes(game, x, y);
 			y++;
 		}
 		x++;
@@ -99,7 +99,7 @@ void so_long(t_pos *matrix)
 		return;
 	}
 	init_game(&win, &game, matrix);
-	draw_game(win, matrix);
+	draw_game(&game);
 	player_draw_down(win, &game, game.player_x, game.player_y);
 	//mlx_loop_hook(win.mlx, idle_animate, &game);
 	mlx_key_hook(win.mlx_window, handle_keypress, &game);
