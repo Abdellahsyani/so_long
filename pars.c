@@ -85,7 +85,7 @@ void	allocation(t_pos *matrix)
 	i = 0;
 	while (i < matrix->row)
 	{
-		matrix->map[i] = (char *)malloc(sizeof(char) * (matrix->col - 1));
+		matrix->map[i] = (char *)malloc(sizeof(char) * (matrix->col + 1));
 		if (!matrix->map[i])
 			free_map(matrix->map);
 		i++;
