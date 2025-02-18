@@ -95,6 +95,7 @@ void	coins_draw(t_data win, int x, int y);
 void	player_draw(t_data win, t_game *game, int x, int y);
 void	exit_draw(t_data win, int x, int y);
 int	update_frame(t_pos *matrix, t_data win, int x, int y);
+void	display_moves(t_game *game);
 
 /* ===========> animate players <=========== */
 void	animate_player_left(t_game *game);
