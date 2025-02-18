@@ -12,37 +12,6 @@
 
 #include "../so_long.h"
 
-
-char    *ft_itoa(int n)
-{
-	char    *str;
-	int     len = 1, temp = n;
-
-	while (temp /= 10)
-		len++;
-	str = malloc(len + 1);
-	if (!str)
-		return (NULL);
-	str[len] = '\0';
-	while (len--)
-	{
-		str[len] = (n % 10) + '0';
-		n /= 10;
-	}
-	return (str);
-}
-
-void	display_moves(t_game *game)
-{
-	char *move_count;
-
-	wall_draw(game->win, 0, 1);
-	move_count = ft_itoa(game->counter);
-	mlx_string_put(game->win.mlx, game->win.mlx_window, 20, 20, 0x12FD41, "Moves: ");
-	mlx_string_put(game->win.mlx, game->win.mlx_window, 80, 20, 0xFFFF11, move_count);
-	free(move_count);
-}
-
 /**
  * key_left_helper _  the function to help execute keys
  * @game: the struct that contains all data
