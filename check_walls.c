@@ -12,21 +12,26 @@
 
 #include "so_long.h"
 
-void	flood_fill(t_pos *matrix, int x, int y)
+void	flood_fill(t_pos *matrix, char **map, int x, int y)
 {
 	int	top;
 	int	down;
 	int	left;
 	int	right;
 
-	if (matrix->map[x][y] != 'E' && matrix->map[x][y] != 'C' && matrix->map[x][y] != 'P')
-		return;
 	if (matrix->map[x][y] == 'E')
 	{
 		matrix->exit_x = x;
 		matrix->exit_y = y;
 	}
-	top = (x > 0 && matrix->map[x - 1][y] == '1');
+	/*top = (x > 0 && matrix->map[x - 1][y] == '1');*/
+	/*down = (x < matrix->row - 1 && matrix->map[x + 1][y] == '1');*/
+	/*left = (y > 0 && matrix->map[x][y - 1] == '1');*/
+	/*right = (y < matrix->col - 1 && matrix->map[x][y + 1] == '1');*/
+	if (x < 1 || x > col - 2 || y < 1 || y > row - 1)
+		return ;
+	if (x != '1' || y != '1')
+	top = flood_fill(matrix, map, x - 1, y);
 	down = (x < matrix->row - 1 && matrix->map[x + 1][y] == '1');
 	left = (y > 0 && matrix->map[x][y - 1] == '1');
 	right = (y < matrix->col - 1 && matrix->map[x][y + 1] == '1');
@@ -50,11 +55,11 @@ void	verify_map(t_pos *matrix)
 			while (j < matrix->col - 2)
 			{
 				if (matrix->map[i][j] == 'C')
-					flood_fill(matrix, i, j);
+					flood_fill(matrix, matrix->map, i, j);
 				if (matrix->map[i][j] == 'E')
-					flood_fill(matrix, i, j);
+					flood_fill(matrix, matrix->map, i, j);
 				if (matrix->map[i][j] == 'P')
-					flood_fill(matrix, i, j);
+					flood_fill(matrix, matrix->map, i, j);
 				j++;
 			}
 			i++;

@@ -39,7 +39,6 @@ void	ft_error(t_pos *matrix)
 {
 	free_map(matrix->map);
 	free(matrix);
-	errno = EINVAL;
 	perror("Map is not valid");
 	exit(1);
 }

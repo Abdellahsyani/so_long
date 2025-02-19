@@ -23,6 +23,12 @@ void	check_map(t_pos *matrix)
 
 	i = 0;
 	j = 0;
+	if ((matrix->col - 1) == matrix->row)
+	{
+		perror("Map must be a rectangle");
+		free_map(matrix->map);
+		exit(1);
+	}
 	while (j < matrix->col - 1)
 	{
 		if (matrix->map[0][j] != '1' || matrix->map[matrix->row - 1][j] != '1')
