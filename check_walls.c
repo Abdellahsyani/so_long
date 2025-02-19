@@ -14,56 +14,67 @@
 
 void	flood_fill(t_pos *matrix, char **map, int x, int y)
 {
-	int	top;
-	int	down;
-	int	left;
-	int	right;
-
-	if (matrix->map[x][y] == 'E')
+	if (x < 0 || x >= matrix->row || y < 0 || y >= matrix->col - 1
+		|| map[x][y] == '1' || map[x][y] == 'V')
+		return ;
+	if (map[x][y] == 'C') 
+		matrix->coin--;
+	else if (map[x][y] == 'E')
 	{
 		matrix->exit_x = x;
 		matrix->exit_y = y;
+		matrix->exit--;
 	}
-	/*top = (x > 0 && matrix->map[x - 1][y] == '1');*/
-	/*down = (x < matrix->row - 1 && matrix->map[x + 1][y] == '1');*/
-	/*left = (y > 0 && matrix->map[x][y - 1] == '1');*/
-	/*right = (y < matrix->col - 1 && matrix->map[x][y + 1] == '1');*/
-	if (x < 1 || x > col - 2 || y < 1 || y > row - 1)
-		return ;
-	if (x != '1' || y != '1')
-	top = flood_fill(matrix, map, x - 1, y);
-	down = (x < matrix->row - 1 && matrix->map[x + 1][y] == '1');
-	left = (y > 0 && matrix->map[x][y - 1] == '1');
-	right = (y < matrix->col - 1 && matrix->map[x][y + 1] == '1');
-	if (top && down && left && right)
-		ft_error(matrix);
+	map[x][y] = 'V';
+	flood_fill(matrix, map, x - 1, y);
+	flood_fill(matrix, map, x + 1, y);
+	flood_fill(matrix, map, x, y - 1);
+	flood_fill(matrix, map, x, y + 1);
 }
 
 void	verify_map(t_pos *matrix)
 {
 	int	i;
 	int	j;
+	int	player_x = -1;
+	int	player_y = -1;
+	char	**map_copy;
 
-	if (matrix->coin < 1 || matrix->exit != 1 || matrix->player != 1)
-		ft_error(matrix);
-	else
+	i = 0;
+	map_copy = malloc(matrix->row * sizeof(char *));
+	if (!map_copy)
+		return ;
+	while (i < matrix->row)
 	{
-		i = 1;
-		while (i < matrix->row - 1)
+		map_copy[i] = ft_strdup(matrix->map[i]);
+		i++;
+	}
+	i = 0;
+	while (i < matrix->row)
+	{
+		j = 0;
+		while (j < matrix->col)
 		{
-			j = 1;
-			while (j < matrix->col - 2)
+			if (map_copy[i][j] == 'P')
 			{
-				if (matrix->map[i][j] == 'C')
-					flood_fill(matrix, matrix->map, i, j);
-				if (matrix->map[i][j] == 'E')
-					flood_fill(matrix, matrix->map, i, j);
-				if (matrix->map[i][j] == 'P')
-					flood_fill(matrix, matrix->map, i, j);
-				j++;
+				player_x = i;
+				player_y = j;
+				break;
 			}
-			i++;
+			j++;
 		}
+		if (player_x != -1)
+			break ;
+		i++;
+	}
+
+	if (player_x == -1 || player_y == -1)
+		ft_error(matrix);
+	flood_fill(matrix, map_copy, player_x, player_y);
+	if (matrix->coin != 0 || matrix->exit != 0)
+	{
+		perror("invalid map");
+		exit(1);
 	}
 }
 

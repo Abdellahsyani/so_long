@@ -12,6 +12,12 @@
 
 #include "so_long.h"
 
+/**
+ * coins_draw _ the function that draw coins
+ * @win: a struct that contains information about mlx
+ * @x: the coordinate of each frame that acts coin
+ * @y: the coordinate of each frame that acts coin
+ */
 void	coins_draw(t_data win, int x, int y)
 {
 	void	*coins;
@@ -28,6 +34,12 @@ void	coins_draw(t_data win, int x, int y)
 	mlx_destroy_image(win.mlx, coins);
 }
 
+/**
+ * exit_draw _ the function that draw exit
+ * @win: a struct that contains information about mlx
+ * @x: the coordinate of each frame that acts exit
+ * @y: the coordinate of each frame that acts exit
+ */
 void	exit_draw(t_data win, int x, int y)
 {
 	void	*exit_door;
@@ -44,6 +56,12 @@ void	exit_draw(t_data win, int x, int y)
 	mlx_destroy_image(win.mlx, exit_door);
 }
 
+/**
+ * wall_draw _ the function that draw wall
+ * @win: a struct that contains information about mlx
+ * @x: the coordinate of each frame that acts wall
+ * @y: the coordinate of each frame that acts wall
+ */
 void	wall_draw(t_data win, int x, int y)
 {
 	void	*wall;
@@ -60,6 +78,12 @@ void	wall_draw(t_data win, int x, int y)
 	mlx_destroy_image(win.mlx, wall);
 }
 
+/**
+ * floor_draw _ the function that draw floor
+ * @win: a struct that contains information about mlx
+ * @x: the coordinate of each frame that acts floor
+ * @y: the coordinate of each frame that acts floor
+ */
 void	floor_draw(t_data win, int x, int y)
 {
 	void	*floor;

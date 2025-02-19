@@ -6,7 +6,7 @@
 /*   By: asyani <asyani@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 09:57:59 by asyani            #+#    #+#             */
-/*   Updated: 2025/02/07 16:45:49 by asyani           ###   ########.fr       */
+/*   Updated: 2025/02/19 16:30:01 by asyani           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	check_map(t_pos *matrix);
 void	fill_map(t_pos *matrix, char **av);
 void	allocation(t_pos *matrix);
 void			pars_map(int fd, char **av);
-void	flood_fill(t_pos *matrix, int x, int y);
+void	flood_fill(t_pos *matrix, char **map, int x, int y);
 
 /* =========> all tools about game <========== */
 int	handle_keypress(int keycode, t_game *game);
@@ -125,5 +125,8 @@ void	key_right_helper(t_game *game, int new_x, int new_y);
 void	key_up_helper(t_game *game, int new_x, int new_y);
 void	key_down_helper(t_game *game, int new_x, int new_y);
 void	write_number(int num);
+/*char	*ft_strdup(const char *s1);*/
+/*int	ft_strlen(char *str);*/
+/*int	ft_strcmp(char *s1, char *s2);*/
 
 #endif
