@@ -25,6 +25,11 @@
 /*	return (0);*/
 /*}*/
 
+
+/**
+ * free_images _ the function that free all player images
+ * @game: a struct that contains info
+ */
 void	free_images(t_game *game)
 {
 	int	i;
@@ -44,6 +49,10 @@ void	free_images(t_game *game)
 	}
 }
 
+/**
+ * exit_game _ the function that exit the game
+ * @game: the struct that contains info about player and all
+ */
 void exit_game(t_game *game)
 {
 	free_images(game);
@@ -54,6 +63,13 @@ void exit_game(t_game *game)
 	exit(1);
 }
 
+/**
+ * handle_keypress _ function to handle the press key
+ * @keycode: a variable to track keys
+ * @game: struct tha contains all info
+ *
+ * return: 0 if failure
+ */
 int	handle_keypress(int keycode, t_game *game)
 {
 	int	new_x;
@@ -77,6 +93,11 @@ int	handle_keypress(int keycode, t_game *game)
 	return (0);
 }
 
+/**
+ * find_player_position _ a function that find the player position
+ * @matrix:  the struct that contains info about player
+ * @game: a second struct
+ */
 void	find_player_position(t_pos *matrix, t_game *game)
 {
 	int	x;
