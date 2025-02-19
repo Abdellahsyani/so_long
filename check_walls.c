@@ -18,7 +18,7 @@ void	flood_fill(t_pos *matrix, char **map, int x, int y)
 		|| map[x][y] == '1' || map[x][y] == 'V')
 		return ;
 	if (map[x][y] == 'C') 
-		matrix->coin--;
+		matrix->v_coin--;
 	else if (map[x][y] == 'E')
 	{
 		matrix->exit_x = x;
@@ -71,7 +71,7 @@ void	verify_map(t_pos *matrix)
 	if (player_x == -1 || player_y == -1)
 		ft_error(matrix);
 	flood_fill(matrix, map_copy, player_x, player_y);
-	if (matrix->coin != 0 || matrix->exit != 0)
+	if (matrix->v_coin != 0 || matrix->exit != 0)
 	{
 		perror("invalid map");
 		exit(1);
@@ -102,5 +102,6 @@ void	check_inside(t_pos *matrix)
 		}
 		i++;
 	}
+	matrix->v_coin = matrix->coin;
 	verify_map(matrix);
 }

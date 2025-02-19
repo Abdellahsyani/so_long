@@ -32,6 +32,7 @@ typedef struct	s_pos
 	int	exit_x;
 	int	exit_y;
 	int	coin;
+	int	v_coin;
 	int	player;
 	int	exit;
 	int	row;
