@@ -46,7 +46,7 @@ void	exit_draw(t_data win, int x, int y)
 	int	img_width;
 	int	img_height;
 
-	exit_door = mlx_xpm_file_to_image(win.mlx, "tools/door1.xpm", &img_width, &img_height);
+	exit_door = mlx_xpm_file_to_image(win.mlx, "tools/door2.xpm", &img_width, &img_height);
 	if (!exit_door)
 	{
 		perror("fail to draw exit");

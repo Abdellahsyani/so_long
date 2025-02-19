@@ -31,6 +31,7 @@ void	execute_key_left(t_game *game, int new_x, int new_y)
 	game->matrix->map[new_x][new_y] = 'P';
 	if (game->matrix->coin == 0)
 	{
+		exit_draw(game->win, exit_x, exit_y);
 		if (game->matrix->map[new_x][new_y] == game->matrix->map[exit_x][exit_y])
 			exit_game(game);
 	}
@@ -59,6 +60,7 @@ void	execute_key_right(t_game *game, int new_x, int new_y)
 	game->matrix->map[new_x][new_y] = 'P';
 	if (game->matrix->coin == 0)
 	{
+		exit_draw(game->win, exit_x, exit_y);
 		if (game->matrix->map[new_x][new_y] == game->matrix->map[exit_x][exit_y])
 			exit_game(game);
 	}
@@ -87,6 +89,7 @@ void	execute_key_up(t_game *game, int new_x, int new_y)
 	game->matrix->map[new_x][new_y] = 'P';
 	if (game->matrix->coin == 0)
 	{
+		exit_draw(game->win, exit_x, exit_y);
 		if (game->matrix->map[new_x][new_y] == game->matrix->map[exit_x][exit_y])
 			exit_game(game);
 	}
@@ -115,6 +118,7 @@ void	execute_key_down(t_game *game, int new_x, int new_y)
 	game->matrix->map[new_x][new_y] = 'P';
 	if (game->matrix->coin == 0)
 	{
+		exit_draw(game->win, exit_x, exit_y);
 		if (game->matrix->map[new_x][new_y] == game->matrix->map[exit_x][exit_y])
 			exit_game(game);
 	}

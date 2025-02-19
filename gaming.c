@@ -16,8 +16,8 @@ void	draw_shapes(t_game *game, int x, int y)
 {
 	if (game->matrix->map[x][y] == 'C')
 		coins_draw(game->win, x, y);
-	if (game->matrix->map[x][y] == 'E' && game->matrix->coin == 0)
-		exit_draw(game->win, x, y);
+	/*if (game->matrix->map[x][y] == 'E')*/
+	/*	exit_draw(game->win, x, y);*/
 }
 
 void	draw_game(t_game *game)
