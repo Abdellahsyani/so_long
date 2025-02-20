@@ -63,6 +63,8 @@ typedef struct	s_game
 	int	counter;
 	int	player_x;
 	int	player_y;
+	int	camera_x;
+	int	camera_y;
 	int	is_moving;
 	t_pos	*matrix;
 	t_data	win;

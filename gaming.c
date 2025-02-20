@@ -78,6 +78,8 @@ void init_game(t_data *win, t_game *game, t_pos *matrix)
 		perror("Player position not found");
 		exit(1);
 	}
+	game->camera_x = game->player_x;
+	game->camera_y = game->player_y;
 	all_arrays(game, win);
 }
 
