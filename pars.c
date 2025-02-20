@@ -137,7 +137,7 @@ int	is_valid_file(char **av)
 	int	i;
 	int	len;
 
-	len = ft_strlen(av[1]);
+	len = strlen(av[1]);
 	if (strcmp(av[1] + len - 4, ".ber") != 0)
 		return (0);
 	i = 0;

@@ -32,28 +32,18 @@ void	flood_fill(t_pos *matrix, char **map, int x, int y)
 	flood_fill(matrix, map, x, y + 1);
 }
 
-void	verify_map(t_pos *matrix)
+static void	find_p(t_pos *matrix, char **map_copy)
 {
 	int	i;
 	int	j;
 	int	player_x = -1;
 	int	player_y = -1;
-	char	**map_copy;
 
-	i = 0;
-	map_copy = malloc(matrix->row * sizeof(char *));
-	if (!map_copy)
-		return ;
-	while (i < matrix->row)
-	{
-		map_copy[i] = ft_strdup(matrix->map[i]);
-		i++;
-	}
 	i = 0;
 	while (i < matrix->row)
 	{
 		j = 0;
-		while (j < matrix->col)
+		while (j < matrix->col - 1)
 		{
 			if (map_copy[i][j] == 'P')
 			{
@@ -63,14 +53,30 @@ void	verify_map(t_pos *matrix)
 			}
 			j++;
 		}
-		if (player_x != -1)
-			break ;
 		i++;
 	}
-
 	if (player_x == -1 || player_y == -1)
 		ft_error(matrix);
 	flood_fill(matrix, map_copy, player_x, player_y);
+}
+
+void	verify_map(t_pos *matrix)
+{
+	int	i;
+	char	**map_copy;
+
+    	if (!matrix || !matrix->map)
+        	ft_error(matrix);
+	map_copy = malloc(matrix->row * sizeof(char *));
+	if (!map_copy)
+		return ;
+	i = 0;
+	while (i < matrix->row)
+	{
+		map_copy[i] = ft_strdup(matrix->map[i]);
+		i++;
+	}
+	find_p(matrix, map_copy);
 	if (matrix->v_coin != 0 || matrix->exit != 0)
 	{
 		perror("invalid map");
