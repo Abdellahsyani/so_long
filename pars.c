@@ -56,10 +56,10 @@ void	fill_map(t_pos *matrix, char **av)
 	int		i;
 	int		j;
 
-	i = 0;
 	fd = open(av[1], O_RDONLY);
-	if (!fd)
-		perror("fail to open file");
+	if (fd < 0)
+		perror("Failed to open file");
+	i = 0;
 	line = get_next_line(fd);
 	while (line && i < matrix->row)
 	{
@@ -69,6 +69,7 @@ void	fill_map(t_pos *matrix, char **av)
 			matrix->map[i][j] = line[j];
 			j++;
 		}
+		matrix->map[i][j] = '\0';
 		free(line);
 		line = get_next_line(fd);
 		i++;
@@ -76,6 +77,7 @@ void	fill_map(t_pos *matrix, char **av)
 	close(fd);
 	check_map(matrix);
 }
+
 
 /**
  * allocation _  function to allocate memory for a map
@@ -87,17 +89,27 @@ void	allocation(t_pos *matrix)
 
 	matrix->map = (char **)malloc(sizeof(char *) * (matrix->row + 1));
 	if (!matrix->map)
-		free_map(matrix->map);
+	{
+		perror("Memory allocation failed");
+		exit(1);
+	}
 	i = 0;
 	while (i < matrix->row)
 	{
 		matrix->map[i] = (char *)malloc(sizeof(char) * (matrix->col + 1));
 		if (!matrix->map[i])
-			free_map(matrix->map);
+		{
+			perror("Memory allocation failed");
+			while (i-- > 0)
+				free(matrix->map[i]);
+			free(matrix->map);
+			exit(1);
+		}
 		i++;
 	}
 	matrix->map[matrix->row] = NULL;
 }
+
 
 /**
  * pars_map _ fucntion to start parsing the map

@@ -60,7 +60,7 @@ static void	find_p(t_pos *matrix, char **map_copy)
 			{
 				player_x = i;
 				player_y = j;
-				break;
+				break ;
 			}
 			j++;
 		}
@@ -95,8 +95,10 @@ void	verify_map(t_pos *matrix)
 	if (matrix->v_coin != 0 || matrix->exit != 0)
 	{
 		perror("invalid map");
+		free_map(map_copy);
 		exit(1);
 	}
+	free_map(map_copy);
 }
 
 /**
