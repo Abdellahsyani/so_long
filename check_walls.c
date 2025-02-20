@@ -12,6 +12,13 @@
 
 #include "so_long.h"
 
+/**
+ * flood_fill _ the function that check for a valid path in the map
+ * @matrix: struct contains col and row
+ * @map: teh new map that will use to check a valid path
+ * @x: the x player coordinate 
+ * @y: the y player coordinate
+ */
 void	flood_fill(t_pos *matrix, char **map, int x, int y)
 {
 	if (x < 0 || x >= matrix->row || y < 0 || y >= matrix->col - 1
@@ -32,6 +39,10 @@ void	flood_fill(t_pos *matrix, char **map, int x, int y)
 	flood_fill(matrix, map, x, y + 1);
 }
 
+/**
+ * find_p _ the function that find the player position in new map
+ * @matrix: struct used for get rwo and col
+ */
 static void	find_p(t_pos *matrix, char **map_copy)
 {
 	int	i;
@@ -60,6 +71,10 @@ static void	find_p(t_pos *matrix, char **map_copy)
 	flood_fill(matrix, map_copy, player_x, player_y);
 }
 
+/**
+ * verify_map _ the function that handle the copy map
+ * @matrix: the struct that contains all info
+ */
 void	verify_map(t_pos *matrix)
 {
 	int	i;
@@ -84,6 +99,10 @@ void	verify_map(t_pos *matrix)
 	}
 }
 
+/**
+ * check_inside _ function to check teh map exluding walls
+ * @matrix: the struct that contains all about game
+ */
 void	check_inside(t_pos *matrix)
 {
 	int	i;

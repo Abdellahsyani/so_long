@@ -25,7 +25,9 @@ size_t	ft_strlen(char *str)
 
 	i = 0;
 	while (str[i])
+	{
 		i++;
+	}
 	return (i);
 }
 
