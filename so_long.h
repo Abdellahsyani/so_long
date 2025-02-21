@@ -44,13 +44,6 @@ typedef struct	s_data
 {
 	void	*mlx;
 	void	*mlx_window;
-	void	*img;
-	char	*data;
-	int	color;
-	int	*addr;
-	int	bpp;
-	int	size_len;
-	int	endian;
 }		t_data;
 
 typedef struct	s_game
