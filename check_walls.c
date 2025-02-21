@@ -95,10 +95,11 @@ void	verify_map(t_pos *matrix)
 	if (matrix->v_coin != 0 || matrix->exit != 0)
 	{
 		perror("invalid map");
-		free_map(map_copy);
+		free_map_copy(matrix, map_copy);
+		free_map(matrix->map);
 		exit(1);
 	}
-	free_map(map_copy);
+	free_map_copy(matrix, map_copy);
 }
 
 /**

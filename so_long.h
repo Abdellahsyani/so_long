@@ -75,6 +75,7 @@ typedef struct	s_game
 void			free_map(char **map);
 void	ft_error(t_pos *matrix);
 void	exit_game(t_game *game);
+void	free_map_copy(t_pos *matrix, char **map);
 
 
 /* =====> parsing function's <========= */

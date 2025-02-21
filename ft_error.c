@@ -32,6 +32,24 @@ void	free_map(char **map)
 }
 
 /**
+ * free_map_copy _ teh function that free map_copy
+ * @matrix: the struct that contains row
+ * @map: the map that will be freed
+ */
+void	free_map_copy(t_pos *matrix, char **map)
+{
+	int	i;
+
+	i = 0;
+	while (i < matrix->row)
+	{
+		free(map[i]);
+		i++;
+	}
+	free(map);
+}
+
+/**
  * ft_error _ function to clean and prnt error message
  * @matrix: a struct that hold map with other elements
  */
@@ -62,7 +80,10 @@ void	ft_putstr_fd(char *s, int fd)
 	}
 }
 
-
+/**
+ * write_number _ function to write number
+ * @n: the number that will be written
+ */
 void	write_number(int n)
 {
 	if (n > 9)
