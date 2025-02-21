@@ -16,8 +16,6 @@ void	draw_shapes(t_game *game, int x, int y)
 {
 	if (game->matrix->map[x][y] == 'C')
 		coins_draw(game->win, x, y);
-	/*if (game->matrix->map[x][y] == 'E')*/
-	/*	exit_draw(game->win, x, y);*/
 }
 
 void	draw_game(t_game *game)
@@ -52,6 +50,34 @@ void	all_arrays(t_game *game, t_data *win)
 	p_down(game, win);
 }
 
+
+void	render_camera(t_game *game)
+{
+	int	offset_x;
+	int	offset_y;
+	int	margin_x;
+	int	margin_y;
+
+	margin_x = WIN_HEIGHT / 2;
+	margin_y = WIN_WIDTH / 2;
+
+	offset_x = game->player_x - margin_x;
+	offset_y = game->player_y - margin_y;
+
+	if (offset_x < 0)
+		offset_x = 0;
+	else if (offset_x > game->matrix->col * 50 - WIN_HEIGHT)
+		offset_x = game->matrix->col * 50 - WIN_HEIGHT;
+
+	if (offset_y < 0)
+		offset_y = 0;
+	else if (offset_y > game->matrix->row * 50 - WIN_WIDTH)
+		offset_y = game->matrix->row * 50 - WIN_WIDTH;
+
+	game->camera_x = offset_x;
+	game->camera_y = offset_y;
+}
+
 void init_game(t_data *win, t_game *game, t_pos *matrix)
 {
 	game->frame = 0;
@@ -66,7 +92,7 @@ void init_game(t_data *win, t_game *game, t_pos *matrix)
 		perror("Failed to initialize MLX");
 		exit(1);
 	}
-	win->mlx_window = mlx_new_window(win->mlx, matrix->col * 50, matrix->row * 50, "so_long");
+	win->mlx_window = mlx_new_window(win->mlx, matrix->col * WIN_WIDTH, matrix->row * WIN_HEIGHT, "so_long");
 	if (!win->mlx_window)
 	{
 		perror("Failed to create window");
@@ -94,6 +120,7 @@ void so_long(t_pos *matrix)
 		return;
 	}
 	init_game(&win, &game, matrix);
+	render_camera(&game);
 	draw_game(&game);
 	player_draw_down(win, &game, game.player_x, game.player_y);
 	//mlx_loop_hook(win.mlx, idle_animate, &game);
