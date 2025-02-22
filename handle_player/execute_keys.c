@@ -31,11 +31,11 @@ void	execute_key_left(t_game *game, int new_x, int new_y)
 	game->matrix->map[new_x][new_y] = 'P';
 	if (game->matrix->coin == 0)
 	{
-		exit_draw(game->win, exit_x, exit_y);
+		exit_draw(game, exit_x, exit_y);
 		if (game->matrix->map[new_x][new_y] == game->matrix->map[exit_x][exit_y])
 			exit_game(game);
 	}
-	floor_draw(game->win, game->player_x, game->player_y);
+	floor_draw(game, game->player_x, game->player_y);
 	game->player_x = new_x;
 	game->player_y = new_y;
 	animate_player_left(game);
@@ -60,11 +60,11 @@ void	execute_key_right(t_game *game, int new_x, int new_y)
 	game->matrix->map[new_x][new_y] = 'P';
 	if (game->matrix->coin == 0)
 	{
-		exit_draw(game->win, exit_x, exit_y);
+		exit_draw(game, exit_x, exit_y);
 		if (game->matrix->map[new_x][new_y] == game->matrix->map[exit_x][exit_y])
 			exit_game(game);
 	}
-	floor_draw(game->win, game->player_x, game->player_y);
+	floor_draw(game, game->player_x, game->player_y);
 	game->player_x = new_x;
 	game->player_y = new_y;
 	animate_player_right(game);
@@ -89,11 +89,11 @@ void	execute_key_up(t_game *game, int new_x, int new_y)
 	game->matrix->map[new_x][new_y] = 'P';
 	if (game->matrix->coin == 0)
 	{
-		exit_draw(game->win, exit_x, exit_y);
+		exit_draw(game, exit_x, exit_y);
 		if (game->matrix->map[new_x][new_y] == game->matrix->map[exit_x][exit_y])
 			exit_game(game);
 	}
-	floor_draw(game->win, game->player_x, game->player_y);
+	floor_draw(game, game->player_x, game->player_y);
 	game->player_x = new_x;
 	game->player_y = new_y;
 	animate_player_up(game);
@@ -118,11 +118,11 @@ void	execute_key_down(t_game *game, int new_x, int new_y)
 	game->matrix->map[new_x][new_y] = 'P';
 	if (game->matrix->coin == 0)
 	{
-		exit_draw(game->win, exit_x, exit_y);
+		exit_draw(game, exit_x, exit_y);
 		if (game->matrix->map[new_x][new_y] == game->matrix->map[exit_x][exit_y])
 			exit_game(game);
 	}
-	floor_draw(game->win, game->player_x, game->player_y);
+	floor_draw(game, game->player_x, game->player_y);
 	game->player_x = new_x;
 	game->player_y = new_y;
 	animate_player_down(game);

@@ -86,11 +86,11 @@ int	handle_keypress(int keycode, t_game *game);
 void	so_long(t_pos *matrix);
 void	draw_game(t_game *game);
 void	find_player_position(t_pos *matrix, t_game *game);
-void	floor_draw(t_data win, int x, int y);
-void	wall_draw(t_data win, int x, int y);
-void	coins_draw(t_data win, int x, int y);
+void	floor_draw(t_game *game, int x, int y);
+void	wall_draw(t_game *game, int x, int y);
+void	coins_draw(t_game *game, int x, int y);
 void	player_draw(t_data win, t_game *game, int x, int y);
-void	exit_draw(t_data win, int x, int y);
+void	exit_draw(t_game *game, int x, int y);
 int	update_frame(t_pos *matrix, t_data win, int x, int y);
 void	display_moves(t_game *game);
 

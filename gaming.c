@@ -15,7 +15,7 @@
 void	draw_shapes(t_game *game, int x, int y)
 {
 	if (game->matrix->map[x][y] == 'C')
-		coins_draw(game->win, x, y);
+		coins_draw(game, x, y);
 }
 
 void	draw_game(t_game *game)
@@ -32,9 +32,9 @@ void	draw_game(t_game *game)
 		while (y < game->matrix->col - 1)
 		{
 			if (game->matrix->map[x][y] == '1')
-				wall_draw(game->win, x, y);
+				wall_draw(game, x, y);
 			else 
-				floor_draw(game->win, x, y);
+				floor_draw(game, x, y);
 			draw_shapes(game, x, y);
 			y++;
 		}
@@ -50,32 +50,25 @@ void	all_arrays(t_game *game, t_data *win)
 	p_down(game, win);
 }
 
-
-void	render_camera(t_game *game)
+void render_camera(t_game *game)
 {
-	int	offset_x;
-	int	offset_y;
-	int	margin_x;
-	int	margin_y;
-
-	margin_x = WIN_HEIGHT / 2;
-	margin_y = WIN_WIDTH / 2;
-
-	offset_x = game->player_x - margin_x;
-	offset_y = game->player_y - margin_y;
-
-	if (offset_x < 0)
-		offset_x = 0;
-	else if (offset_x > game->matrix->col * 50 - WIN_HEIGHT)
-		offset_x = game->matrix->col * 50 - WIN_HEIGHT;
-
-	if (offset_y < 0)
-		offset_y = 0;
-	else if (offset_y > game->matrix->row * 50 - WIN_WIDTH)
-		offset_y = game->matrix->row * 50 - WIN_WIDTH;
-
-	game->camera_x = offset_x;
-	game->camera_y = offset_y;
+    int player_pixel_x = game->player_y * 50;
+    int player_pixel_y = game->player_x * 50;
+    
+    // Center camera on player
+    game->camera_x = player_pixel_x - (WIN_WIDTH / 2);
+    game->camera_y = player_pixel_y - (WIN_HEIGHT / 2);
+    
+    // Prevent camera from going out of bounds
+    if (game->camera_x < 0)
+        game->camera_x = 0;
+    else if (game->camera_x > game->matrix->col * 50 - WIN_WIDTH)
+        game->camera_x = game->matrix->col * 50 - WIN_WIDTH;
+        
+    if (game->camera_y < 0)
+        game->camera_y = 0;
+    else if (game->camera_y > game->matrix->row * 50 - WIN_HEIGHT)
+        game->camera_y = game->matrix->row * 50 - WIN_HEIGHT;
 }
 
 void init_game(t_data *win, t_game *game, t_pos *matrix)
@@ -104,8 +97,6 @@ void init_game(t_data *win, t_game *game, t_pos *matrix)
 		perror("Player position not found");
 		exit(1);
 	}
-	game->camera_x = game->player_x;
-	game->camera_y = game->player_y;
 	all_arrays(game, win);
 }
 
@@ -120,7 +111,6 @@ void so_long(t_pos *matrix)
 		return;
 	}
 	init_game(&win, &game, matrix);
-	render_camera(&game);
 	draw_game(&game);
 	player_draw_down(win, &game, game.player_x, game.player_y);
 	//mlx_loop_hook(win.mlx, idle_animate, &game);

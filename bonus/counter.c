@@ -45,7 +45,7 @@ void	display_moves(t_game *game)
 {
 	char *move_count;
 
-	wall_draw(game->win, 0, 1);
+	wall_draw(game, 0, 1);
 	move_count = ft_itoa(game->counter);
 	mlx_string_put(game->win.mlx, game->win.mlx_window, 20, 20, 0x12FD41, "Moves: ");
 	mlx_string_put(game->win.mlx, game->win.mlx_window, 80, 20, 0xFFFF11, move_count);

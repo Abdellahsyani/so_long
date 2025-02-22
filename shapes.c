@@ -18,20 +18,20 @@
  * @x: the coordinate of each frame that acts coin
  * @y: the coordinate of each frame that acts coin
  */
-void	coins_draw(t_data win, int x, int y)
+void	coins_draw(t_game *game, int x, int y)
 {
 	void	*coins;
 	int	img_width;
 	int	img_height;
 
-	coins = mlx_xpm_file_to_image(win.mlx, "tools/coin.xpm", &img_width, &img_height);
+	coins = mlx_xpm_file_to_image(game->win.mlx, "tools/coin.xpm", &img_width, &img_height);
 	if (!coins)
 	{
 		perror("fail to draw coin");
 		return ;
 	}
-	mlx_put_image_to_window(win.mlx, win.mlx_window, coins, y * 50, x * 50);
-	mlx_destroy_image(win.mlx, coins);
+	mlx_put_image_to_window(game->win.mlx, game->win.mlx_window, coins, y * 50, x * 50);
+	mlx_destroy_image(game->win.mlx, coins);
 }
 
 /**
@@ -40,20 +40,20 @@ void	coins_draw(t_data win, int x, int y)
  * @x: the coordinate of each frame that acts exit
  * @y: the coordinate of each frame that acts exit
  */
-void	exit_draw(t_data win, int x, int y)
+void	exit_draw(t_game *game, int x, int y)
 {
 	void	*exit_door;
 	int	img_width;
 	int	img_height;
 
-	exit_door = mlx_xpm_file_to_image(win.mlx, "tools/door2.xpm", &img_width, &img_height);
+	exit_door = mlx_xpm_file_to_image(game->win.mlx, "tools/door2.xpm", &img_width, &img_height);
 	if (!exit_door)
 	{
 		perror("fail to draw exit");
 		return ;
 	}
-	mlx_put_image_to_window(win.mlx, win.mlx_window, exit_door, y * 50, x * 50);
-	mlx_destroy_image(win.mlx, exit_door);
+	mlx_put_image_to_window(game->win.mlx, game->win.mlx_window, exit_door, y * 50, x * 50);
+	mlx_destroy_image(game->win.mlx, exit_door);
 }
 
 /**
@@ -62,20 +62,20 @@ void	exit_draw(t_data win, int x, int y)
  * @x: the coordinate of each frame that acts wall
  * @y: the coordinate of each frame that acts wall
  */
-void	wall_draw(t_data win, int x, int y)
+void	wall_draw(t_game *game, int x, int y)
 {
 	void	*wall;
 	int	img_width;
 	int	img_height;
 
-	wall = mlx_xpm_file_to_image(win.mlx, "tools/wall.xpm", &img_width, &img_height);
+	wall = mlx_xpm_file_to_image(game->win.mlx, "tools/wall.xpm", &img_width, &img_height);
 	if (!wall)
 	{
 		perror("fail to draw wall");
 		return ;
 	}
-	mlx_put_image_to_window(win.mlx, win.mlx_window, wall, y * 50, x * 50);
-	mlx_destroy_image(win.mlx, wall);
+	mlx_put_image_to_window(game->win.mlx, game->win.mlx_window, wall, y * 50, x * 50);
+	mlx_destroy_image(game->win.mlx, wall);
 }
 
 /**
@@ -84,18 +84,18 @@ void	wall_draw(t_data win, int x, int y)
  * @x: the coordinate of each frame that acts floor
  * @y: the coordinate of each frame that acts floor
  */
-void	floor_draw(t_data win, int x, int y)
+void	floor_draw(t_game *game, int x, int y)
 {
 	void	*floor;
 	int	img_width;
 	int	img_height;
 
-	floor = mlx_xpm_file_to_image(win.mlx, "tools/floor.xpm", &img_width, &img_height);
+	floor = mlx_xpm_file_to_image(game->win.mlx, "tools/floor.xpm", &img_width, &img_height);
 	if (!floor)
 	{
 		perror("fail to draw floor");
 		return ;
 	}
-	mlx_put_image_to_window(win.mlx, win.mlx_window, floor, y * 50, x * 50);
-	mlx_destroy_image(win.mlx, floor);
+	mlx_put_image_to_window(game->win.mlx, game->win.mlx_window, floor, y * 50, x * 50);
+	mlx_destroy_image(game->win.mlx, floor);
 }
