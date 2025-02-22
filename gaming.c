@@ -50,27 +50,6 @@ void	all_arrays(t_game *game, t_data *win)
 	p_down(game, win);
 }
 
-void render_camera(t_game *game)
-{
-    int player_pixel_x = game->player_y * 50;
-    int player_pixel_y = game->player_x * 50;
-    
-    // Center camera on player
-    game->camera_x = player_pixel_x - (WIN_WIDTH / 2);
-    game->camera_y = player_pixel_y - (WIN_HEIGHT / 2);
-    
-    // Prevent camera from going out of bounds
-    if (game->camera_x < 0)
-        game->camera_x = 0;
-    else if (game->camera_x > game->matrix->col * 50 - WIN_WIDTH)
-        game->camera_x = game->matrix->col * 50 - WIN_WIDTH;
-        
-    if (game->camera_y < 0)
-        game->camera_y = 0;
-    else if (game->camera_y > game->matrix->row * 50 - WIN_HEIGHT)
-        game->camera_y = game->matrix->row * 50 - WIN_HEIGHT;
-}
-
 void init_game(t_data *win, t_game *game, t_pos *matrix)
 {
 	game->frame = 0;
@@ -100,6 +79,15 @@ void init_game(t_data *win, t_game *game, t_pos *matrix)
 	all_arrays(game, win);
 }
 
+int	handle_close(t_game *game)
+{
+	free_images(game);
+	mlx_destroy_window(game->win.mlx, game->win.mlx_window);
+	free_map(game->matrix->map);
+	exit(1);
+	return (0);
+}
+
 void so_long(t_pos *matrix)
 {
 	t_data	win;
@@ -115,6 +103,7 @@ void so_long(t_pos *matrix)
 	player_draw_down(win, &game, game.player_x, game.player_y);
 	//mlx_loop_hook(win.mlx, idle_animate, &game);
 	mlx_key_hook(win.mlx_window, handle_keypress, &game);
+	mlx_hook(win.mlx_window, 17, 0, handle_close, &game);
 
 	mlx_loop(win.mlx);
 }
