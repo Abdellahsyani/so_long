@@ -17,7 +17,7 @@ void move_enemy(t_game *game, int i)
 	int x = game->enemy_arr[i].enemy_x;
 	int y = game->enemy_arr[i].enemy_y;
 
-	int direction = rand() % 10;
+	int direction = rand() % 6;
 
 	int new_x = x;
 	int new_y = y;

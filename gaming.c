@@ -14,15 +14,13 @@
 
 void	handle_enemy(t_game *game)
 {
-	static int frame_counter;
+	static int frame_counter = 0;
 	int	i;
 
 	i = 0;
-	frame_counter = 0;
 	frame_counter++;
 	if (frame_counter % 2000 == 0)
 	{
-		printf("enemy: %d\n", game->enemy_count);
 		while (i < game->enemy_count)
 		{
 			move_enemy(game, i);
@@ -37,12 +35,9 @@ void	draw_shapes(t_game *game, int x, int y)
 		coins_draw(game, x, y);
 	if (game->matrix->map[x][y] == 'N')
 	{
-		if (game->enemy_count < 10)
-		{
-			game->enemy_arr[game->enemy_count].enemy_x = x;
-			game->enemy_arr[game->enemy_count].enemy_y = y;
-			game->enemy_count++;
-		}
+		game->enemy_arr[game->enemy_count].enemy_x = x;
+		game->enemy_arr[game->enemy_count].enemy_y = y;
+		game->enemy_count++;
 		enemy_draw(game, x, y);
 	}
 }
@@ -86,6 +81,7 @@ void init_game(t_data *win, t_game *game, t_pos *matrix)
 	game->player_x = -1;
 	game->player_y = -1;
 	game->matrix = matrix;
+	game->enemy_count = 0;
 
 	win->mlx = mlx_init();
 	if (!win->mlx)

@@ -15,6 +15,7 @@
 
 # include <stdio.h>
 # include <time.h>
+# include <string.h>
 # include <stdlib.h>
 # include <errno.h>
 # include "mlx.h"
@@ -66,7 +67,7 @@ typedef struct	s_game
 	int	enemy_count;
 	t_pos	*matrix;
 	t_data	win;
-	t_enemy enemy_arr[1024];
+	t_enemy enemy_arr[10];
 
 }		t_game;
 
