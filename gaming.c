@@ -12,12 +12,39 @@
 
 #include "so_long.h"
 
+void	handle_enemy(t_game *game)
+{
+	static int frame_counter;
+	int	i;
+
+	i = 0;
+	frame_counter = 0;
+	frame_counter++;
+	if (frame_counter % 2000 == 0)
+	{
+		printf("enemy: %d\n", game->enemy_count);
+		while (i < game->enemy_count)
+		{
+			move_enemy(game, i);
+			i++;
+		}
+	}
+}
+
 void	draw_shapes(t_game *game, int x, int y)
 {
 	if (game->matrix->map[x][y] == 'C')
 		coins_draw(game, x, y);
 	if (game->matrix->map[x][y] == 'N')
+	{
+		if (game->enemy_count < 10)
+		{
+			game->enemy_arr[game->enemy_count].enemy_x = x;
+			game->enemy_arr[game->enemy_count].enemy_y = y;
+			game->enemy_count++;
+		}
 		enemy_draw(game, x, y);
+	}
 }
 
 void	draw_game(t_game *game)
@@ -106,6 +133,7 @@ void so_long(t_pos *matrix)
 	//mlx_loop_hook(win.mlx, idle_animate, &game);
 	mlx_key_hook(win.mlx_window, handle_keypress, &game);
 	mlx_hook(win.mlx_window, 17, 0, handle_close, &game);
+	mlx_loop_hook(win.mlx, (void *)handle_enemy, &game);
 
 	mlx_loop(win.mlx);
 }

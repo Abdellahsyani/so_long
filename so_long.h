@@ -14,6 +14,7 @@
 # define SO_LONG_H
 
 # include <stdio.h>
+# include <time.h>
 # include <stdlib.h>
 # include <errno.h>
 # include "mlx.h"
@@ -46,6 +47,12 @@ typedef struct	s_data
 	void	*mlx_window;
 }		t_data;
 
+typedef struct s_enemy
+{
+	int	enemy_x;
+	int	enemy_y;
+}	t_enemy;
+
 typedef struct	s_game
 {
 	void	*player_left[3];
@@ -56,14 +63,14 @@ typedef struct	s_game
 	int	counter;
 	int	player_x;
 	int	player_y;
-	int	camera_x;
-	int	camera_y;
-	int	is_moving;
+	int	enemy_count;
 	t_pos	*matrix;
 	t_data	win;
+	t_enemy enemy_arr[1024];
 
 }		t_game;
 
+void	move_enemy(t_game *game, int i);
 /* ========> error handling <======== */
 void			free_map(char **map);
 void	ft_error(t_pos *matrix);
