@@ -99,3 +99,25 @@ void	floor_draw(t_game *game, int x, int y)
 	mlx_put_image_to_window(game->win.mlx, game->win.mlx_window, floor, y * 50, x * 50);
 	mlx_destroy_image(game->win.mlx, floor);
 }
+
+/**
+ * enemy_draw _ function to draw enemy to atack player
+ * @game: a struct that contains mlx
+ * @x: coordinate of enemy
+ * @y: coordinate of enemy
+ */
+void	enemy_draw(t_game *game, int x, int y)
+{
+	void	*enemy;
+	int	img_width;
+	int	img_height;
+
+	enemy = mlx_xpm_file_to_image(game->win.mlx, "tools/enimy.xpm", &img_width, &img_height);
+	if (!enemy)
+	{
+		perror("fail tp draw enemy");
+		return ;
+	}
+	mlx_put_image_to_window(game->win.mlx, game->win.mlx_window, enemy, y * 50, x * 50);
+	mlx_destroy_image(game->win.mlx, enemy);
+}

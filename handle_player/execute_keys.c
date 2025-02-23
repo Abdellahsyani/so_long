@@ -13,6 +13,17 @@
 #include "../so_long.h"
 
 /**
+ * you_loser _ function to handle when enemy atack player
+ * @game: a struct that contains everything about the game
+ */
+static void	you_loser(t_game *game)
+{
+	ft_putstr_fd("❌ The enemy catch you\n", 2);
+	ft_putstr_fd("😅 You are out of the game", 2);
+	exit_game(game);
+}
+
+/**
  * execute_key_left _ the fucntion to execute key left
  * @game: the struct that contains all information's
  * @new_x: the new coordinate of the player
@@ -28,6 +39,8 @@ void	execute_key_left(t_game *game, int new_x, int new_y)
 	game->matrix->map[game->player_x][game->player_y] = '0';
 	if (game->matrix->map[new_x][new_y] == 'C')
 		game->matrix->coin--;
+	if (game->matrix->map[new_x][new_y] == 'N')
+		you_loser(game);
 	game->matrix->map[new_x][new_y] = 'P';
 	if (game->matrix->coin == 0)
 	{
@@ -57,6 +70,8 @@ void	execute_key_right(t_game *game, int new_x, int new_y)
 	game->matrix->map[game->player_x][game->player_y] = '0';
 	if (game->matrix->map[new_x][new_y] == 'C')
 		game->matrix->coin--;
+	if (game->matrix->map[new_x][new_y] == 'N')
+		you_loser(game);
 	game->matrix->map[new_x][new_y] = 'P';
 	if (game->matrix->coin == 0)
 	{
@@ -86,6 +101,8 @@ void	execute_key_up(t_game *game, int new_x, int new_y)
 	game->matrix->map[game->player_x][game->player_y] = '0';
 	if (game->matrix->map[new_x][new_y] == 'C')
 		game->matrix->coin--;
+	if (game->matrix->map[new_x][new_y] == 'N')
+		you_loser(game);
 	game->matrix->map[new_x][new_y] = 'P';
 	if (game->matrix->coin == 0)
 	{
@@ -115,6 +132,8 @@ void	execute_key_down(t_game *game, int new_x, int new_y)
 	game->matrix->map[game->player_x][game->player_y] = '0';
 	if (game->matrix->map[new_x][new_y] == 'C')
 		game->matrix->coin--;
+	if (game->matrix->map[new_x][new_y] == 'N')
+		you_loser(game);
 	game->matrix->map[new_x][new_y] = 'P';
 	if (game->matrix->coin == 0)
 	{

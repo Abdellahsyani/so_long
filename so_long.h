@@ -93,6 +93,7 @@ void	player_draw(t_data win, t_game *game, int x, int y);
 void	exit_draw(t_game *game, int x, int y);
 int	update_frame(t_pos *matrix, t_data win, int x, int y);
 void	display_moves(t_game *game);
+void	enemy_draw(t_game *game, int x, int y);
 
 /* ===========> animate players <=========== */
 void	animate_player_left(t_game *game);
@@ -122,8 +123,6 @@ void	key_right_helper(t_game *game, int new_x, int new_y);
 void	key_up_helper(t_game *game, int new_x, int new_y);
 void	key_down_helper(t_game *game, int new_x, int new_y);
 void	write_number(int num);
-/*char	*ft_strdup(const char *s1);*/
-/*int	ft_strlen(char *str);*/
 /*int	ft_strcmp(char *s1, char *s2);*/
 
 #endif

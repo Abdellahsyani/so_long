@@ -12,6 +12,11 @@
 
 #include "../so_long.h"
 
+/**
+ * p_left _ function to fill array of images: player left
+ * @game: struct that contains array's
+ * @win: struct that contains windows
+ */
 void	p_left(t_game *game, t_data *win)
 {
 	int	img_width;
@@ -31,6 +36,11 @@ void	p_left(t_game *game, t_data *win)
 	game->win = *win;
 }
 
+/**
+ * p_right _ function to fill array of images: player right
+ * @game: struct that contains array's
+ * @win: struct that contains windows
+ */
 void	p_right(t_game *game, t_data *win)
 {
 	int	img_width;
@@ -51,6 +61,11 @@ void	p_right(t_game *game, t_data *win)
 	game->win = *win;
 }
 
+/**
+ * p_up _ function to fill array of images: player up
+ * @game: struct that contains array's
+ * @win: struct that contains windows
+ */
 void	p_up(t_game *game, t_data *win)
 {
 	int	img_width;
@@ -70,6 +85,11 @@ void	p_up(t_game *game, t_data *win)
 	game->win = *win;
 }
 
+/**
+ * p_down _ function to fill array of images: player down
+ * @game: struct that contains array's
+ * @win: struct that contains windows
+ */
 void	p_down(t_game *game, t_data *win)
 {
 	int	img_width;

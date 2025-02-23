@@ -16,6 +16,8 @@ void	draw_shapes(t_game *game, int x, int y)
 {
 	if (game->matrix->map[x][y] == 'C')
 		coins_draw(game, x, y);
+	if (game->matrix->map[x][y] == 'N')
+		enemy_draw(game, x, y);
 }
 
 void	draw_game(t_game *game)
