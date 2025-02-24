@@ -12,20 +12,6 @@
 
 #include "../so_long.h"
 
-/*int	idle_animate(t_game *game)*/
-/*{*/
-/*	static int direction = 1;*/
-/*	if (game->jumping == 1)*/
-/*	{*/
-/*		game->jump_offset += direction;*/
-/*		if (game->jump_offset > 5 || game->jump_offset < -5)*/
-/*			direction *= -1;*/
-/*	}*/
-/*	player_draw(game->win, game, game->player_x, game->player_y);*/
-/*	return (0);*/
-/*}*/
-
-
 /**
  * free_images _ the function that free all player images
  * @game: a struct that contains info
@@ -53,13 +39,13 @@ void	free_images(t_game *game)
  * exit_game _ the function that exit the game
  * @game: the struct that contains info about player and all
  */
-void exit_game(t_game *game)
+void	exit_game(t_game *game)
 {
 	free_images(game);
-        mlx_destroy_window(game->win.mlx, game->win.mlx_window);
-        mlx_destroy_display(game->win.mlx);
-        free(game->win.mlx);
-        free_map(game->matrix->map);
+	mlx_destroy_window(game->win.mlx, game->win.mlx_window);
+	mlx_destroy_display(game->win.mlx);
+	free(game->win.mlx);
+	free_map(game->matrix->map);
 	exit(1);
 }
 
@@ -75,12 +61,12 @@ int	handle_keypress(int keycode, t_game *game)
 	int	new_x;
 	int	new_y;
 
-	if (!game || !game->matrix || !game->matrix->map || 
-		!game->win.mlx || !game->win.mlx_window)
+	if (!game || !game->matrix || !game->matrix->map
+		|| !game->win.mlx || !game->win.mlx_window)
 		return (0);
 	new_x = game->player_x;
 	new_y = game->player_y;
-	if (keycode == KEY_LEFT || keycode == 'a') 
+	if (keycode == KEY_LEFT || keycode == 'a')
 		key_left_helper(game, new_x, new_y);
 	if (keycode == KEY_RIGHT || keycode == 'd')
 		key_right_helper(game, new_x, new_y);

@@ -22,8 +22,8 @@ void	key_left_helper(t_game *game, int new_x, int new_y)
 {
 	new_y--;
 	game->counter += 1;
-	if (new_x < 0 || new_x >= game->matrix->row || 
-		new_y < 0 || new_y >= game->matrix->col - 1)
+	if (new_x < 0 || new_x >= game->matrix->row
+		|| new_y < 0 || new_y >= game->matrix->col - 1)
 		return ;
 	if (game->matrix->map[new_x] && game->matrix->map[new_x][new_y] != '1')
 	{
@@ -44,8 +44,8 @@ void	key_right_helper(t_game *game, int new_x, int new_y)
 {
 	new_y++;
 	game->counter += 1;
-	if (new_x < 0 || new_x >= game->matrix->row || 
-		new_y < 0 || new_y >= game->matrix->col - 1)
+	if (new_x < 0 || new_x >= game->matrix->row
+		|| new_y < 0 || new_y >= game->matrix->col - 1)
 		return ;
 	if (game->matrix->map[new_x] && game->matrix->map[new_x][new_y] != '1')
 	{
@@ -66,8 +66,8 @@ void	key_up_helper(t_game *game, int new_x, int new_y)
 {
 	new_x--;
 	game->counter += 1;
-	if (new_x < 0 || new_x >= game->matrix->row || 
-		new_y < 0 || new_y >= game->matrix->col - 1)
+	if (new_x < 0 || new_x >= game->matrix->row
+		|| new_y < 0 || new_y >= game->matrix->col - 1)
 		return ;
 	if (game->matrix->map[new_x] && game->matrix->map[new_x][new_y] != '1')
 	{
@@ -88,8 +88,8 @@ void	key_down_helper(t_game *game, int new_x, int new_y)
 {
 	new_x++;
 	game->counter++;
-	if (new_x < 0 || new_x >= game->matrix->row || 
-		new_y < 0 || new_y >= game->matrix->col - 1)
+	if (new_x < 0 || new_x >= game->matrix->row
+		|| new_y < 0 || new_y >= game->matrix->col - 1)
 		return ;
 	if (game->matrix->map[new_x] && game->matrix->map[new_x][new_y] != '1')
 	{

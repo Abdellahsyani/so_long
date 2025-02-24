@@ -24,7 +24,7 @@ void	flood_fill(t_pos *matrix, char **map, int x, int y)
 	if (x < 0 || x >= matrix->row || y < 0 || y >= matrix->col - 1
 		|| map[x][y] == '1' || map[x][y] == 'V')
 		return ;
-	if (map[x][y] == 'C') 
+	if (map[x][y] == 'C')
 		matrix->v_coin--;
 	else if (map[x][y] == 'E')
 	{
@@ -47,9 +47,11 @@ static void	find_p(t_pos *matrix, char **map_copy)
 {
 	int	i;
 	int	j;
-	int	player_x = -1;
-	int	player_y = -1;
+	int	player_x;
+	int	player_y;
 
+	player_x = -1;
+	player_y = -1;
 	i = 0;
 	while (i < matrix->row)
 	{
@@ -77,11 +79,11 @@ static void	find_p(t_pos *matrix, char **map_copy)
  */
 void	verify_map(t_pos *matrix)
 {
-	int	i;
+	int		i;
 	char	**map_copy;
 
-    	if (!matrix || !matrix->map)
-        	ft_error(matrix);
+	if (!matrix || !matrix->map)
+		ft_error(matrix);
 	map_copy = malloc(matrix->row * sizeof(char *));
 	if (!map_copy)
 		return ;
@@ -94,7 +96,7 @@ void	verify_map(t_pos *matrix)
 	find_p(matrix, map_copy);
 	if (matrix->v_coin != 0 || matrix->exit != 0)
 	{
-		perror("invalid map");
+		ft_putstr_fd("Invalid path try another map\n", 2);
 		free_map_copy(matrix, map_copy);
 		free_map(matrix->map);
 		exit(1);
@@ -132,4 +134,29 @@ void	check_inside(t_pos *matrix)
 	}
 	matrix->v_coin = matrix->coin;
 	verify_map(matrix);
+}
+
+/**
+ * is_valid_file _ the function that check if the file is valid
+ * @av: the file that will check
+ */
+int	is_valid_file(char **av)
+{
+	int	i;
+	int	len;
+
+	len = ft_strlen(av[1]);
+	if (ft_strcmp(av[1] + len - 4, ".ber") != 0)
+		return (0);
+	i = 0;
+	while (av[1][i])
+	{
+		if (av[1][i] == '/')
+		{
+			if (av[1][i + 1] >= 'a' && av[1][i + 1] <= 'z')
+				return (1);
+		}
+		i++;
+	}
+	return (0);
 }

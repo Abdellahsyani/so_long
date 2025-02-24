@@ -25,7 +25,7 @@ void	check_map(t_pos *matrix)
 	j = 0;
 	if ((matrix->col - 1) == matrix->row)
 	{
-		perror("Map must be a rectangle");
+		ft_putstr_fd("Map must be a rectangle", 2);
 		free_map(matrix->map);
 		exit(1);
 	}
@@ -78,7 +78,6 @@ void	fill_map(t_pos *matrix, char **av)
 	check_map(matrix);
 }
 
-
 /**
  * allocation _  function to allocate memory for a map
  * @matrix:  struct that contains all elem
@@ -110,7 +109,6 @@ void	allocation(t_pos *matrix)
 	matrix->map[matrix->row] = NULL;
 }
 
-
 /**
  * pars_map _ fucntion to start parsing the map
  * @fd: the file descriptor to open
@@ -122,17 +120,18 @@ void	pars_map(int fd, char **av)
 	t_pos	matrix;
 	int		i;
 
-	i = 0;
 	matrix.map = NULL;
 	matrix.row = 0;
 	matrix.col = 0;
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
+		i = 0;
 		while (line[i])
 		{
 			i++;
-			matrix.col++;
+			if (matrix.row == 0)
+				matrix.col++;
 		}
 		matrix.row++;
 		free(line);
@@ -142,27 +141,6 @@ void	pars_map(int fd, char **av)
 	allocation(&matrix);
 	fill_map(&matrix, av);
 	so_long(&matrix);
-}
-
-int	is_valid_file(char **av)
-{
-	int	i;
-	int	len;
-
-	len = ft_strlen(av[1]);
-	if (strcmp(av[1] + len - 4, ".ber") != 0)
-		return (0);
-	i = 0;
-	while (av[1][i])
-	{
-		if (av[1][i] == '/')
-		{
-			if (av[1][i + 1] >= 'a' && av[1][i + 1] <= 'z')
-				return (1);
-		}
-		i++;
-	}
-	return (0);
 }
 
 int	main(int ac, char **av)
@@ -179,7 +157,6 @@ int	main(int ac, char **av)
 		perror("Invalid file");
 		return (0);
 	}
-	// check for .ber file they should not eneter if a file just .ber
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
 	{

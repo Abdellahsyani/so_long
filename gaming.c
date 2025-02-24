@@ -40,7 +40,8 @@ void	draw_game(t_game *game)
 	int	x;
 	int	y;
 
-	if (!game->matrix || !game->matrix->map || !game->win.mlx || !game->win.mlx_window)
+	if (!game->matrix || !game->matrix->map || !game->win.mlx
+		|| !game->win.mlx_window)
 		return ;
 	x = 0;
 	while (x < game->matrix->row)
@@ -50,7 +51,7 @@ void	draw_game(t_game *game)
 		{
 			if (game->matrix->map[x][y] == '1')
 				wall_draw(game, x, y);
-			else 
+			else
 				floor_draw(game, x, y);
 			draw_shapes(game, x, y);
 			y++;
@@ -78,7 +79,7 @@ void	all_arrays(t_game *game, t_data *win)
  * @game: struct that hold all info
  * @matrix: struct that hold map
  */
-void init_game(t_data *win, t_game *game, t_pos *matrix)
+void	init_game(t_data *win, t_game *game, t_pos *matrix)
 {
 	game->frame = 0;
 	game->counter = 0;
@@ -86,23 +87,18 @@ void init_game(t_data *win, t_game *game, t_pos *matrix)
 	game->player_y = -1;
 	game->matrix = matrix;
 	game->enemy_count = 0;
-
 	win->mlx = mlx_init();
 	if (!win->mlx)
 	{
-		perror("Failed to initialize MLX");
+		ft_putstr_fd("Failed to initialize MLX", 2);
 		exit(1);
 	}
-	win->mlx_window = mlx_new_window(win->mlx, matrix->col * WIN_WIDTH, matrix->row * WIN_HEIGHT, "so_long");
-	if (!win->mlx_window)
-	{
-		perror("Failed to create window");
-		exit(1);
-	}
+	win->mlx_window = mlx_new_window(win->mlx, matrix->col * WIN_WIDTH,
+			matrix->row * WIN_HEIGHT, "so_long");
 	find_player_position(matrix, game);
 	if (game->player_x == -1 || game->player_y == -1)
 	{
-		perror("Player position not found");
+		ft_putstr_fd("Player position not found", 2);
 		exit(1);
 	}
 	all_arrays(game, win);
@@ -112,23 +108,21 @@ void init_game(t_data *win, t_game *game, t_pos *matrix)
  * so_long _ the function that start the  game
  * @matrix: the struct that hold map
  */
-void so_long(t_pos *matrix)
+void	so_long(t_pos *matrix)
 {
 	t_data	win;
 	t_game	game;
 
 	if (!matrix || !matrix->map || matrix->row <= 0 || matrix->col <= 0)
 	{
-		perror("Invalid map data");
-		return;
+		ft_putstr_fd("Invalid map data", 2);
+		return ;
 	}
 	init_game(&win, &game, matrix);
 	draw_game(&game);
 	player_draw_down(win, &game, game.player_x, game.player_y);
-	//mlx_loop_hook(win.mlx, idle_animate, &game);
 	mlx_key_hook(win.mlx_window, handle_keypress, &game);
 	mlx_hook(win.mlx_window, 17, 0, handle_close, &game);
 	mlx_loop_hook(win.mlx, (void *)handle_enemy, &game);
-
 	mlx_loop(win.mlx);
 }

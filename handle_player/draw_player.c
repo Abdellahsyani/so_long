@@ -21,7 +21,8 @@
  */
 void	player_draw_left(t_data win, t_game *game, int x, int y)
 {
-	mlx_put_image_to_window(win.mlx, win.mlx_window, game->player_left[game->frame], y * 50, x * 50);
+	mlx_put_image_to_window(win.mlx, win.mlx_window,
+		game->player_left[game->frame], y * 50, x * 50);
 }
 
 /**
@@ -33,7 +34,8 @@ void	player_draw_left(t_data win, t_game *game, int x, int y)
  */
 void	player_draw_right(t_data win, t_game *game, int x, int y)
 {
-	mlx_put_image_to_window(win.mlx, win.mlx_window, game->player_right[game->frame], y * 50, x * 50);
+	mlx_put_image_to_window(win.mlx, win.mlx_window,
+		game->player_right[game->frame], y * 50, x * 50);
 }
 
 /**
@@ -45,7 +47,8 @@ void	player_draw_right(t_data win, t_game *game, int x, int y)
  */
 void	player_draw_up(t_data win, t_game *game, int x, int y)
 {
-	mlx_put_image_to_window(win.mlx, win.mlx_window, game->player_up[game->frame], y * 50, x * 50);
+	mlx_put_image_to_window(win.mlx, win.mlx_window,
+		game->player_up[game->frame], y * 50, x * 50);
 }
 
 /**
@@ -57,5 +60,6 @@ void	player_draw_up(t_data win, t_game *game, int x, int y)
  */
 void	player_draw_down(t_data win, t_game *game, int x, int y)
 {
-	mlx_put_image_to_window(win.mlx, win.mlx_window, game->player_down[game->frame], y * 50, x * 50);
+	mlx_put_image_to_window(win.mlx, win.mlx_window,
+		game->player_down[game->frame], y * 50, x * 50);
 }

@@ -45,7 +45,8 @@ void	execute_key_left(t_game *game, int new_x, int new_y)
 	if (game->matrix->coin == 0)
 	{
 		exit_draw(game, exit_x, exit_y);
-		if (game->matrix->map[new_x][new_y] == game->matrix->map[exit_x][exit_y])
+		if (game->matrix->map[new_x][new_y] ==
+			game->matrix->map[exit_x][exit_y])
 			exit_game(game);
 	}
 	floor_draw(game, game->player_x, game->player_y);
@@ -76,7 +77,8 @@ void	execute_key_right(t_game *game, int new_x, int new_y)
 	if (game->matrix->coin == 0)
 	{
 		exit_draw(game, exit_x, exit_y);
-		if (game->matrix->map[new_x][new_y] == game->matrix->map[exit_x][exit_y])
+		if (game->matrix->map[new_x][new_y] ==
+			game->matrix->map[exit_x][exit_y])
 			exit_game(game);
 	}
 	floor_draw(game, game->player_x, game->player_y);
@@ -107,7 +109,8 @@ void	execute_key_up(t_game *game, int new_x, int new_y)
 	if (game->matrix->coin == 0)
 	{
 		exit_draw(game, exit_x, exit_y);
-		if (game->matrix->map[new_x][new_y] == game->matrix->map[exit_x][exit_y])
+		if (game->matrix->map[new_x][new_y] ==
+			game->matrix->map[exit_x][exit_y])
 			exit_game(game);
 	}
 	floor_draw(game, game->player_x, game->player_y);
@@ -138,7 +141,8 @@ void	execute_key_down(t_game *game, int new_x, int new_y)
 	if (game->matrix->coin == 0)
 	{
 		exit_draw(game, exit_x, exit_y);
-		if (game->matrix->map[new_x][new_y] == game->matrix->map[exit_x][exit_y])
+		if (game->matrix->map[new_x][new_y] ==
+			game->matrix->map[exit_x][exit_y])
 			exit_game(game);
 	}
 	floor_draw(game, game->player_x, game->player_y);

@@ -31,9 +31,10 @@ int	handle_close(t_game *game)
  */
 void	handle_enemy(t_game *game)
 {
-	static int frame_counter = 0;
-	int	i;
+	static int	frame_counter;
+	int			i;
 
+	frame_counter = 0;
 	i = 0;
 	frame_counter++;
 	if (frame_counter % 2000 == 0)
@@ -52,11 +53,14 @@ void	handle_enemy(t_game *game)
  * 
  * return: the number converted to string
  */
-static char    *ft_itoa(int n)
+static char	*ft_itoa(int n)
 {
-	char    *str;
-	int     len = 1, temp = n;
+	char	*str;
+	int		len;
+	int		temp;
 
+	len = 1;
+	temp = n;
 	while (temp /= 10)
 		len++;
 	str = malloc(len + 1);
@@ -77,11 +81,13 @@ static char    *ft_itoa(int n)
  */
 void	display_moves(t_game *game)
 {
-	char *move_count;
+	char	*move_count;
 
 	wall_draw(game, 0, 1);
 	move_count = ft_itoa(game->counter);
-	mlx_string_put(game->win.mlx, game->win.mlx_window, 20, 20, 0x12FD41, "Moves: ");
-	mlx_string_put(game->win.mlx, game->win.mlx_window, 80, 20, 0xFFFF11, move_count);
+	mlx_string_put(game->win.mlx, game->win.mlx_window, 20, 20, 0x12FD41,
+		"Moves: ");
+	mlx_string_put(game->win.mlx, game->win.mlx_window, 80, 20, 0xFFFF11,
+		move_count);
 	free(move_count);
 }
