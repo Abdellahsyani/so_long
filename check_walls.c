@@ -21,7 +21,7 @@
  */
 void	flood_fill(t_pos *matrix, char **map, int x, int y)
 {
-	if (x < 0 || x >= matrix->row || y < 0 || y >= matrix->col - 1
+	if (x < 0 || x >= matrix->row || y < 0 || y >= matrix->col
 		|| map[x][y] == '1' || map[x][y] == 'V')
 		return ;
 	if (map[x][y] == 'C')
@@ -56,7 +56,7 @@ static void	find_p(t_pos *matrix, char **map_copy)
 	while (i < matrix->row)
 	{
 		j = 0;
-		while (j < matrix->col - 1)
+		while (j < matrix->col)
 		{
 			if (map_copy[i][j] == 'P')
 			{
@@ -120,7 +120,7 @@ void	check_inside(t_pos *matrix)
 	while (i < matrix->row - 1)
 	{
 		j = 1;
-		while (j < matrix->col - 2)
+		while (j < matrix->col - 1)
 		{
 			if (matrix->map[i][j] == 'C')
 				matrix->coin++;

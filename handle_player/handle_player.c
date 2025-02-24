@@ -97,7 +97,7 @@ void	find_player_position(t_pos *matrix, t_game *game)
 	while (x < matrix->row)
 	{
 		y = 0;
-		while (y < matrix->col - 1)
+		while (y < matrix->col)
 		{
 			if (matrix->map[x][y] == 'P')
 			{

@@ -21,23 +21,23 @@ void	check_map(t_pos *matrix)
 	int	i;
 	int	j;
 
-	i = 0;
-	j = 0;
-	if ((matrix->col - 1) == matrix->row)
+	if ((matrix->col) == matrix->row)
 	{
-		ft_putstr_fd("Map must be a rectangle", 2);
+		ft_putstr_fd("Map must be a rectangle\n", 2);
 		free_map(matrix->map);
 		exit(1);
 	}
-	while (j < matrix->col - 1)
+	j = 0;
+	while (j < matrix->col)
 	{
 		if (matrix->map[0][j] != '1' || matrix->map[matrix->row - 1][j] != '1')
 			ft_error(matrix);
 		j++;
 	}
+	i = 0;
 	while (i < matrix->row)
 	{
-		if (matrix->map[i][0] != '1' || matrix->map[i][matrix->col - 2] != '1')
+		if (matrix->map[i][0] != '1' || matrix->map[i][matrix->col - 1] != '1')
 			ft_error(matrix);
 		i++;
 	}
@@ -64,7 +64,7 @@ void	fill_map(t_pos *matrix, char **av)
 	while (line && i < matrix->row)
 	{
 		j = 0;
-		while (line[j] && j < matrix->col - 1)
+		while (line[j] && j < matrix->col)
 		{
 			matrix->map[i][j] = line[j];
 			j++;
@@ -127,7 +127,7 @@ void	pars_map(int fd, char **av)
 	while (line != NULL)
 	{
 		i = 0;
-		while (line[i])
+		while (line[i] && line[i] != '\n')
 		{
 			i++;
 			if (matrix.row == 0)

@@ -47,7 +47,7 @@ void	draw_game(t_game *game)
 	while (x < game->matrix->row)
 	{
 		y = 0;
-		while (y < game->matrix->col - 1)
+		while (y < game->matrix->col)
 		{
 			if (game->matrix->map[x][y] == '1')
 				wall_draw(game, x, y);

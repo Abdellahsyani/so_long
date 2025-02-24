@@ -18,11 +18,37 @@
  */
 int	handle_close(t_game *game)
 {
-	free_images(game);
-	mlx_destroy_window(game->win.mlx, game->win.mlx_window);
-	free_map(game->matrix->map);
-	exit(1);
+	exit_game(game);
 	return (0);
+}
+
+/**
+ * move_enemy _ the function that controle enemy moves
+ * @game: the kind struct that handle everything
+ * @i: the smart counter
+ */
+void	move_enemy(t_game *game, int i)
+{
+	int	direction;
+
+	game->win.x = game->enemy_arr[i].enemy_x;
+	game->win.y = game->enemy_arr[i].enemy_y;
+	direction = rand() % 6;
+	game->win.new_x = game->win.x;
+	game->win.new_y = game->win.y;
+	if (direction == 0)
+		game->win.new_x--;
+	if (direction == 1)
+		game->win.new_x++;
+	if (direction == 2)
+		game->win.new_y--;
+	if (direction == 3)
+		game->win.new_y++;
+	if (game->matrix->map[game->win.new_x][game->win.new_y] != '1' &&
+		game->matrix->map[game->win.new_x][game->win.new_y] != 'C' &&
+		game->matrix->map[game->win.new_x][game->win.new_y] != 'E' &&
+		game->matrix->map[game->win.new_x][game->win.new_y] != 'N')
+		move_enemy_helper(game, i);
 }
 
 /**
@@ -34,7 +60,6 @@ void	handle_enemy(t_game *game)
 	static int	frame_counter;
 	int			i;
 
-	frame_counter = 0;
 	i = 0;
 	frame_counter++;
 	if (frame_counter % 2000 == 0)

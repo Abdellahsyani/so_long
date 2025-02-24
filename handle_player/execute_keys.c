@@ -19,7 +19,7 @@
 static void	you_loser(t_game *game)
 {
 	ft_putstr_fd("❌ The enemy catch you\n", 2);
-	ft_putstr_fd("😅 You are out of the game", 2);
+	ft_putstr_fd("😅 You are out of the game\n", 2);
 	exit_game(game);
 }
 

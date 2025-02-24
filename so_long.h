@@ -46,6 +46,10 @@ typedef struct s_data
 {
 	void	*mlx;
 	void	*mlx_window;
+	int	x;
+	int	y;
+	int	new_x;
+	int	new_y;
 }			t_data;
 
 typedef struct s_enemy
@@ -67,7 +71,7 @@ typedef struct s_game
 	int		enemy_count;
 	t_pos	*matrix;
 	t_data	win;
-	t_enemy	enemy_arr[10];
+	t_enemy	enemy_arr[1024];
 
 }			t_game;
 
@@ -134,5 +138,6 @@ void		key_up_helper(t_game *game, int new_x, int new_y);
 void		key_down_helper(t_game *game, int new_x, int new_y);
 void		write_number(int num);
 int			ft_strcmp(char *s1, char *s2);
+void		move_enemy_helper(t_game *game, int i);
 
 #endif
