@@ -13,6 +13,40 @@
 #include "../so_long.h"
 
 /**
+ * handle_close _ function to handle exit window
+ * @game: the struct that contains all info
+ */
+int	handle_close(t_game *game)
+{
+	free_images(game);
+	mlx_destroy_window(game->win.mlx, game->win.mlx_window);
+	free_map(game->matrix->map);
+	exit(1);
+	return (0);
+}
+
+/**
+ * handle_enemy _ th function that handle enemy speed and movements
+ * @game: the struct that hold enemy
+ */
+void	handle_enemy(t_game *game)
+{
+	static int frame_counter = 0;
+	int	i;
+
+	i = 0;
+	frame_counter++;
+	if (frame_counter % 2000 == 0)
+	{
+		while (i < game->enemy_count)
+		{
+			move_enemy(game, i);
+			i++;
+		}
+	}
+}
+
+/**
  * ft_itoa _ the function that convert integer to string
  * @n: the number that we are convert to string 
  * 

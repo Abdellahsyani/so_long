@@ -12,23 +12,12 @@
 
 #include "so_long.h"
 
-void	handle_enemy(t_game *game)
-{
-	static int frame_counter = 0;
-	int	i;
-
-	i = 0;
-	frame_counter++;
-	if (frame_counter % 2000 == 0)
-	{
-		while (i < game->enemy_count)
-		{
-			move_enemy(game, i);
-			i++;
-		}
-	}
-}
-
+/**
+ * draw_shapes _ the function that draw coin and enemy
+ * @game: struct that hold coin and enemy
+ * @x: row coordinate
+ * @y: column cooradinate
+ */
 void	draw_shapes(t_game *game, int x, int y)
 {
 	if (game->matrix->map[x][y] == 'C')
@@ -42,6 +31,10 @@ void	draw_shapes(t_game *game, int x, int y)
 	}
 }
 
+/**
+ * draw_game _ function to draw all game
+ * @game: struct that hold all things
+ */
 void	draw_game(t_game *game)
 {
 	int	x;
@@ -66,6 +59,11 @@ void	draw_game(t_game *game)
 	}
 }
 
+/**
+ * all_arrays _ a function that fill all arrays by players image
+ * @game: struct that hold all things
+ * @win: struct that hold windows
+ */
 void	all_arrays(t_game *game, t_data *win)
 {
 	p_left(game, win);
@@ -74,6 +72,12 @@ void	all_arrays(t_game *game, t_data *win)
 	p_down(game, win);
 }
 
+/**
+ * init_game _ the function that initiliaze the game
+ * @win: struct that hold window's
+ * @game: struct that hold all info
+ * @matrix: struct that hold map
+ */
 void init_game(t_data *win, t_game *game, t_pos *matrix)
 {
 	game->frame = 0;
@@ -104,15 +108,10 @@ void init_game(t_data *win, t_game *game, t_pos *matrix)
 	all_arrays(game, win);
 }
 
-int	handle_close(t_game *game)
-{
-	free_images(game);
-	mlx_destroy_window(game->win.mlx, game->win.mlx_window);
-	free_map(game->matrix->map);
-	exit(1);
-	return (0);
-}
-
+/**
+ * so_long _ the function that start the  game
+ * @matrix: the struct that hold map
+ */
 void so_long(t_pos *matrix)
 {
 	t_data	win;
