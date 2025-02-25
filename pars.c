@@ -69,7 +69,8 @@ void	fill_map(t_pos *matrix, char **av)
 			matrix->map[i][j] = line[j];
 			j++;
 		}
-		if (j < matrix->col)
+		printf("col: %d, j: %d\n", matrix->col, j);
+		if (j < matrix->col || j > matrix->col || line[j + 1])
 			short_line(matrix, line, fd);
 		matrix->map[i][j] = '\0';
 		free(line);

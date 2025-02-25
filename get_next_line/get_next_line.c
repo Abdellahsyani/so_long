@@ -47,7 +47,6 @@ char	*ft_strjoin(char *s1, char *s2)
  *
  * return: the extract line
  */
-
 char	*extract_line(char **static_str)
 {
 	char	*newline_pos;
@@ -64,6 +63,11 @@ char	*extract_line(char **static_str)
 		line = malloc(((newline_pos - *static_str) + 1) * sizeof(char));
 		ft_strncpy(line, *static_str, (newline_pos - *static_str));
 		temp = ft_strdup(newline_pos);
+		if (temp && temp[0] == '\0')
+		{
+			free(temp);
+			temp = NULL;
+		}
 	}
 	free(*static_str);
 	*static_str = temp;

@@ -34,9 +34,9 @@ void	init_map(t_pos *matrix)
 void	short_line(t_pos *matrix, char *line, int fd)
 {
 	free(line);
-	close(fd);
 	ft_putstr_fd("Map is not valid: Misaling lines\n", 2);
 	free_map(matrix->map);
+	close(fd);
 	exit(1);
 }
 
