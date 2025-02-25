@@ -152,7 +152,8 @@ int	is_valid_file(char **av)
 	{
 		if (av[1][i] == '/')
 		{
-			if (av[1][i + 1] >= 'a' && av[1][i + 1] <= 'z')
+			if ((av[1][i + 1] >= 'a' && av[1][i + 1] <= 'z')
+				|| (av[1][i + 1] >= 'A' && av[1][i + 1] <= 'Z'))
 				return (1);
 		}
 		i++;
