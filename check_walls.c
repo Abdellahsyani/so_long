@@ -117,6 +117,7 @@ void	check_inside(t_pos *matrix)
 	matrix->coin = 0;
 	matrix->player = 0;
 	matrix->exit = 0;
+	check_char(matrix);
 	while (i < matrix->row - 1)
 	{
 		j = 1;

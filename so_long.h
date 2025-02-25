@@ -139,5 +139,6 @@ void		key_down_helper(t_game *game, int new_x, int new_y);
 void		write_number(int num);
 int			ft_strcmp(char *s1, char *s2);
 void		move_enemy_helper(t_game *game, int i);
+void		check_char(t_pos *matrix);
 
 #endif

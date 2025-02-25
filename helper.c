@@ -28,3 +28,33 @@ int	ft_strcmp(char *s1, char *s2)
 		i++;
 	return (s1[i] - s2[i]);
 }
+
+/**
+ * check_char _ the function to for strange characters inside the map
+ * @matrix: the struct that hold's all map
+ */
+void	check_char(t_pos *matrix)
+{
+	int	i;
+	int	j;
+
+	i = 1;
+	while (i < matrix->row - 1)
+	{
+		j = 1;
+		while (j < matrix->col - 1)
+		{
+			if (matrix->map[i][j] != '0' && matrix->map[i][j] != 'N'
+				&& matrix->map[i][j] != 'C' && matrix->map[i][j] != 'P'
+				&& matrix->map[i][j] != 'E' && matrix->map[i][j] != '1')
+			{
+				ft_putstr_fd("searching.......\n", 2);
+				ft_putstr_fd("Ooop's you are breaking the map rules\n", 2);
+				free_map(matrix->map);
+				exit(1);
+			}
+			j++;
+		}
+		i++;
+	}
+}
