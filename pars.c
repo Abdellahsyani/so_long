@@ -154,7 +154,7 @@ int	main(int ac, char **av)
 	}
 	if (!is_valid_file(av))
 	{
-		perror("Invalid file");
+		ft_putstr_fd("Invalid file\n", 2);
 		return (0);
 	}
 	fd = open(av[1], O_RDONLY);
