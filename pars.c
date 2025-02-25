@@ -51,33 +51,30 @@ void	check_map(t_pos *matrix)
  */
 void	fill_map(t_pos *matrix, char **av)
 {
-	int	fd;
-	char	*line;
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 
-	fd = open(av[1], O_RDONLY);
-	if (fd < 0)
+	matrix->fd = open(av[1], O_RDONLY);
+	if (matrix->fd < 0)
 		perror("Failed to open file");
 	i = 0;
-	line = get_next_line(fd);
-	while (line && i < matrix->row)
+	matrix->line = get_next_line(matrix->fd);
+	while (matrix->line && i < matrix->row)
 	{
 		j = 0;
-		while (line[j] && j < matrix->col)
+		while (matrix->line[j] && j < matrix->col)
 		{
-			matrix->map[i][j] = line[j];
+			matrix->map[i][j] = matrix->line[j];
 			j++;
 		}
-		printf("col: %d, j: %d\n", matrix->col, j);
-		if (j < matrix->col || j > matrix->col || line[j + 1])
-			short_line(matrix, line, fd);
+		if (j < matrix->col || j > matrix->col || matrix->line[j + 1])
+			short_line(matrix);
 		matrix->map[i][j] = '\0';
-		free(line);
-		line = get_next_line(fd);
+		free(matrix->line);
+		matrix->line = get_next_line(matrix->fd);
 		i++;
 	}
-	close(fd);
+	close(matrix->fd);
 	check_map(matrix);
 }
 

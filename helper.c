@@ -12,31 +12,31 @@
 
 #include "so_long.h"
 
-void	init_map(t_pos *matrix)
-{
-	int	i;
-	int	j;
+/*void	init_map(t_pos *matrix)*/
+/*{*/
+/*	int	i;*/
+/*	int	j;*/
+/**/
+/*	i = 0;*/
+/*	while (i < matrix->row)*/
+/*	{*/
+/*		j = 0;*/
+/*		while (j < matrix->col)*/
+/*		{*/
+/*			matrix->map[i][j] = '0';*/
+/*			j++;*/
+/*		}*/
+/*		matrix->map[i][matrix->col] = '\0';*/
+/*		i++;*/
+/*	}*/
+/*}*/
 
-	i = 0;
-	while (i < matrix->row)
-	{
-		j = 0;
-		while (j < matrix->col)
-		{
-			matrix->map[i][j] = '0';
-			j++;
-		}
-		matrix->map[i][matrix->col] = '\0';
-		i++;
-	}
-}
-
-void	short_line(t_pos *matrix, char *line, int fd)
+void	short_line(t_pos *matrix)
 {
-	free(line);
+	free(matrix->line);
 	ft_putstr_fd("Map is not valid: Misaling lines\n", 2);
 	free_map(matrix->map);
-	close(fd);
+	close(matrix->fd);
 	exit(1);
 }
 
