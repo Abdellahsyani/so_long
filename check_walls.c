@@ -47,11 +47,9 @@ static void	find_p(t_pos *matrix, char **map_copy)
 {
 	int	i;
 	int	j;
-	int	player_x;
-	int	player_y;
 
-	player_x = -1;
-	player_y = -1;
+	matrix->p_x = -1;
+	matrix->p_y = -1;
 	i = 0;
 	while (i < matrix->row)
 	{
@@ -60,17 +58,17 @@ static void	find_p(t_pos *matrix, char **map_copy)
 		{
 			if (map_copy[i][j] == 'P')
 			{
-				player_x = i;
-				player_y = j;
+				matrix->p_x = i;
+				matrix->p_y = j;
 				break ;
 			}
 			j++;
 		}
 		i++;
 	}
-	if (player_x == -1 || player_y == -1)
+	if (matrix->p_x == -1 || matrix->p_y == -1)
 		ft_error(matrix);
-	flood_fill(matrix, map_copy, player_x, player_y);
+	flood_fill(matrix, map_copy, matrix->p_x, matrix->p_y);
 }
 
 /**

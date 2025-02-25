@@ -22,7 +22,11 @@ void	move_enemy_helper(t_game *game, int i)
 	game->matrix->map[game->win.x][game->win.y] = '0';
 	floor_draw(game, game->win.x, game->win.y);
 	if (game->matrix->map[game->win.new_x][game->win.new_y] == 'P')
+	{
+		ft_putstr_fd("❌ The enemy catch you\n", 2);
+		ft_putstr_fd("You lose the game 😓\n", 2);
 		exit_game(game);
+	}
 	game->matrix->map[game->win.new_x][game->win.new_y] = 'N';
 	game->enemy_arr[i].enemy_x = game->win.new_x;
 	game->enemy_arr[i].enemy_y = game->win.new_y;

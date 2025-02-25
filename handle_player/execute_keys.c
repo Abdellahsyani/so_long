@@ -18,7 +18,7 @@
  */
 static void	you_loser(t_game *game)
 {
-	ft_putstr_fd("❌ The enemy catch you\n", 2);
+	ft_putstr_fd("❌❌❌❌❌❌❌❌❌❌❌\n", 2);
 	ft_putstr_fd("😅 You are out of the game\n", 2);
 	exit_game(game);
 }
@@ -47,7 +47,10 @@ void	execute_key_left(t_game *game, int new_x, int new_y)
 		exit_draw(game, exit_x, exit_y);
 		if (game->matrix->map[new_x][new_y] ==
 			game->matrix->map[exit_x][exit_y])
+		{
+			ft_putstr_fd("Game Over 🥳\n", 1);
 			exit_game(game);
+		}
 	}
 	floor_draw(game, game->player_x, game->player_y);
 	game->player_x = new_x;
@@ -79,7 +82,10 @@ void	execute_key_right(t_game *game, int new_x, int new_y)
 		exit_draw(game, exit_x, exit_y);
 		if (game->matrix->map[new_x][new_y] ==
 			game->matrix->map[exit_x][exit_y])
+		{
+			ft_putstr_fd("Game Over 🥳\n", 1);
 			exit_game(game);
+		}
 	}
 	floor_draw(game, game->player_x, game->player_y);
 	game->player_x = new_x;
@@ -111,7 +117,10 @@ void	execute_key_up(t_game *game, int new_x, int new_y)
 		exit_draw(game, exit_x, exit_y);
 		if (game->matrix->map[new_x][new_y] ==
 			game->matrix->map[exit_x][exit_y])
+		{
+			ft_putstr_fd("Game Over 🥳\n", 1);
 			exit_game(game);
+		}
 	}
 	floor_draw(game, game->player_x, game->player_y);
 	game->player_x = new_x;
@@ -143,7 +152,10 @@ void	execute_key_down(t_game *game, int new_x, int new_y)
 		exit_draw(game, exit_x, exit_y);
 		if (game->matrix->map[new_x][new_y] ==
 			game->matrix->map[exit_x][exit_y])
+		{
+			ft_putstr_fd("Game Over 🥳\n", 1);
 			exit_game(game);
+		}
 	}
 	floor_draw(game, game->player_x, game->player_y);
 	game->player_x = new_x;

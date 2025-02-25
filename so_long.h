@@ -39,6 +39,8 @@ typedef struct s_pos
 	int		exit;
 	int		row;
 	int		col;
+	int		p_x;
+	int		p_y;
 	char	**map;
 }			t_pos;
 
@@ -140,5 +142,7 @@ void		write_number(int num);
 int			ft_strcmp(char *s1, char *s2);
 void		move_enemy_helper(t_game *game, int i);
 void		check_char(t_pos *matrix);
+void		init_map(t_pos *matrix);
+void	short_line(t_pos *matrix, char *line, int fd);
 
 #endif

@@ -12,6 +12,34 @@
 
 #include "so_long.h"
 
+void	init_map(t_pos *matrix)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < matrix->row)
+	{
+		j = 0;
+		while (j < matrix->col)
+		{
+			matrix->map[i][j] = '0';
+			j++;
+		}
+		matrix->map[i][matrix->col] = '\0';
+		i++;
+	}
+}
+
+void	short_line(t_pos *matrix, char *line, int fd)
+{
+	free(line);
+	close(fd);
+	ft_putstr_fd("Map is not valid: Misaling lines\n", 2);
+	free_map(matrix->map);
+	exit(1);
+}
+
 /**
  * ft_strcmp _ the function that compare strings
  * @s1: the first string

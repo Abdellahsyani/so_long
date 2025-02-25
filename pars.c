@@ -21,7 +21,7 @@ void	check_map(t_pos *matrix)
 	int	i;
 	int	j;
 
-	if ((matrix->col) == matrix->row)
+	if (matrix->col == matrix->row)
 	{
 		ft_putstr_fd("Map must be a rectangle\n", 2);
 		free_map(matrix->map);
@@ -51,10 +51,10 @@ void	check_map(t_pos *matrix)
  */
 void	fill_map(t_pos *matrix, char **av)
 {
-	int		fd;
+	int	fd;
 	char	*line;
-	int		i;
-	int		j;
+	int	i;
+	int	j;
 
 	fd = open(av[1], O_RDONLY);
 	if (fd < 0)
@@ -69,6 +69,8 @@ void	fill_map(t_pos *matrix, char **av)
 			matrix->map[i][j] = line[j];
 			j++;
 		}
+		if (j < matrix->col)
+			short_line(matrix, line, fd);
 		matrix->map[i][j] = '\0';
 		free(line);
 		line = get_next_line(fd);

@@ -33,7 +33,7 @@ void	move_enemy(t_game *game, int i)
 
 	game->win.x = game->enemy_arr[i].enemy_x;
 	game->win.y = game->enemy_arr[i].enemy_y;
-	direction = rand() % 6;
+	direction = rand() % 50;
 	game->win.new_x = game->win.x;
 	game->win.new_y = game->win.y;
 	if (direction == 0)
@@ -62,7 +62,7 @@ void	handle_enemy(t_game *game)
 
 	i = 0;
 	frame_counter++;
-	if (frame_counter % 2000 == 0)
+	if (frame_counter % 3000 == 0)
 	{
 		while (i < game->enemy_count)
 		{
@@ -86,8 +86,12 @@ static char	*ft_itoa(int n)
 
 	len = 1;
 	temp = n;
-	while (temp /= 10)
-		len++;
+	while (temp != 0)
+	{
+		temp /= 10;
+		if (temp != 0)
+			len++;
+	}
 	str = malloc(len + 1);
 	if (!str)
 		return (NULL);
