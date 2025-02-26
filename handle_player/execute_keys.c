@@ -48,7 +48,8 @@ void	execute_key_left(t_game *game, int new_x, int new_y)
 		if (game->matrix->map[new_x][new_y] ==
 			game->matrix->map[exit_x][exit_y])
 		{
-			ft_putstr_fd("Game Over 🥳\n", 1);
+			write_number(game->counter);
+			ft_putstr_fd("\nGame Over 🥳\n", 1);
 			exit_game(game);
 		}
 	}
@@ -83,7 +84,8 @@ void	execute_key_right(t_game *game, int new_x, int new_y)
 		if (game->matrix->map[new_x][new_y] ==
 			game->matrix->map[exit_x][exit_y])
 		{
-			ft_putstr_fd("Game Over 🥳\n", 1);
+			write_number(game->counter);
+			ft_putstr_fd("\nGame Over 🥳\n", 1);
 			exit_game(game);
 		}
 	}
@@ -118,7 +120,8 @@ void	execute_key_up(t_game *game, int new_x, int new_y)
 		if (game->matrix->map[new_x][new_y] ==
 			game->matrix->map[exit_x][exit_y])
 		{
-			ft_putstr_fd("Game Over 🥳\n", 1);
+			write_number(game->counter);
+			ft_putstr_fd("\nGame Over 🥳\n", 1);
 			exit_game(game);
 		}
 	}
@@ -153,7 +156,8 @@ void	execute_key_down(t_game *game, int new_x, int new_y)
 		if (game->matrix->map[new_x][new_y] ==
 			game->matrix->map[exit_x][exit_y])
 		{
-			ft_putstr_fd("Game Over 🥳\n", 1);
+			write_number(game->counter);
+			ft_putstr_fd("\nGame Over 🥳\n", 1);
 			exit_game(game);
 		}
 	}

@@ -28,7 +28,8 @@ void	coins_draw(t_game *game, int x, int y)
 			&img_height);
 	if (!coins)
 	{
-		perror("fail to draw coin");
+		perror("Error: fail to draw coin");
+		exit_game(game);
 		return ;
 	}
 	mlx_put_image_to_window(game->win.mlx, game->win.mlx_window, coins, y * 50,
@@ -52,7 +53,8 @@ void	exit_draw(t_game *game, int x, int y)
 			&img_width, &img_height);
 	if (!exit_door)
 	{
-		perror("fail to draw exit");
+		perror("Error: fail to draw exit");
+		exit_game(game);
 		return ;
 	}
 	mlx_put_image_to_window(game->win.mlx, game->win.mlx_window, exit_door, y
@@ -76,7 +78,8 @@ void	wall_draw(t_game *game, int x, int y)
 			&img_height);
 	if (!wall)
 	{
-		perror("fail to draw wall");
+		perror("Error: fail to draw wall");
+		exit_game(game);
 		return ;
 	}
 	mlx_put_image_to_window(game->win.mlx, game->win.mlx_window, wall, y * 50, x
@@ -100,7 +103,8 @@ void	floor_draw(t_game *game, int x, int y)
 			&img_height);
 	if (!floor)
 	{
-		perror("fail to draw floor");
+		perror("Error: fail to draw floor");
+		exit_game(game);
 		return ;
 	}
 	mlx_put_image_to_window(game->win.mlx, game->win.mlx_window, floor, y * 50,
@@ -124,7 +128,8 @@ void	enemy_draw(t_game *game, int x, int y)
 			&img_height);
 	if (!enemy)
 	{
-		perror("fail tp draw enemy");
+		perror("Error: fail tp draw enemy");
+		exit_game(game);
 		return ;
 	}
 	mlx_put_image_to_window(game->win.mlx, game->win.mlx_window, enemy, y * 50,

@@ -23,7 +23,7 @@ void	check_map(t_pos *matrix)
 
 	if (matrix->col == matrix->row)
 	{
-		ft_putstr_fd("Map must be a rectangle\n", 2);
+		ft_putstr_fd("Error: Map must be a rectangle\n", 2);
 		free_map(matrix->map);
 		exit(1);
 	}
@@ -56,7 +56,7 @@ void	fill_map(t_pos *matrix, char **av)
 
 	matrix->fd = open(av[1], O_RDONLY);
 	if (matrix->fd < 0)
-		perror("Failed to open file");
+		perror("Error: Failed to open file");
 	i = 0;
 	matrix->line = get_next_line(matrix->fd);
 	while (matrix->line && i < matrix->row)
@@ -89,7 +89,7 @@ void	allocation(t_pos *matrix)
 	matrix->map = (char **)malloc(sizeof(char *) * (matrix->row + 1));
 	if (!matrix->map)
 	{
-		perror("Memory allocation failed");
+		perror("Error: Memory allocation failed");
 		exit(1);
 	}
 	i = 0;
@@ -98,7 +98,7 @@ void	allocation(t_pos *matrix)
 		matrix->map[i] = (char *)malloc(sizeof(char) * (matrix->col + 1));
 		if (!matrix->map[i])
 		{
-			perror("Memory allocation failed");
+			perror("Error: Memory allocation failed");
 			while (i-- > 0)
 				free(matrix->map[i]);
 			free(matrix->map);
@@ -149,18 +149,18 @@ int	main(int ac, char **av)
 
 	if (ac != 2)
 	{
-		ft_putstr_fd("❌ The game must take 2 argument!!\n", 2);
+		ft_putstr_fd("Error: ❌ The game must take 2 argument!!\n", 2);
 		return (1);
 	}
 	if (!is_valid_file(av))
 	{
-		ft_putstr_fd("Invalid file\n", 2);
+		ft_putstr_fd("Error: Invalid file\n", 2);
 		return (0);
 	}
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
 	{
-		perror("fail to open file");
+		perror("Error: fail to open file");
 		exit(1);
 	}
 	pars_map(fd, av);

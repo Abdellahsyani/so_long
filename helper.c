@@ -12,29 +12,14 @@
 
 #include "so_long.h"
 
-/*void	init_map(t_pos *matrix)*/
-/*{*/
-/*	int	i;*/
-/*	int	j;*/
-/**/
-/*	i = 0;*/
-/*	while (i < matrix->row)*/
-/*	{*/
-/*		j = 0;*/
-/*		while (j < matrix->col)*/
-/*		{*/
-/*			matrix->map[i][j] = '0';*/
-/*			j++;*/
-/*		}*/
-/*		matrix->map[i][matrix->col] = '\0';*/
-/*		i++;*/
-/*	}*/
-/*}*/
-
+/**
+ * short_line _ function to exit if there is some small line in the map
+ * @matrix: the matrix game
+ */
 void	short_line(t_pos *matrix)
 {
 	free(matrix->line);
-	ft_putstr_fd("Map is not valid: Misaling lines\n", 2);
+	ft_putstr_fd("Error: Map is not valid: Misaling lines\n", 2);
 	free_map(matrix->map);
 	close(matrix->fd);
 	exit(1);
@@ -76,7 +61,7 @@ void	check_char(t_pos *matrix)
 				&& matrix->map[i][j] != 'C' && matrix->map[i][j] != 'P'
 				&& matrix->map[i][j] != 'E' && matrix->map[i][j] != '1')
 			{
-				ft_putstr_fd("searching.......\n", 2);
+				ft_putstr_fd("Error:\nsearching.......\n", 2);
 				ft_putstr_fd("Ooop's you are breaking the map rules\n", 2);
 				free_map(matrix->map);
 				exit(1);

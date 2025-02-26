@@ -90,7 +90,7 @@ void	init_game(t_data *win, t_game *game, t_pos *matrix)
 	win->mlx = mlx_init();
 	if (!win->mlx)
 	{
-		ft_putstr_fd("Failed to initialize MLX", 2);
+		ft_putstr_fd("Error: Failed to initialize MLX", 2);
 		exit(1);
 	}
 	win->mlx_window = mlx_new_window(win->mlx, matrix->col * WIN_WIDTH,
@@ -98,7 +98,7 @@ void	init_game(t_data *win, t_game *game, t_pos *matrix)
 	find_player_position(matrix, game);
 	if (game->player_x == -1 || game->player_y == -1)
 	{
-		ft_putstr_fd("Player position not found", 2);
+		ft_putstr_fd("Error: Player position not found", 2);
 		exit(1);
 	}
 	all_arrays(game, win);
@@ -115,7 +115,7 @@ void	so_long(t_pos *matrix)
 
 	if (!matrix || !matrix->map || matrix->row <= 0 || matrix->col <= 0)
 	{
-		ft_putstr_fd("Invalid map data", 2);
+		ft_putstr_fd("Error: Invalid map data", 2);
 		return ;
 	}
 	init_game(&win, &game, matrix);

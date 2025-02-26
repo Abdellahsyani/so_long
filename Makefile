@@ -2,8 +2,8 @@ NAME = so_long
 
 SRC = get_next_line/get_next_line.c get_next_line/get_next_line_utils.c pars.c check_walls.c ft_error.c gaming.c shapes.c handle_player/draw_player.c handle_player/handle_player.c handle_player/sides.c handle_player/animate_player.c handle_player/execute_keys.c handle_player/keys.c bonus/counter.c helper.c
 CC = cc
-MNFLAGS = -lmlx -lX11 -lXext -lm
-CFLAG = -g -Wall -Wextra -Werror
+MNFLAGS = -lmlx -lX11 -lXext -lm 
+CFLAG = -g -Wall -Wextra -Werror 
 
 OBJ = $(SRC:.c=.o)
 

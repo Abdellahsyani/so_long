@@ -56,7 +56,7 @@ void	free_map_copy(t_pos *matrix, char **map)
 void	ft_error(t_pos *matrix)
 {
 	free_map(matrix->map);
-	ft_putstr_fd("Map is not valid\n", 2);
+	ft_putstr_fd("Error: Map is not valid\n", 2);
 	exit(1);
 }
 
