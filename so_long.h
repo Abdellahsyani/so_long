@@ -91,7 +91,7 @@ void		ft_putstr_fd(char *s, int fd);
 void		verify_map(t_pos *matrix);
 void		check_inside(t_pos *matrix);
 void		check_map(t_pos *matrix);
-void		fill_map(t_pos *matrix, char **av);
+void		fill_map(t_pos *matrix, char **av, int i);
 void		allocation(t_pos *matrix);
 void		pars_map(int fd, char **av);
 void		flood_fill(t_pos *matrix, char **map, int x, int y);

@@ -49,15 +49,13 @@ void	check_map(t_pos *matrix)
  * @matrix:  the struct that contains map and other elem
  * @av: line argument to fitch the map from a file
  */
-void	fill_map(t_pos *matrix, char **av)
+void	fill_map(t_pos *matrix, char **av, int i)
 {
-	int		i;
 	int		j;
 
 	matrix->fd = open(av[1], O_RDONLY);
 	if (matrix->fd < 0)
 		perror("Error: Failed to open file");
-	i = 0;
 	matrix->line = get_next_line(matrix->fd);
 	while (matrix->line && i < matrix->row)
 	{
@@ -67,7 +65,8 @@ void	fill_map(t_pos *matrix, char **av)
 			matrix->map[i][j] = matrix->line[j];
 			j++;
 		}
-		if (j < matrix->col || j > matrix->col || matrix->line[j + 1])
+		if (j < matrix->col || j > matrix->col
+			|| (int)ft_strlen(matrix->line) > matrix->col + 1)
 			short_line(matrix);
 		matrix->map[i][j] = '\0';
 		free(matrix->line);
@@ -139,7 +138,7 @@ void	pars_map(int fd, char **av)
 	}
 	close(fd);
 	allocation(&matrix);
-	fill_map(&matrix, av);
+	fill_map(&matrix, av, 0);
 	so_long(&matrix);
 }
 
