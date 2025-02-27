@@ -52,7 +52,7 @@ void	p_left(t_game *game, t_data *win)
 	if (!game->player_left[0] || !game->player_left[1] || !game->player_left[2])
 	{
 		perror("Error: Failed to load player sprites");
-		exit(1);
+		exit_game(game);
 	}
 	game->win = *win;
 }
@@ -77,7 +77,7 @@ void	p_right(t_game *game, t_data *win)
 		|| !game->player_right[2])
 	{
 		perror("Error: Failed to load player sprites");
-		exit(1);
+		exit_game(game);
 	}
 	game->win = *win;
 }
@@ -101,7 +101,7 @@ void	p_up(t_game *game, t_data *win)
 	if (!game->player_up[0] || !game->player_up[1] || !game->player_up[2])
 	{
 		perror("Error: Failed to load player sprites");
-		exit(1);
+		exit_game(game);
 	}
 	game->win = *win;
 }
@@ -125,7 +125,7 @@ void	p_down(t_game *game, t_data *win)
 	if (!game->player_down[0] || !game->player_down[1] || !game->player_down[2])
 	{
 		perror("Error: Failed to load player sprites");
-		exit(1);
+		exit_game(game);
 	}
 	game->win = *win;
 }
