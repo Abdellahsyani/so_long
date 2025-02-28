@@ -89,7 +89,7 @@ void		free_images(t_game *game);
 /* =====> parsing function's <========= */
 void		ft_putstr_fd(char *s, int fd);
 void		verify_map(t_pos *matrix);
-void		check_inside(t_pos *matrix);
+void		check_inside(t_pos *matrix, int i);
 void		check_map(t_pos *matrix);
 void		fill_map(t_pos *matrix, char **av, int i);
 void		allocation(t_pos *matrix);
@@ -146,5 +146,6 @@ void		move_enemy_helper(t_game *game, int i);
 void		check_char(t_pos *matrix);
 void		init_map(t_pos *matrix);
 void		short_line(t_pos *matrix);
+void		map_issue(t_pos *matrix);
 
 #endif

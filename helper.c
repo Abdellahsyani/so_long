@@ -71,3 +71,14 @@ void	check_char(t_pos *matrix)
 		i++;
 	}
 }
+
+/**
+ * map_issue _ the function to end the program when lines is not equal
+ * @matrix: the struct
+ */
+void	map_issue(t_pos *matrix)
+{
+	ft_putstr_fd("Error: map issue\n", 2);
+	free_map(matrix->map);
+	exit(1);
+}

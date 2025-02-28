@@ -41,7 +41,7 @@ void	check_map(t_pos *matrix)
 			ft_error(matrix);
 		i++;
 	}
-	check_inside(matrix);
+	check_inside(matrix, 1);
 }
 
 /**
@@ -51,7 +51,7 @@ void	check_map(t_pos *matrix)
  */
 void	fill_map(t_pos *matrix, char **av, int i)
 {
-	int		j;
+	int	j;
 
 	matrix->fd = open(av[1], O_RDONLY);
 	if (matrix->fd < 0)
@@ -65,7 +65,8 @@ void	fill_map(t_pos *matrix, char **av, int i)
 			matrix->map[i][j] = matrix->line[j];
 			j++;
 		}
-		if (j < matrix->col || j > matrix->col)
+		if (j < matrix->col
+			|| (matrix->line[j] != '\0' && matrix->line[j] != '\n'))
 			short_line(matrix);
 		matrix->map[i][j] = '\0';
 		free(matrix->line);
@@ -84,7 +85,7 @@ void	allocation(t_pos *matrix)
 {
 	int	i;
 
-	matrix->map = (char **)malloc(sizeof(char *) * (matrix->row + 1));
+	matrix->map = malloc(sizeof(char *) * (matrix->row + 1));
 	if (!matrix->map)
 	{
 		perror("Error: Memory allocation failed");
@@ -93,7 +94,7 @@ void	allocation(t_pos *matrix)
 	i = 0;
 	while (i < matrix->row)
 	{
-		matrix->map[i] = (char *)malloc(sizeof(char) * (matrix->col + 1));
+		matrix->map[i] = malloc(sizeof(char) * matrix->col + 1);
 		if (!matrix->map[i])
 		{
 			perror("Error: Memory allocation failed");

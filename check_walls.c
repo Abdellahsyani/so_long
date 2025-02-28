@@ -106,12 +106,10 @@ void	verify_map(t_pos *matrix)
  * check_inside _ function to check teh map exluding walls
  * @matrix: the struct that contains all about game
  */
-void	check_inside(t_pos *matrix)
+void	check_inside(t_pos *matrix, int i)
 {
-	int	i;
 	int	j;
 
-	i = 1;
 	matrix->coin = 0;
 	matrix->player = 0;
 	matrix->exit = 0;
@@ -132,11 +130,7 @@ void	check_inside(t_pos *matrix)
 		i++;
 	}
 	if (matrix->player != 1 || matrix->exit != 1 || matrix->coin == 0)
-	{
-		ft_putstr_fd("Error: map issue\n", 2);
-		free_map(matrix->map);
-		exit(1);
-	}
+		map_issue(matrix);
 	matrix->v_coin = matrix->coin;
 	verify_map(matrix);
 }
