@@ -52,7 +52,12 @@ void	p_left(t_game *game, t_data *win)
 	if (!game->player_left[0] || !game->player_left[1] || !game->player_left[2])
 	{
 		perror("Error: Failed to load player sprites");
-		exit_game(game);
+		free_images(game);
+		free_map(game->matrix->map);
+		mlx_destroy_window(game->win.mlx, game->win.mlx_window);
+		mlx_destroy_display(game->win.mlx);
+		free(game->win.mlx);
+		exit(1);
 	}
 	game->win = *win;
 }
@@ -77,7 +82,12 @@ void	p_right(t_game *game, t_data *win)
 		|| !game->player_right[2])
 	{
 		perror("Error: Failed to load player sprites");
-		exit_game(game);
+		free_images(game);
+		free_map(game->matrix->map);
+		mlx_destroy_window(game->win.mlx, game->win.mlx_window);
+		mlx_destroy_display(game->win.mlx);
+		free(game->win.mlx);
+		exit(1);
 	}
 	game->win = *win;
 }
@@ -101,7 +111,12 @@ void	p_up(t_game *game, t_data *win)
 	if (!game->player_up[0] || !game->player_up[1] || !game->player_up[2])
 	{
 		perror("Error: Failed to load player sprites");
-		exit_game(game);
+		free_images(game);
+		free_map(game->matrix->map);
+		mlx_destroy_window(game->win.mlx, game->win.mlx_window);
+		mlx_destroy_display(game->win.mlx);
+		free(game->win.mlx);
+		exit(1);
 	}
 	game->win = *win;
 }
@@ -125,7 +140,12 @@ void	p_down(t_game *game, t_data *win)
 	if (!game->player_down[0] || !game->player_down[1] || !game->player_down[2])
 	{
 		perror("Error: Failed to load player sprites");
-		exit_game(game);
+		free_images(game);
+		free_map(game->matrix->map);
+		mlx_destroy_window(game->win.mlx, game->win.mlx_window);
+		mlx_destroy_display(game->win.mlx);
+		free(game->win.mlx);
+		exit(1);
 	}
 	game->win = *win;
 }
