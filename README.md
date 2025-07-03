@@ -86,7 +86,7 @@ make
   - One player (`P`)
   - At least one exit (`E`)
   - At least one collectible (`C`)
-- Only valid characters: `01PEC`
+- Only valid characters: `01PEC` `N` for enemy
 - Example:
 
     ```
@@ -103,11 +103,13 @@ _Add screenshots here if available._
 
 ## Bonus
 
-If you implemented bonus features (animations, enemy movement, multiple exits, etc.), describe them here.
+- include player animation and enemy attacks
+    - player move `up` `down` `left` `right` with the right movements
+    - enemy movers random but without animation  like the player
 
 ## Credits
 
-- Developed by [Your Name] as part of 42 School
+- Developed by [Abdellah syani] as part of 42 School
 - Thanks to 42 Network and MiniLibX contributors
 
 ---
