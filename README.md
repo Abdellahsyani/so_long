@@ -99,7 +99,7 @@ make
 
 ## Screenshots
 
-_Add screenshots here if available._
+![Game Screenshot](screen.png)
 
 ## Bonus
 
