@@ -43,7 +43,7 @@ This project is part of the 42 curriculum and aims to introduce students to grap
 ### Clone the repository
 
 ```bash
-git clone https://github.com/your-username/so_long.git
+git clone https://github.com/Abdellahsyani/so_long.git
 cd so_long
 ```
 
